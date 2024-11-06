@@ -18,7 +18,6 @@ Present the Baekjun contributions of Kwangwoon University students to highlight 
 
 ![ranking1](/mdImage/rank.jpeg) ![ranking](/mdImage/rank.jpeg) 
 <br/>
-- Display KWU's rating point of BAEKJOON
 
 ## Schedule 
 ### Table of each week 
