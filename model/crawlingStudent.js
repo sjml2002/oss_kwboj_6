@@ -52,7 +52,6 @@ export const updateKwStudentInfo = async($) => {
                 const solvedcnt= $(tr).find('td').eq(5).children("div").text();
                 
                 const student = new kwStudentInfo(ID,tier,tierimg,ranking,rankingInKWU,acrating,classlevel,solvedcnt);
-                console.log(student) //debug
                 kwstudents.push(student)
             })
         }
