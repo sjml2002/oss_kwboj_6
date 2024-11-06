@@ -62,7 +62,7 @@
         /// 제출 및 제출 시각과 관련한 정보
         const fetchSubmitTimeInfo = async() => {
             try {
-                const response = await fetch('/getUniversityRanking');
+                const response = await fetch('/getSubmitInfo');
                 const jsondata = await response.json();
 
                 // 데이터를 HTML에 넣기 (example 코드는 studentInfo.html 참고)
