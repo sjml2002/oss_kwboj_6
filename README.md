@@ -1,7 +1,7 @@
 # Statistics of KWU student's BAEKJOON
 
 ## Purpose of the project
-Present the Baekjun contributions of Kwangwoon University students to highlight their current status. Develop a statistical site to support the enhancement of students' coding skills.
+Present the Baekjoon contributions of Kwangwoon University students to highlight their current status. Develop a statistical site to support the enhancement of students' coding skills.
 
 ## Blueprint of the project
 ### KWU.AC (Temp Title)
