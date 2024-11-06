@@ -16,27 +16,27 @@ export default class universityRank {
         
     }
 
-    get rank() {
-        return (this._rank);
-    }
+    // get rank() {
+    //     return (this._rank);
+    // }
 
-    get name() {
-        return (this._name);
-    }
+    // get name() {
+    //     return (this._name);
+    // }
 
-    get members() {
-        return (this._members);
-    }
+    // get members() {
+    //     return (this._members);
+    // }
 
-    get solvedcnt() {
-        return (this._solvedcnt);
-    }
+    // get solvedcnt() {
+    //     return (this._solvedcnt);
+    // }
 
-    get submitcnt() {
-        return (this._submitcnt);
-    }
+    // get submitcnt() {
+    //     return (this._submitcnt);
+    // }
 
-    get percentageCorrect() {
-        return (this._percentageCorrect);
-    }
+    // get percentageCorrect() {
+    //     return (this._percentageCorrect);
+    // }
 }

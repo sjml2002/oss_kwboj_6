@@ -9,15 +9,15 @@ export default class submitWithTime {
         this._time = t;
     }
 
-    get ID() {
-        return (this._ID);
-    }
+    // get ID() {
+    //     return (this._ID);
+    // }
 
-    get problemID() {
-        return (this._problemID);
-    }
+    // get problemID() {
+    //     return (this._problemID);
+    // }
 
-    get time() {
-        return (this._time);
-    }
+    // get time() {
+    //     return (this._time);
+    // }
 }

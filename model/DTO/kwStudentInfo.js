@@ -1,5 +1,5 @@
 export default class kwStudentInfo {
-    _ID;
+    _ID;             //유저 ID
     _tier;           //솔브닥 티어
     _tierImgUrl;     //티어 이미지 url
     _ranking;        //전체 순위
@@ -19,35 +19,35 @@ export default class kwStudentInfo {
         this._solvedcnt = sc;
     }
 
-    get ID() {
-        return (this._ID);
-    }
+    // get ID() {
+    //     return (this._ID);
+    // }
 
-    get tier() {
-        return (this.tier);
-    }
+    // get tier() {
+    //     return (this._tier);
+    // }
 
-    get tierImgUrl() {
-        return (this._tierImgUrl);
-    }
+    // get tierImgUrl() {
+    //     return (this._tierImgUrl);
+    // }
 
-    get ranking() {
-        return (this._ranking);
-    }
+    // get ranking() {
+    //     return (this._ranking);
+    // }
 
-    get rankingInKWU() {
-        return (this._rankingInKWU);
-    }
+    // get rankingInKWU() {
+    //     return (this._rankingInKWU);
+    // }
 
-    get ACrating() {
-        return (this._ACrating);
-    }
+    // get ACrating() {
+    //     return (this._ACrating);
+    // }
 
-    get CLASSLEVEL() {
-        return (this._CLASSLEVEL);
-    }
+    // get CLASSLEVEL() {
+    //     return (this._CLASSLEVEL);
+    // }
 
-    get solvedcnt() {
-        return (this._solvedcnt);
-    }
+    // get solvedcnt() {
+    //     return (this._solvedcnt);
+    // }
 }
