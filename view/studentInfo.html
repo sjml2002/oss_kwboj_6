@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+     <!-- 문서의 문자 인코딩 설정 (UTF-8이 가장 일반적임) -->
+     <meta charset="UTF-8">
+    
+     <!-- 반응형 웹을 위한 viewport 설정 (모바일 친화적) -->
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     
+     <!-- 문서 제목 (탭이나 검색 결과에 표시됨) -->
+     <title> oss_kwboj </title>
+     
+     <!-- 설명과 키워드 (SEO 최적화를 위해 사용) -->
+     <meta name="description" content="광운대학교 백준 통계 사이트">
+     <meta name="keywords" content="kwboj, boj, kw, 광운대, 광운대백준, 광운대학교">
+     
+     <!-- 작성자 정보 -->
+     <meta name="author" content="junsangkim">
+     
+     <!-- 파비콘 (탭이나 북마크에 표시됨) -->
+     <!-- <link rel="icon" href="favicon.ico" type="image/x-icon"> -->
+     
+     <!-- 외부 CSS 파일 로드 -->
+     <!-- <link rel="stylesheet" href="styles.css"> -->
+     
+    <!-- 외부 JavaScript 파일 로드 (필요 시) -->
+    <!-- <script src="crawlingMain.js" defer></script> -->
+    <script type="module">
+
+        /// 광운대 학생들의 백준 정보
+        const fetchStudentInfo = async() => {
+            try {
+                const response = await fetch('/getkwStudentInfo');
+                const jsondata = await response.json();
+
+                // 데이터를 HTML에 넣기
+                // TODO for 시각화 맴버들
+                const table = document.getElementById('studentInfoTable');
+                jsondata.forEach((item, idx) => {
+                    const tr = document.createElement('tr');
+
+                    const idCell = document.createElement('td');
+                    idCell.textContent = item._ID;
+                    tr.appendChild(idCell);
+
+                    const rankingCell = document.createElement('td');
+                    rankingCell.textContent = item._ranking;
+                    tr.appendChild(rankingCell);
+
+                    const rankingInKWUCell = document.createElement('td');
+                    rankingInKWUCell.textContent = item._rankingInKWU;
+                    tr.appendChild(rankingInKWUCell);
+
+                    const acratingCell = document.createElement('td');
+                    acratingCell.textContent = item._ACrating;
+                    tr.appendChild(acratingCell);
+
+                    const classLevelCell = document.createElement('td');
+                    classLevelCell.textContent = item._CLASSLEVEL;
+                    tr.appendChild(classLevelCell);
+
+                    const solvedCountCell = document.createElement('td');
+                    solvedCountCell.textContent = item._solvedcnt;
+                    tr.appendChild(solvedCountCell);
+
+                    const tierCell = document.createElement('td');
+                    tierCell.textContent = item._tier;
+                    tr.appendChild(tierCell);
+
+                    const tierImgCell = document.createElement('td');
+                    const img = document.createElement('img');
+                    img.src = item._tierImgUrl;
+                    img.alt = item._tier;
+                    img.width = 20; // 이미지 크기 조절
+                    img.height = 20;
+                    tierImgCell.appendChild(img);
+                    tr.appendChild(tierImgCell);
+
+                    table.appendChild(tr);
+                });
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchStudentInfo();
+    </script>
+</head>
+<body>
+    <h1>광운대학교 학생 정보</h1>
+
+    <table id="studentInfoTable">
+        <thead>
+            <tr>
+                <th style="padding: 10px">ID</th>
+                <th style="padding: 10px">전체 순위</th>
+                <th style="padding: 10px">순위 in 광운대</th>
+                <th style="padding: 10px">AC Rating</th>
+                <th style="padding: 10px">Class Level</th>
+                <th style="padding: 10px">맞은 문제 수</th>
+                <th style="padding: 10px">티어</th>
+                <th style="padding: 10px">Tier Image</th>
+            </tr>
+        </thead>
+    </table>
+
+    
+</body>
+</html>
