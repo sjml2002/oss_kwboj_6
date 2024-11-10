@@ -16,8 +16,11 @@ const getHtml = async(customheader, url) => {
     }
 }
 
-//YYYY-MM-DD HH:MM:SS (MM월은 M월, DD일은 D일 일수도 있다.)
-//return: datetime (class Date)
+/**
+ * @param {String} timestr datetime을 string 화 한거에요.
+ * YYYY-MM-DD HH:MM:SS (MM월은 M월, DD일은 D일 일수도 있다.)
+ * @return {Date} datetime
+ */
 function stringTo_DateTime(timestr) {
     const datetime = new Date(timestr);
     return (datetime);
@@ -31,7 +34,10 @@ export const getRecentTime = async($) => {
 }
 
 
-//return: recent(최근시각) ~ targettime 까지 광운대학교 학생들의 제출 기록을 list로 반환
+/**
+ * @param {Date} targetdatetime 
+ * @return {list} recent(최근시각) ~ targettime 까지 광운대학교 학생들의 제출 기록
+ */
 export const getRecent_to_targettime_submitlist = async($, targetdatetime) => {
     let submitlist = [] //class: submitWithTime
 

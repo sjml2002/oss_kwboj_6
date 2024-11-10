@@ -27,8 +27,10 @@ export const curPeopleCnt = async($) => {
     return (numofpeople);
 }
 
-//kwStudentInfo 업데이트
-//return: Array of kwStudentInfo
+/**
+ * kwStudentInfo 업데이트
+ * @return {list} Array of kwStudentInfo
+ */
 export const updateKwStudentInfo = async($) => {
     const page = $("div.css-18lc7iz")
     const lastpagenum = page.find('a').last().text();
