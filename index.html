@@ -35,16 +35,21 @@
             background-color: #6B2230; /* 배경색 */
             padding: 5px 15px; /* 텍스트 안쪽 여백 */
             border-radius: 5px; /* 둥근 모서리 */
-            display: inline-block; /* 배경과 텍스트 크기 맞추기 */
+            display: inline-block; /* 배경과 텍스트 크기 맞추기 */       
         }
 
         /* 각 섹션 스타일 */
         .section {
             margin-bottom: 70px; /* 섹션 간 간격 */
+            padding: 10px 0px 60px 0px;
+            border: 4px solid #6B2230; /* 섹션 테두리 추가 */
+            border-radius: 10px; /* 테두리 모서리를 둥글게 */
+            background-color: #f9f9f9; /* 섹션 배경색 설정 */
         }
 
         /* 섹션 제목 스타일 */
         .section-title {
+            margin-top: -10px;
             margin-bottom: 10px; /* 제목과 단상 간 간격 */
             font-size: 18px; /* 글꼴 크기 */
             color: white; /* 글자 색상 */
@@ -52,7 +57,11 @@
             text-align: center; /* 중앙 정렬 */
             border: 2px solid #6B2230; /* 제목 테두리 */
             padding: 5px; /* 제목 안쪽 여백 */
-            border-radius: 5px; /* 둥근 모서리 */
+            border-radius: 2px; /* 둥근 모서리 */
+            text-shadow: -1px -1px 0 #000000, /* 왼쪽 위 */
+                 1px -1px 0 #000000,  /* 오른쪽 위 */
+                 -1px 1px 0 #000000,  /* 왼쪽 아래 */
+                 1px 1px 0 #000000;   /* 오른쪽 아래 */
         }
 
         /* 단상 컨테이너 스타일 */
@@ -119,6 +128,11 @@
            margin-top: auto; /* 자동 여백 */
            padding: 10px 5px; /* 텍스트 패딩 */
            text-align: center; /* 텍스트 중앙 정렬 */
+           color: #6B2230;  /* 사용자 글자 색상 수정 */
+           text-shadow: -1px -1px 0 #FFFFFF, /* 왼쪽 위 */
+                 1px -1px 0 #FFFFFF,  /* 오른쪽 위 */
+                 -1px 1px 0 #FFFFFF,  /* 왼쪽 아래 */
+                 1px 1px 0 #FFFFFF;   /* 오른쪽 아래 */
        }
     </style>
 </head>
