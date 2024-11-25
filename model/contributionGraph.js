@@ -1,8 +1,14 @@
-$(window).ready(function () {
-    const chartRadius = 150; // 차트의 반지름 (px)
-    const centerX = 150; // 차트의 중심 X 좌표
-    const centerY = 150; // 차트의 중심 Y 좌표
+import * as crawling from "./crawlingMain.js";
+//import axios from "axios";
 
+/**
+ * 티어에 따른 인원 수 계산
+ * @returns {List - Map} 실제 랜더링 데이터가 되는 sectors
+ */
+const getTierList = async() => {
+    const kwstudents = await crawling.getkwStudentInfo();
+
+    const tierNameList = ["브론즈", "실버", "골드", "플래티넘", "다이아", "루비"];
     let sectors = [
         { label: "브론즈", start: 0, end: 20, color: "#ad5600", value: 20 }, // value 값이 문제 수
         { label: "실버", start: 20, end: 40, color: "#435f7a", value: 20 },
@@ -11,6 +17,32 @@ $(window).ready(function () {
         { label: "다이아", start: 70, end: 80, color: "#00BFFF", value: 10 },
         { label: "루비", start: 80, end: 100, color: "#e0115f", value: 20 },
     ];
+    
+    kwstudents.forEach((student) => {
+        const tier = student._tier;
+        const tierName = tierNameList[parseInt(tier/5)];
+
+        console.log(tierName); //debug
+        
+        //make map
+        sectors.forEach((sector) => {
+            if (sector.label === tierName) {
+                sector.value += 1;
+            }
+        })
+    });
+
+    console.log(sectors); //debug
+    return (sectors);
+}
+
+
+$(window).ready(async function () {
+    const chartRadius = 150; // 차트의 반지름 (px)
+    const centerX = 150; // 차트의 중심 X 좌표
+    const centerY = 150; // 차트의 중심 Y 좌표
+
+    let sectors = await getTierList();
 
     // 그래프 애니메이션
     let i = 1;

@@ -1,12 +1,14 @@
-import axios from "axios";
-import * as cheerio from "cheerio";
+//import axios from "axios";
+//import * as cheerio from "cheerio";
 import kwStudentInfo from "./DTO/submitWithTime.js"
 import submitWithTime from "./DTO/submitWithTime.js";
 
 const getHtml = async(customheader, url) => {
+    const proxyUrl = "https://cors-anywhere.herokuapp.com/";
     try {
-        const html  = await axios.get(url, {
+        const html  = await axios.get(proxyUrl + url, {
             headers: customheader,
+            credentials: "include",
         });
         const htmldata = cheerio.load(html.data)
         return (htmldata);

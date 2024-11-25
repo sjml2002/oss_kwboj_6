@@ -16,13 +16,16 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
 
+app.use(express.static("./"));
 app.use(express.static(path.join(__dirname, "model"))); //model 안의 파일들 사용하기
+app.use(express.static(path.join(__dirname, "view/STYLE",))); //view/STYLE 안의 파일들 사용하기
+app.use(express.static(path.join(__dirname, "mdImage"))); //view/STYLE 안의 파일들 사용하기
 
 
 ///////////////////////  Routing  /////////////////////////////////////////
-app.get('/pie_chart', (req, res) => {
+app.get('/piechart', (req, res) => {
   //__dirname: 현재 폴더의 위치 (전역변수)
-  res.sendFile(path.join(__dirname, "view", "pie_chart.html"))
+  res.sendFile(path.join(__dirname, "view", "piechart.html"))
 })
 
 app.get("/studentInfo", (req, res) => {

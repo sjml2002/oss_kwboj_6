@@ -1,6 +1,6 @@
-import axios from "axios";
-import * as cheerio from "cheerio";
-import * as fs from 'fs';
+//import axios from 'axios';
+//import * as cheerio from "cheerio";
+//import * as fs from 'fs';
 import * as crawlingStudent from "./crawlingStudent.js";
 import * as crawlingSubmit from "./crawlingSubmitTime.js";
 import * as crawlingUniRank from "./crawlingUniversityRanking.js";
@@ -18,9 +18,11 @@ let data_totalProblems = new Set();
 let data_todaysProblem = [];
 
 const getHtml = async(customheader, url) => {
+    const proxyUrl = "https://cors-anywhere.herokuapp.com/";
     try {
-        const html  = await axios.get(url, {
+        const html  = await axios.get(proxyUrl + url, {
             headers: customheader,
+            credentials: "include",
         });
         const htmldata = cheerio.load(html.data)
         return (htmldata);
@@ -121,18 +123,18 @@ export const getUniversityRanking = async() => {
 }
 
 //광운대학생이 푼 총 문제
-export const getTotalProblem = async() => {
-    data_kwstudents = await getkwStudentInfo();
-    const studentsID = data_kwstudents.map((student) => student._ID);
+// export const getTotalProblem = async() => {
+//     data_kwstudents = await getkwStudentInfo();
+//     const studentsID = data_kwstudents.map((student) => student._ID);
 
-    data_totalProblems = await crawlingStudent.updateTotalProblem(studentsID);
-    console.log("data_totalProblems: ", data_totalProblems); //debug
-    const jsondata = JSON.stringify([...data_totalProblems]);
-    fs.writeFileSync("test.json", jsondata);
+//     data_totalProblems = await crawlingStudent.updateTotalProblem(studentsID);
+//     console.log("data_totalProblems: ", data_totalProblems); //debug
+//     const jsondata = JSON.stringify([...data_totalProblems]);
+//     fs.writeFileSync("test.json", jsondata);
 
-    console.log("여기는? ", data_totalProblems); //debug
-    return (data_totalProblems);
-}
+//     console.log("여기는? ", data_totalProblems); //debug
+//     return (data_totalProblems);
+// }
 
 //오늘의 추천 문제 3문제
 export const getTodaysProblem = () =>  {
