@@ -42,74 +42,50 @@ const todayTopSolvers = [
 // DOM 로드 완료 후 실행
 document.addEventListener('DOMContentLoaded', () => {
     // 최근 제출 섹션
-    const recentContainer = document.getElementById('recentSubmissionChart');
-    if (recentContainer) {
+    const recentPodium = document.querySelector('.podium');
+    if (recentPodium) {
         recentSubmissions
             .sort((a, b) => b._time - a._time)
             .forEach((submission, index) => {
-                const submissionElement = document.createElement('div');
-                submissionElement.className = 'ranking-item'; // CSS 클래스 추가
-                
-                const medalSpan = document.createElement('span');
-                medalSpan.className = 'medal-icon';
-                medalSpan.textContent = index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉';
+                const stageElement = recentPodium.children[index];
+                const userElement = stageElement.querySelector('.user');
+                userElement.textContent = submission._ID;
 
-                const submissionText = document.createTextNode(
-                    ` ${submission._ID} (제출 시간 : ${Math.round((Date.now() - submission._time) / (1000 * 60))}분 전)`
-                );
-
-                submissionElement.appendChild(medalSpan);
-                submissionElement.appendChild(submissionText);
-                
-                recentContainer.appendChild(submissionElement);
+                // Update medal based on index
+                const medalElement = stageElement.querySelector('.medal');
+                medalElement.textContent = index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉';
             });
     }
 
     // 잠수 순위 섹션
-    const dormantContainer = document.getElementById('dormantUserChart');
-    if (dormantContainer) {
+    const dormantPodium = document.querySelectorAll('.podium')[1]; // 두 번째 podium
+    if (dormantPodium) {
         dormantUsers
             .sort((a, b) => b._time - a._time)
             .forEach((submission, index) => {
-                const dormantElement = document.createElement('div');
-                dormantElement.className = 'ranking-item'; // CSS 클래스 추가
-                
-                const medalSpan = document.createElement('span');
-                medalSpan.className = 'medal-icon';
-                medalSpan.textContent = index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉';
+                const stageElement = dormantPodium.children[index];
+                const userElement = stageElement.querySelector('.user');
+                userElement.textContent = submission._ID;
 
-                const dormantText = document.createTextNode(
-                    ` ${submission._ID} (마지막 제출 : ${Math.round((Date.now() - submission._time) / (1000 * 60 * 60 * 24))}일 전)`
-                );
-
-                dormantElement.appendChild(medalSpan);
-                dormantElement.appendChild(dormantText);
-                
-                dormantContainer.appendChild(dormantElement);
+                // Update medal based on index
+                const medalElement = stageElement.querySelector('.medal');
+                medalElement.textContent = index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉';
             });
     }
 
     // 오늘의 탑 솔버 섹션
-    const topSolverContainer = document.getElementById('topSolverToday');
-    if (topSolverContainer) {
+    const topSolverPodium = document.querySelectorAll('.podium')[2]; // 세 번째 podium
+    if (topSolverPodium) {
         todayTopSolvers
             .sort((a, b) => b._todaySolved - a._todaySolved)
             .forEach((solver, index) => {
-                const solverElement = document.createElement('div');
-                solverElement.className = 'ranking-item'; // CSS 클래스 추가
+                const stageElement = topSolverPodium.children[index];
+                const userElement = stageElement.querySelector('.user');
+                userElement.textContent = solver._ID;
 
-                const medalSpan = document.createElement('span');
-                medalSpan.className = 'medal-icon';
-                medalSpan.textContent = index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉';
-
-                const solverText = document.createTextNode(
-                    ` ${solver._ID} (해결한  문제 : ${solver._todaySolved})`
-                );
-
-                solverElement.appendChild(medalSpan);
-                solverElement.appendChild(solverText);
-
-                topSolverContainer.appendChild(solverElement);
+                // Update medal based on index
+                const medalElement = stageElement.querySelector('.medal');
+                medalElement.textContent = index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉';
             });
     }
 });
