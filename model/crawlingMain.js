@@ -76,13 +76,14 @@ export const getSubmitOrderTime = async() => {
         return ("Error! html 데이터 추출 중 에러")
 
     let recentdatetime = await crawlingSubmit.getRecentTime(mainhtml)
-    
+
     if (cache_lastdatetime < recentdatetime) {
         cache_lastdatetime = recentdatetime; //cache update
         //새롭게 업데이트 진행
-        const today = new Date();
-        today.setHours(0, 0, 0, 0); //오늘 자정으로 설정
-        let data_kwsubmitlist = await crawlingSubmit.getRecent_to_targettime_submitlist(mainhtml, today);
+        const yearago = new Date();
+        yearago.setFullYear(yearago.getFullYear()-1);
+        yearago.setHours(0, 0, 0, 0); //오늘 자정으로 설정
+        let data_kwsubmitlist = await crawlingSubmit.getRecent_to_targettime_submitlist(mainhtml, yearago);
         return (data_kwsubmitlist)
     }
     else { //그냥 이미 저장되어있던 데이터 list return
