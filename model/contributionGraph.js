@@ -5,9 +5,6 @@ const fetchStudentInfo = async() => {
     try {
         const response = await fetch('/getkwStudentInfo');
         const jsondata = await response.json();
-        //const arraydata = JSON.parse(jsondata);
-
-        console.log(jsondata); //debug
 
         // 데이터를 HTML에 넣기 (example 코드는 studentInfo.html 참고)
         // TODO for 시각화 맴버들
@@ -27,7 +24,7 @@ const getTierList = async() => {
     const kwstudents = await fetchStudentInfo();
 
     let sectors = [
-        { label: "언랭", start: 0, end: 10, color: "#000000", value: 0}, // value 값이 문제 수
+        { label: "언랭", start: 0, end: 10, color: "#2d2d2d", value: 0}, // value 값이 문제 수
         { label: "브론즈", start: 10, end: 20, color: "#ad5600", value: 0 },
         { label: "실버", start: 20, end: 40, color: "#435f7a", value: 0 },
         { label: "골드", start: 40, end: 60, color: "#ec9a00", value: 0 },
@@ -37,7 +34,6 @@ const getTierList = async() => {
     ];
     
     kwstudents.forEach((student) => {
-        console.log(student); //debug
         const tier = student._tier;
         let tierName = "언랭";
         if (tier.includes("Ruby"))
@@ -65,13 +61,10 @@ const getTierList = async() => {
         let solvedpercentage = 0;
         if (sectors[i].value != 0)
          solvedpercentage = (sectors[i].value / kwstudents.length) * 100; //백분율 환산했을 때 비율
-        console.log(solvedpercentage); //debug
         if (i > 0)
             sectors[i].start = sectors[i-1].end;
         sectors[i].end = sectors[i].start + (solvedpercentage);
     }
-
-    console.log(sectors); //debug
     return (sectors);
 }
 
