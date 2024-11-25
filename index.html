@@ -39,13 +39,28 @@
             margin: 0;
         }
 
+        /* 섹션 제목 스타일 */
+        .section-title {
+            background-color: #6B2230; /* 배경색 변경 */
+            color: white; /* 글씨 색상 변경 */
+            padding: 10px;
+            margin-top: 0;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
         /* 각 랭킹 섹션의 스타일 */
         .ranking-section {
             margin-bottom: 40px; /* 각 섹션 간격 */
-            padding: 20px; /* 내부 여백 */
-            border: 1px solid #ccc; /* 회색 테두리 */
+            border: 2px solid #6B2230; /* 굵은 테두리 색상 변경 */
             border-radius: 10px; /* 둥근 테두리 */
             background-color: #f9f9f9; /* 연한 배경색 */
+            overflow: hidden; /* 내부 요소가 둥근 모서리를 넘어가지 않도록 */
+        }
+
+        /* 랭킹 내용 패딩 추가 */
+        .ranking-section > div {
+            padding: 20px;
         }
 
         /* 메달 아이콘 스타일 */
@@ -69,23 +84,139 @@
 
     <!-- 최근 제출 랭킹 섹션 -->
     <div class="ranking-section">
-        <h2>가장 최근 제출</h2>
+        <h2 class="section-title">가장 최근 제출</h2>
         <div id="recentSubmissionChart"></div>
     </div>
     
     <!-- 잠수 순위 랭킹 섹션 -->
     <div class="ranking-section">
-        <h2>잠수 순위 (가장 오래전에 제출한 사람)</h2>
+        <h2 class="section-title">잠수 순위 (가장 오래전에 제출한 사람)</h2>
         <div id="dormantUserChart"></div>
     </div>
     
     <!-- 오늘의 탑 솔버 랭킹 섹션 -->
     <div class="ranking-section">
-        <h2>오늘 제일 많이 푼 사람</h2>
+        <h2 class="section-title">오늘 제일 많이 푼 사람</h2>
         <div id="topSolverToday"></div>
     </div>
 
     <!-- 랭킹 데이터를 처리하는 스크립트 -->
-    <script src="ranking.js"></script>
+    <script>
+        // 데이터 클래스 정의
+        class submitWithTime {
+            constructor(ID, problem, time) {
+                this._ID = ID;
+                this._problem = problem;
+                this._time = time;
+            }
+        }
+
+        class kwStudentInfo {
+            constructor(ID, tier, tierIcon, ranking, solvedCnt, rating, todaySolved, totalProblems) {
+                this._ID = ID;
+                this._tier = tier;
+                this._tierIcon = tierIcon;
+                this._ranking = ranking;
+                this._solvedCnt = solvedCnt;
+                this._rating = rating;
+                this._todaySolved = todaySolved;
+                this._totalProblems = totalProblems;
+            }
+        }
+
+        // 더미 데이터 생성
+        const recentSubmissions = [
+            new submitWithTime('kwuser1', 'problem1', new Date()),
+            new submitWithTime('kwuser2', 'problem2', new Date(Date.now() - 1000 * 60 * 5)),
+            new submitWithTime('kwuser3', 'problem3', new Date(Date.now() - 1000 * 60 * 10))
+        ];
+
+        const dormantUsers = [
+            new submitWithTime('kwuser4', 'problem4', new Date(Date.now() - 1000 * 60 * 60 * 24 * 30)),
+            new submitWithTime('kwuser5', 'problem5', new Date(Date.now() - 1000 * 60 * 60 * 24 * 20)),
+            new submitWithTime('kwuser6', 'problem6', new Date(Date.now() - 1000 * 60 * 60 * 24 * 10))
+        ];
+
+        const todayTopSolvers = [
+            new kwStudentInfo('kwuser7', 'Gold', 'gold.png', 1, 2000, 2500, 5, 10),
+            new kwStudentInfo('kwuser8', 'Silver', 'silver.png', 2, 1800, 2400, 4, 8),
+            new kwStudentInfo('kwuser9', 'Bronze', 'bronze.png', 3, 1600, 2300, 3, 6)
+        ];
+
+        // DOM 로드 완료 후 실행
+        document.addEventListener('DOMContentLoaded', () => {
+            // 최근 제출 섹션
+            const recentContainer = document.getElementById('recentSubmissionChart');
+            if (recentContainer) {
+                recentSubmissions
+                    .sort((a, b) => b._time - a._time)
+                    .forEach((submission, index) => {
+                        const submissionElement = document.createElement('div');
+                        submissionElement.className = 'ranking-item';
+                        
+                        const medalSpan = document.createElement('span');
+                        medalSpan.className = 'medal-icon';
+                        medalSpan.textContent = index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉';
+
+                        const submissionText = document.createTextNode(
+                            ` ${submission._ID} (제출 시간 : ${Math.round((Date.now() - submission._time) / (1000 * 60))}분 전)`
+                        );
+
+                        submissionElement.appendChild(medalSpan);
+                        submissionElement.appendChild(submissionText);
+                        
+                        recentContainer.appendChild(submissionElement);
+                    });
+            }
+
+            // 잠수 순위 섹션
+            const dormantContainer = document.getElementById('dormantUserChart');
+            if (dormantContainer) {
+                dormantUsers
+                    .sort((a, b) => b._time - a._time)
+                    .forEach((submission, index) => {
+                        const dormantElement = document.createElement('div');
+                        dormantElement.className = 'ranking-item';
+                        
+                        const medalSpan = document.createElement('span');
+                        medalSpan.className = 'medal-icon';
+                        medalSpan.textContent = index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉';
+
+                        const dormantText = document.createTextNode(
+                            ` ${submission._ID} (마지막 제출 : ${Math.round((Date.now() - submission._time) / (1000 * 60 * 60 * 24))}일 전)`
+                        );
+
+                        dormantElement.appendChild(medalSpan);
+                        dormantElement.appendChild(dormantText);
+                        
+                        dormantContainer.appendChild(dormantElement);
+                    });
+            }
+
+            // 오늘의 탑 솔버 섹션
+            const topSolverContainer = document.getElementById('topSolverToday');
+            if (topSolverContainer) {
+                todayTopSolvers
+                    .sort((a, b) => b._todaySolved - a._todaySolved)
+                    .forEach((solver, index) => {
+                        const solverElement = document.createElement('div');
+                        solverElement.className = 'ranking-item';
+
+                        const medalSpan = document.createElement('span');
+                        medalSpan.className = 'medal-icon';
+                        medalSpan.textContent = index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉';
+
+                        const solverText = document.createTextNode(
+                            ` ${solver._ID} (해결한 문제 : ${solver._todaySolved})`
+                        );
+
+                        solverElement.appendChild(medalSpan);
+                        solverElement.appendChild(solverText);
+
+                        topSolverContainer.appendChild(solverElement);
+                    });
+            }
+        });
+    </script>
 </body>
 </html>

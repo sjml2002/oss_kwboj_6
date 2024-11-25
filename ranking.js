@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 medalSpan.textContent = index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉';
 
                 const solverText = document.createTextNode(
-                    ` ${solver._ID} (해결한 문제 : ${solver._todaySolved})`
+                    ` ${solver._ID} (해결한  문제 : ${solver._todaySolved})`
                 );
 
                 solverElement.appendChild(medalSpan);
