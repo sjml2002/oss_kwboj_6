@@ -19,17 +19,15 @@ app.listen(port, () => {
 app.use(express.static(path.join(__dirname, "model"))); //model 안의 파일들 사용하기
 
 
-
-
 ///////////////////////  Routing  /////////////////////////////////////////
-app.get('/', (req, res) => {
+app.get('/pie_chart', (req, res) => {
   //__dirname: 현재 폴더의 위치 (전역변수)
-  res.sendFile(path.join(__dirname, "view", "main.html"))
+  res.sendFile(path.join(__dirname, "view", "pie_chart.html"))
 })
 
-// app.get("/studentInfo", (req, res) => {
-//   res.sendFile(path.join(__dirname, "view", "studentInfo.html"))
-// })
+app.get("/studentInfo", (req, res) => {
+  res.sendFile(path.join(__dirname, "view", "studentInfo.html"))
+})
 
 // Example for 시각화 맴버들
 app.get("/contribution", (req, res) => {
