@@ -3,220 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>광운대학교 백준 야매 랭킹</title>
-    
+    <title>광운대 백준 야매 랭킹</title>
     <style>
-        /* 전체 페이지의 기본 스타일 */
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            background-color: #f9f9f9;
+            padding: 20px;
+            text-align: center;
         }
 
-        /* 타이틀 컨테이너 스타일 */
         .title-container {
             display: flex;
-            align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
+            align-items: center;
+            margin-bottom: 40px;
         }
 
         .title-image {
-            width: 50px; /* 이미지 크기 조정 */
-            height: auto;
+            width: 50px;
+            margin: 0 10px;
         }
 
-        .left-image {
-            margin-right: 20px;
-        }
-
-        .right-image {
-            margin-left: 20px;
-        }
-
-        /* 페이지 제목 스타일 */
         h1 {
-            text-align: center;
-            margin: 0;
+            font-size: 24px;
+            color: #6B2230;
         }
 
-        /* 섹션 제목 스타일 */
+        .section {
+            margin-bottom: 50px;
+        }
+
         .section-title {
-            background-color: #6B2230; /* 배경색 변경 */
-            color: white; /* 글씨 색상 변경 */
-            padding: 10px;
-            margin-top: 0;
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #6B2230;
+            text-align: center;
         }
 
-        /* 각 랭킹 섹션의 스타일 */
-        .ranking-section {
-            margin-bottom: 40px; /* 각 섹션 간격 */
-            border: 2px solid #6B2230; /* 굵은 테두리 색상 변경 */
-            border-radius: 10px; /* 둥근 테두리 */
-            background-color: #f9f9f9; /* 연한 배경색 */
-            overflow: hidden; /* 내부 요소가 둥근 모서리를 넘어가지 않도록 */
+        .podium {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 20px;
+            margin-top: 20px;
         }
 
-        /* 랭킹 내용 패딩 추가 */
-        .ranking-section > div {
-            padding: 20px;
+        .stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            position: relative;
+            border-radius: 5px 5px 0 0;
+            color: white;
+            font-weight: bold;
+            padding-top: 10px;
         }
 
-        /* 메달 아이콘 스타일 */
-        .medal-icon {
-            font-size: 24px; /* 아이콘 크기 */
-            margin-right: 10px; /* 오른쪽 여백 */
+        .stage-1 {
+            height: 150px;
+            width: 100px;
+            background-color: #C0C0C0;
         }
 
-        /* 랭킹 항목 스타일 */
-        .ranking-item {
-            margin: 10px 0; /* 목록 항목 간격 */
+        .stage-2 {
+            height: 120px;
+            width: 100px;
+            background-color: #FFD700;
+        }
+
+        .stage-3 {
+            height: 100px;
+            width: 100px;
+            background-color: #CD7F32;
+        }
+
+        .wood-base {
+            background-color: #6B4230;
+            width: 100px;
+            height: 20px;
+            border-radius: 0 0 5px 5px;
+            margin-top: 5px;
+        }
+
+        .medal {
+            position: absolute;
+            bottom: -40px;
+            font-size: 24px;
+        }
+
+        .user {
+            margin-top: auto;
+            padding: 10px 5px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
     <div class="title-container">
-        <img src="mascot.png" alt="마스코트" class="title-image left-image">
+        <img src="mascot.png" alt="마스코트" class="title-image">
         <h1>광운대 백준 야매 랭킹</h1>
-        <img src="mascot2.png" alt="마스코트2" class="title-image right-image">
+        <img src="mascot2.png" alt="마스코트2" class="title-image">
     </div>
 
-    <!-- 최근 제출 랭킹 섹션 -->
-    <div class="ranking-section">
+    <!-- 최근 제출 섹션 -->
+    <div class="section">
         <h2 class="section-title">가장 최근 제출</h2>
-        <div id="recentSubmissionChart"></div>
+        <div class="podium">
+            <div class="stage stage-2">
+                <div class="user">kwuser2</div>
+                <div class="wood-base"></div>
+                <div class="medal">🥈</div>
+            </div>
+            <div class="stage stage-1">
+                <div class="user">kwuser1</div>
+                <div class="wood-base"></div>
+                <div class="medal">🥇</div>
+            </div>
+            <div class="stage stage-3">
+                <div class="user">kwuser3</div>
+                <div class="wood-base"></div>
+                <div class="medal">🥉</div>
+            </div>
+        </div>
     </div>
-    
-    <!-- 잠수 순위 랭킹 섹션 -->
-    <div class="ranking-section">
+
+    <!-- 잠수 순위 섹션 -->
+    <div class="section">
         <h2 class="section-title">잠수 순위 (가장 오래전에 제출한 사람)</h2>
-        <div id="dormantUserChart"></div>
+        <div class="podium">
+            <div class="stage stage-2">
+                <div class="user">kwuser5</div>
+                <div class="wood-base"></div>
+                <div class="medal">🥈</div>
+            </div>
+            <div class="stage stage-1">
+                <div class="user">kwuser6</div>
+                <div class="wood-base"></div>
+                <div class="medal">🥇</div>
+            </div>
+            <div class="stage stage-3">
+                <div class="user">kwuser4</div>
+                <div class="wood-base"></div>
+                <div class="medal">🥉</div>
+            </div>
+        </div>
     </div>
-    
-    <!-- 오늘의 탑 솔버 랭킹 섹션 -->
-    <div class="ranking-section">
+
+    <!-- 오늘의 탑 솔버 섹션 -->
+    <div class="section">
         <h2 class="section-title">오늘 제일 많이 푼 사람</h2>
-        <div id="topSolverToday"></div>
+        <div class="podium">
+            <div class="stage stage-2">
+                <div class="user">kwuser8</div>
+                <div class="wood-base"></div>
+                <div class="medal">🥈</div>
+            </div>
+            <div class="stage stage-1">
+                <div class="user">kwuser7</div>
+                <div class="wood-base"></div>
+                <div class="medal">🥇</div>
+            </div>
+            <div class="stage stage-3">
+                <div class="user">kwuser9</div>
+                <div class="wood-base"></div>
+                <div class="medal">🥉</div>
+            </div>
+        </div>
     </div>
-
-    <!-- 랭킹 데이터를 처리하는 스크립트 -->
-    <script>
-        // 데이터 클래스 정의
-        class submitWithTime {
-            constructor(ID, problem, time) {
-                this._ID = ID;
-                this._problem = problem;
-                this._time = time;
-            }
-        }
-
-        class kwStudentInfo {
-            constructor(ID, tier, tierIcon, ranking, solvedCnt, rating, todaySolved, totalProblems) {
-                this._ID = ID;
-                this._tier = tier;
-                this._tierIcon = tierIcon;
-                this._ranking = ranking;
-                this._solvedCnt = solvedCnt;
-                this._rating = rating;
-                this._todaySolved = todaySolved;
-                this._totalProblems = totalProblems;
-            }
-        }
-
-        // 더미 데이터 생성
-        const recentSubmissions = [
-            new submitWithTime('kwuser1', 'problem1', new Date()),
-            new submitWithTime('kwuser2', 'problem2', new Date(Date.now() - 1000 * 60 * 5)),
-            new submitWithTime('kwuser3', 'problem3', new Date(Date.now() - 1000 * 60 * 10))
-        ];
-
-        const dormantUsers = [
-            new submitWithTime('kwuser4', 'problem4', new Date(Date.now() - 1000 * 60 * 60 * 24 * 30)),
-            new submitWithTime('kwuser5', 'problem5', new Date(Date.now() - 1000 * 60 * 60 * 24 * 20)),
-            new submitWithTime('kwuser6', 'problem6', new Date(Date.now() - 1000 * 60 * 60 * 24 * 10))
-        ];
-
-        const todayTopSolvers = [
-            new kwStudentInfo('kwuser7', 'Gold', 'gold.png', 1, 2000, 2500, 5, 10),
-            new kwStudentInfo('kwuser8', 'Silver', 'silver.png', 2, 1800, 2400, 4, 8),
-            new kwStudentInfo('kwuser9', 'Bronze', 'bronze.png', 3, 1600, 2300, 3, 6)
-        ];
-
-        // DOM 로드 완료 후 실행
-        document.addEventListener('DOMContentLoaded', () => {
-            // 최근 제출 섹션
-            const recentContainer = document.getElementById('recentSubmissionChart');
-            if (recentContainer) {
-                recentSubmissions
-                    .sort((a, b) => b._time - a._time)
-                    .forEach((submission, index) => {
-                        const submissionElement = document.createElement('div');
-                        submissionElement.className = 'ranking-item';
-                        
-                        const medalSpan = document.createElement('span');
-                        medalSpan.className = 'medal-icon';
-                        medalSpan.textContent = index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉';
-
-                        const submissionText = document.createTextNode(
-                            ` ${submission._ID} (제출 시간 : ${Math.round((Date.now() - submission._time) / (1000 * 60))}분 전)`
-                        );
-
-                        submissionElement.appendChild(medalSpan);
-                        submissionElement.appendChild(submissionText);
-                        
-                        recentContainer.appendChild(submissionElement);
-                    });
-            }
-
-            // 잠수 순위 섹션
-            const dormantContainer = document.getElementById('dormantUserChart');
-            if (dormantContainer) {
-                dormantUsers
-                    .sort((a, b) => b._time - a._time)
-                    .forEach((submission, index) => {
-                        const dormantElement = document.createElement('div');
-                        dormantElement.className = 'ranking-item';
-                        
-                        const medalSpan = document.createElement('span');
-                        medalSpan.className = 'medal-icon';
-                        medalSpan.textContent = index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉';
-
-                        const dormantText = document.createTextNode(
-                            ` ${submission._ID} (마지막 제출 : ${Math.round((Date.now() - submission._time) / (1000 * 60 * 60 * 24))}일 전)`
-                        );
-
-                        dormantElement.appendChild(medalSpan);
-                        dormantElement.appendChild(dormantText);
-                        
-                        dormantContainer.appendChild(dormantElement);
-                    });
-            }
-
-            // 오늘의 탑 솔버 섹션
-            const topSolverContainer = document.getElementById('topSolverToday');
-            if (topSolverContainer) {
-                todayTopSolvers
-                    .sort((a, b) => b._todaySolved - a._todaySolved)
-                    .forEach((solver, index) => {
-                        const solverElement = document.createElement('div');
-                        solverElement.className = 'ranking-item';
-
-                        const medalSpan = document.createElement('span');
-                        medalSpan.className = 'medal-icon';
-                        medalSpan.textContent = index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉';
-
-                        const solverText = document.createTextNode(
-                            ` ${solver._ID} (해결한 문제 : ${solver._todaySolved})`
-                        );
-
-                        solverElement.appendChild(medalSpan);
-                        solverElement.appendChild(solverText);
-
-                        topSolverContainer.appendChild(solverElement);
-                    });
-            }
-        });
-    </script>
 </body>
 </html>
