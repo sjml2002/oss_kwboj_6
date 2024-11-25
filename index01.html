@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문제 카테고리 & 결투 게임</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 40px;
+        }
+
+        .category {
+            width: 300px;
+            background-color: #e6f7ff;
+            border-radius: 15px;
+            border: 2px solid #b3e5fc; /* 테두리 추가 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .category:hover {
+            transform: translateY(-5px);
+        }
+
+        .category-header {
+            background-color: #b3e5fc;
+            color: #003366;
+            padding: 15px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .problem-list {
+            padding: 15px;
+        }
+
+        .problem {
+            background-color: #f0f8ff;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #003366;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+
+        .problem:hover {
+            background-color: #d9f1ff;
+        }
+
+        .problem:last-child {
+            margin-bottom: 0;
+        }
+
+        .duel-container {
+            margin: 40px auto;
+            max-width: 600px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 2px solid #b3e5fc; /* 테두리 추가 */
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .duel-header {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #003366;
+            font-weight: bold;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .input-group input {
+            width: 40%;
+            padding: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .vs {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff3333; /* 빨간색 VS 텍스트 */
+        }
+
+        .duel-button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .duel-button:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        canvas {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 문제 카테고리 -->
+    <div class="categories">
+        <!-- 오늘의 문제 카테고리 -->
+        <div class="category">
+            <div class="category-header">오늘의 문제</div>
+            <div class="problem-list">
+                <a href="https://www.acmicpc.net/problem/1010" class="problem" target="_blank">문제 1010</a>
+                <a href="https://www.acmicpc.net/problem/2021" class="problem" target="_blank">문제 2021</a>
+                <a href="https://www.acmicpc.net/problem/3033" class="problem" target="_blank">문제 3033</a>
+            </div>
+        </div>
+
+        <!-- 우리 학교 학생들이 못 푼 문제 카테고리 -->
+        <div class="category">
+            <div class="category-header">우리 학교 학생들이 못 푼 문제</div>
+            <div class="problem-list">
+                <a href="https://www.acmicpc.net/problem/4004" class="problem" target="_blank">문제 4004</a>
+                <a href="https://www.acmicpc.net/problem/5005" class="problem" target="_blank">문제 5005</a>
+                <a href="https://www.acmicpc.net/problem/6006" class="problem" target="_blank">문제 6006</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 결투 게임 -->
+    <div class="duel-container">
+        <div class="duel-header">백준 레이팅 결투</div>
+        <div class="input-group">
+            <input type="text" id="user1" placeholder="첫 번째 아이디 입력">
+            <div class="vs">VS</div>
+            <input type="text" id="user2" placeholder="두 번째 아이디 입력">
+        </div>
+        <button class="duel-button" onclick="startDuel()">결투 시작</button>
+        <div class="result" id="result"></div>
+        <canvas id="chart" width="400" height="400"></canvas>
+    </div>
+
+    <script>
+        function startDuel() {
+            const user1 = document.getElementById('user1').value.trim();
+            const user2 = document.getElementById('user2').value.trim();
+
+            if (!user1 || !user2) {
+                alert('두 아이디를 모두 입력해주세요!');
+                return;
+            }
+
+            // 여기서 실제 API 호출 로직으로 두 유저 데이터를 가져와야 합니다.
+            // 아래는 예시 데이터로 결과를 출력합니다.
+            const user1Rating = Math.floor(Math.random() * 3000);
+            const user2Rating = Math.floor(Math.random() * 3000);
+
+            const resultDiv = document.getElementById('result');
+            if (user1Rating > user2Rating) {
+                resultDiv.textContent = `${user1} 승리! (점수: ${user1Rating} vs ${user2Rating})`;
+            } else if (user1Rating < user2Rating) {
+                resultDiv.textContent = `${user2} 승리! (점수: ${user1Rating} vs ${user2Rating})`;
+            } else {
+                resultDiv.textContent = `무승부! (점수: ${user1Rating} vs ${user2Rating})`;
+            }
+
+            // 차트 그리기 (육각형 분포도 자리)
+            const canvas = document.getElementById('chart');
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillText("육각형 그래프 자리", 50, 200);
+        }
+    </script>
+</body>
+</html>
