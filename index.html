@@ -12,9 +12,31 @@
             margin: 20px;
         }
 
+        /* 타이틀 컨테이너 스타일 */
+        .title-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .title-image {
+            width: 50px; /* 이미지 크기 조정 */
+            height: auto;
+        }
+
+        .left-image {
+            margin-right: 20px;
+        }
+
+        .right-image {
+            margin-left: 20px;
+        }
+
         /* 페이지 제목 스타일 */
         h1 {
             text-align: center;
+            margin: 0;
         }
 
         /* 각 랭킹 섹션의 스타일 */
@@ -39,8 +61,12 @@
     </style>
 </head>
 <body>
-    <h1>광운대 백준 야매 랭킹</h1>
-    
+    <div class="title-container">
+        <img src="mascot.png" alt="마스코트" class="title-image left-image">
+        <h1>광운대 백준 야매 랭킹</h1>
+        <img src="mascot2.png" alt="마스코트2" class="title-image right-image">
+    </div>
+
     <!-- 최근 제출 랭킹 섹션 -->
     <div class="ranking-section">
         <h2>가장 최근 제출</h2>
