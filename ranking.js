@@ -1,4 +1,4 @@
-// 데이터 클래스 정의 (기존 코드 유지)
+// 데이터 클래스 정의
 class submitWithTime {
     constructor(ID, problem, time) {
         this._ID = ID; // 제출자의 ID
@@ -20,84 +20,60 @@ class kwStudentInfo {
     }
 }
 
-// 더미 데이터 생성 (실제 크롤링 데이터로 대체 필요)
+// 더미 데이터 생성
 const recentSubmissions = [
-    new submitWithTime('kwuser1', 'problem1', new Date()), // 최근 제출자 1
-    new submitWithTime('kwuser2', 'problem2', new Date(Date.now() - 1000 * 60 * 5)), // 최근 제출자 2 (5분 전)
-    new submitWithTime('kwuser3', 'problem3', new Date(Date.now() - 1000 * 60 * 10)) // 최근 제출자 3 (10분 전)
+    new submitWithTime('kwuser1', 'problem1', new Date()),
+    new submitWithTime('kwuser2', 'problem2', new Date(Date.now() - 1000 * 60 * 5)),
+    new submitWithTime('kwuser3', 'problem3', new Date(Date.now() - 1000 * 60 * 10)),
 ];
 
 const dormantUsers = [
-    new submitWithTime('kwuser4', 'problem4', new Date(Date.now() - 1000 * 60 * 60 * 24 * 30)), // 잠수 사용자 1 (30일 전)
-    new submitWithTime('kwuser5', 'problem5', new Date(Date.now() - 1000 * 60 * 60 * 24 * 20)), // 잠수 사용자 2 (20일 전)
-    new submitWithTime('kwuser6', 'problem6', new Date(Date.now() - 1000 * 60 * 60 * 24 * 10)) // 잠수 사용자 3 (10일 전)
+    new submitWithTime('kwuser4', 'problem4', new Date(Date.now() - 1000 * 60 * 60 * 24 * 30)),
+    new submitWithTime('kwuser5', 'problem5', new Date(Date.now() - 1000 * 60 * 60 * 24 * 20)),
+    new submitWithTime('kwuser6', 'problem6', new Date(Date.now() - 1000 * 60 * 60 * 24 * 10)),
 ];
 
 const todayTopSolvers = [
-    new kwStudentInfo('kwuser7', 'Gold', 'gold.png', 1, 2000, 2500, 5, 10), // 오늘의 탑 솔버 1
-    new kwStudentInfo('kwuser8', 'Silver', 'silver.png', 2, 1800, 2400, 4, 8), // 오늘의 탑 솔버 2
-    new kwStudentInfo('kwuser9', 'Bronze', 'bronze.png', 3, 1600, 2300, 3, 6) // 오늘의 탑 솔버 3
+    new kwStudentInfo('kwuser7', 'Gold', 'gold.png', 1, 2000, 2500, 5, 10),
+    new kwStudentInfo('kwuser8', 'Silver', 'silver.png', 2, 1800, 2400, 4, 8),
+    new kwStudentInfo('kwuser9', 'Bronze', 'bronze.png', 3, 1600, 2300, 3, 6),
 ];
+
+// podium 섹션 업데이트 함수
+function updatePodium(podiumElement, data, sortKey, getUserName) {
+    data
+        .sort((a, b) => b[sortKey] - a[sortKey]) // 정렬 기준으로 내림차순 정렬
+        .forEach((item, index) => {
+            const stageElement = podiumElement.children[index];
+            if (stageElement) {
+                const userElement = stageElement.querySelector('.user');
+                if (userElement) userElement.textContent = getUserName(item); // 사용자 이름 업데이트
+
+                const medalElement = stageElement.querySelector('.medal');
+                if (medalElement) {
+                    medalElement.textContent = index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉'; // 메달 설정
+                }
+            }
+        });
+}
 
 // DOM 로드 완료 후 실행
 document.addEventListener('DOMContentLoaded', () => {
-    // 최근 제출 섹션 업데이트
-    const recentPodium = document.querySelector('.podium'); // 첫 번째 podium 선택
-    if (recentPodium) {
-        recentSubmissions
-            .sort((a, b) => b._time - a._time) // 제출 시간을 기준으로 내림차순 정렬
-            .forEach((submission, index) => {
-                const stageElement = recentPodium.children[index]; // 각 스테이지 요소 선택
-                if (stageElement) {
-                    const userElement = stageElement.querySelector('.user'); // 사용자 이름 요소 선택
-                    if (userElement) userElement.textContent = submission._ID; // 사용자 이름 업데이트
+    const podiums = document.querySelectorAll('.podium');
 
-                    // 메달 업데이트 (인덱스에 따라)
-                    const medalElement = stageElement.querySelector('.medal'); 
-                    if (medalElement) {
-                        medalElement.textContent = index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉'; 
-                    }
-                }
-            });
+    // 최근 제출 섹션 업데이트
+    if (podiums[0]) {
+        updatePodium(podiums[0], recentSubmissions, '_time', item => item._ID);
     }
 
     // 잠수 순위 섹션 업데이트
-    const dormantPodium = document.querySelectorAll('.podium')[1]; // 두 번째 podium 선택
-    if (dormantPodium) {
-        dormantUsers
-            .sort((a, b) => b._time - a._time) // 제출 시간을 기준으로 내림차순 정렬
-            .forEach((submission, index) => {
-                const stageElement = dormantPodium.children[index]; // 각 스테이지 요소 선택
-                if (stageElement) {
-                    const userElement = stageElement.querySelector('.user'); 
-                    if (userElement) userElement.textContent = submission._ID; 
-
-                    // 메달 업데이트 (인덱스에 따라)
-                    const medalElement = stageElement.querySelector('.medal'); 
-                    if (medalElement) {
-                        medalElement.textContent = index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉'; 
-                    }
-                }
-            });
+    if (podiums[1]) {
+        updatePodium(podiums[1], dormantUsers, '_time', item => item._ID);
     }
 
     // 오늘의 탑 솔버 섹션 업데이트
-    const topSolverPodium = document.querySelectorAll('.podium')[2]; // 세 번째 podium 선택
-    if (topSolverPodium) {
-        todayTopSolvers
-            .sort((a, b) => b._todaySolved - a._todaySolved) // 오늘 해결한 문제 수 기준으로 내림차순 정렬
-            .forEach((solver, index) => {
-                const stageElement = topSolverPodium.children[index]; // 각 스테이지 요소 선택
-                if (stageElement) {
-                    const userElement = stageElement.querySelector('.user'); 
-                    if (userElement) userElement.textContent = solver._ID; 
-
-                    // 메달 업데이트 (인덱스에 따라)
-                    const medalElement = stageElement.querySelector('.medal'); 
-                    if (medalElement) {
-                        medalElement.textContent = index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉'; 
-                    }
-                }
-            });
+    if (podiums[2]) {
+        updatePodium(podiums[2], todayTopSolvers, '_todaySolved', item => item._ID);
     }
-}); 
+});
+
