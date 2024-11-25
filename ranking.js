@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 medalSpan.textContent = index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉';
 
                 const submissionText = document.createTextNode(
-                    ` ${submission._ID} (제출 시간: ${Math.round((Date.now() - submission._time) / (1000 * 60))}분 전)`
+                    ` ${submission._ID} (제출 시간 : ${Math.round((Date.now() - submission._time) / (1000 * 60))}분 전)`
                 );
 
                 submissionElement.appendChild(medalSpan);
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 medalSpan.textContent = index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉';
 
                 const dormantText = document.createTextNode(
-                    ` ${submission._ID} (마지막 제출: ${Math.round((Date.now() - submission._time) / (1000 * 60 * 60 * 24))}일 전)`
+                    ` ${submission._ID} (마지막 제출 : ${Math.round((Date.now() - submission._time) / (1000 * 60 * 60 * 24))}일 전)`
                 );
 
                 dormantElement.appendChild(medalSpan);
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 medalSpan.textContent = index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉';
 
                 const solverText = document.createTextNode(
-                    ` ${solver._ID} (푼 문제: ${solver._todaySolved})`
+                    ` ${solver._ID} (해결한 문제 : ${solver._todaySolved})`
                 );
 
                 solverElement.appendChild(medalSpan);
