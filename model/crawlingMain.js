@@ -1,5 +1,5 @@
-//import axios from 'axios';
-//import * as cheerio from "cheerio";
+import axios from 'axios';
+import * as cheerio from "cheerio";
 //import * as fs from 'fs';
 import * as crawlingStudent from "./crawlingStudent.js";
 import * as crawlingSubmit from "./crawlingSubmitTime.js";
@@ -18,11 +18,9 @@ let data_totalProblems = new Set();
 let data_todaysProblem = [];
 
 const getHtml = async(customheader, url) => {
-    const proxyUrl = "https://cors-anywhere.herokuapp.com/";
     try {
-        const html  = await axios.get(proxyUrl + url, {
+        const html  = await axios.get(url, {
             headers: customheader,
-            credentials: "include",
         });
         const htmldata = cheerio.load(html.data)
         return (htmldata);

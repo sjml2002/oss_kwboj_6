@@ -1,36 +1,75 @@
-import * as crawling from "./crawlingMain.js";
+//import * as crawling from "./crawlingMain.js";
 //import axios from "axios";
+
+const fetchStudentInfo = async() => {
+    try {
+        const response = await fetch('/getkwStudentInfo');
+        const jsondata = await response.json();
+        //const arraydata = JSON.parse(jsondata);
+
+        console.log(jsondata); //debug
+
+        // 데이터를 HTML에 넣기 (example 코드는 studentInfo.html 참고)
+        // TODO for 시각화 맴버들
+        return (jsondata);
+        
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return ([]);
+    }
+};
 
 /**
  * 티어에 따른 인원 수 계산
  * @returns {List - Map} 실제 랜더링 데이터가 되는 sectors
  */
 const getTierList = async() => {
-    const kwstudents = await crawling.getkwStudentInfo();
+    const kwstudents = await fetchStudentInfo();
 
-    const tierNameList = ["브론즈", "실버", "골드", "플래티넘", "다이아", "루비"];
     let sectors = [
-        { label: "브론즈", start: 0, end: 20, color: "#ad5600", value: 20 }, // value 값이 문제 수
-        { label: "실버", start: 20, end: 40, color: "#435f7a", value: 20 },
-        { label: "골드", start: 40, end: 60, color: "#ec9a00", value: 20 },
-        { label: "플래티넘", start: 60, end: 70, color: "#27e2a4", value: 10 },
-        { label: "다이아", start: 70, end: 80, color: "#00BFFF", value: 10 },
-        { label: "루비", start: 80, end: 100, color: "#e0115f", value: 20 },
+        { label: "언랭", start: 0, end: 10, color: "#000000", value: 0}, // value 값이 문제 수
+        { label: "브론즈", start: 10, end: 20, color: "#ad5600", value: 0 },
+        { label: "실버", start: 20, end: 40, color: "#435f7a", value: 0 },
+        { label: "골드", start: 40, end: 60, color: "#ec9a00", value: 0 },
+        { label: "플래티넘", start: 60, end: 70, color: "#27e2a4", value: 0 },
+        { label: "다이아", start: 70, end: 80, color: "#00BFFF", value: 0 },
+        { label: "루비", start: 80, end: 100, color: "#e0115f", value: 0 },
     ];
     
     kwstudents.forEach((student) => {
+        console.log(student); //debug
         const tier = student._tier;
-        const tierName = tierNameList[parseInt(tier/5)];
-
-        console.log(tierName); //debug
+        let tierName = "언랭";
+        if (tier.includes("Ruby"))
+            tierName = "루비";
+        else if (tier.includes("Diamond"))
+            tierName = "다이아";
+        else if (tier.includes("Platinum"))
+            tierName = "플래티넘";
+        else if (tier.includes("Gold"))
+            tierName = "골드";
+        else if (tier.includes("Silver"))
+            tierName = "실버";
+        else if (tier.includes("Bronze"))
+            tierName = "브론즈";
         
-        //make map
         sectors.forEach((sector) => {
             if (sector.label === tierName) {
                 sector.value += 1;
             }
         })
     });
+
+    //start, end 비율 설정
+    for(let i=0; i<sectors.length; i++) {
+        let solvedpercentage = 0;
+        if (sectors[i].value != 0)
+         solvedpercentage = (sectors[i].value / kwstudents.length) * 100; //백분율 환산했을 때 비율
+        console.log(solvedpercentage); //debug
+        if (i > 0)
+            sectors[i].start = sectors[i-1].end;
+        sectors[i].end = sectors[i].start + (solvedpercentage);
+    }
 
     console.log(sectors); //debug
     return (sectors);
@@ -125,7 +164,7 @@ $(window).ready(async function () {
         );
     
         if (clickedSector) {
-            alert(`클릭한 섹터: ${clickedSector.label} (${clickedSector.value} 문제)`);
+            alert(`클릭한 섹터: ${clickedSector.label} (${clickedSector.value} 명)`);
         } else {
             alert("섹터를 클릭하지 않았습니다.");
         }
@@ -151,7 +190,7 @@ $(window).ready(async function () {
     
         if (hoveredSector) {
             // 섹터 정보 표시
-            $(".tooltip").html(`${hoveredSector.label}: ${hoveredSector.value} 문제`)
+            $(".tooltip").html(`${hoveredSector.label}: ${hoveredSector.value} 명`)
                 .css({
                     top: e.pageY + 10 + "px",
                     left: e.pageX + 10 + "px",
