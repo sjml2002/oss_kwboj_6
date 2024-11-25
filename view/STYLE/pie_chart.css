@@ -1,0 +1,223 @@
+.chart-container {
+  display: flex;
+  flex-direction: column;
+  /* 주축을 세로 방향으로 설정 */
+  justify-content: center;
+  /* 세로 방향 정렬 */
+  align-items: center;
+  /* 가로 방향 중앙 정렬 */
+  gap: 10px;
+  /* 데이터와 설명 사이 간격 */
+  padding: 0px;
+  width: 100%;
+  /* 전체 컨테이너 너비 */
+  max-width: 500px;
+  /* 최대 컨테이너 너비 */
+  margin: 0 auto;
+  /* 컨테이너를 화면 중앙에 정렬 */
+}
+
+/* 원형 그래프와 오른쪽 문제 value를 담는 컨테이너 */
+.data-container {
+  display: flex;
+  justify-content: center;
+  /* 차트와 값 정렬 */
+  align-items: center;
+  /* 수평 중앙 정렬 */
+  gap: 5px;
+  /* 차트와 값 사이 간격 */
+  padding: 0px;
+  /* 외부 여백 */
+  width: 100%;
+  /* 화면 너비에 맞게 확장 */
+  max-width: 500px;
+  /* 최대 너비 제한 */
+  max-height: 300px;
+  margin: 0 auto;
+  /* 가운데 정렬 */
+}
+
+.pie-chart {
+  position: relative;
+  /* 부모 요소의 위치를 기준으로 설정 */
+  margin: 20px auto;
+  /* 위, 아래 여백 추가 및 자동 수평 정렬 */
+  width: 300px;
+  /* 원형의 너비 */
+  height: 300px;
+  /* 원형의 높이 */
+  border-radius: 50%;
+  /* 원형으로 만들기 */
+  transition: 0.3s;
+  /* 변화 시 부드러운 전환 효과 */
+}
+
+.tooltip {
+  position: absolute;
+  padding: 8px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  border-radius: 4px;
+  font-size: 12px;
+  display: none;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+span.center {
+  background: #fff;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 70px;
+  font-size: 20px;
+  transform: translate(-50%, -50%);
+}
+
+.chart-description {
+  text-align: center;
+  /* 가운데 정렬 */
+  font-size: 25px;
+  /* 텍스트 크기 */
+  font-weight: bold;
+  /* 설명 텍스트 볼드체 */
+  color: #333;
+  /* 텍스트 색상 */
+  line-height: 1.5;
+  /* 텍스트 줄 간격 */
+}
+
+.chart-value {
+  font-size: 14px;
+}
+
+.chart-value ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.chart-value li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.chart-value li span {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  border-radius: 4px;
+  /* 색상 박스 둥글게 */
+}
+
+/* 이하 테스트용 코드 */
+
+.pie-chart1 {
+  animation: pie1 0.5s forwards;
+}
+
+@keyframes pie1 {
+  0% {
+    background: conic-gradient(#ccc 0% 0%, #ffffff 0% 100%);
+  }
+
+  6% {
+    background: conic-gradient(#ccc 0% 6%, #ffffff 0% 100%);
+  }
+
+  12% {
+    background: conic-gradient(#ccc 0% 12%, #ffffff 0% 100%);
+  }
+
+  18% {
+    background: conic-gradient(#ccc 0% 18%, #ffffff 0% 100%);
+  }
+
+  25% {
+    background: conic-gradient(#ccc 0% 25%, #ffffff 0% 100%);
+  }
+
+  33% {
+    background: conic-gradient(#ccc 0% 33%, #ffffff 0% 100%);
+  }
+
+  38% {
+    background: conic-gradient(#ccc 0% 38%, #ffffff 0% 100%);
+  }
+
+  44% {
+    background: conic-gradient(#ccc 0% 44%, #ffffff 0% 100%);
+  }
+
+  50% {
+    background: conic-gradient(#ccc 0% 50%, #ffffff 0% 100%);
+  }
+
+  56% {
+    background: conic-gradient(#ccc 0% 56%, #ffffff 0% 100%);
+  }
+
+  62% {
+    background: conic-gradient(#ccc 0% 62%, #ffffff 0% 100%);
+  }
+
+  68% {
+    background: conic-gradient(#ccc 0% 68%, #ffffff 0% 100%);
+  }
+
+  75% {
+    background: conic-gradient(#ccc 0% 75%, #ffffff 0% 100%);
+  }
+
+  82% {
+    background: conic-gradient(#ccc 0% 82%, #ffffff 0% 100%);
+  }
+
+  88% {
+    background: conic-gradient(#ccc 0% 88%, #ffffff 0% 100%);
+  }
+
+  94% {
+    background: conic-gradient(#ccc 0% 94%, #ffffff 0% 100%);
+  }
+
+  100% {
+    background: conic-gradient(#ccc 0% 100%, #ffffff 0% 100%);
+  }
+}
+
+.pie-chart-temp {
+  position: relative;
+  display: inline-block;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.pie-chart2 {
+  animation: pie2 0.5s forwards;
+}
+
+@keyframes pie2 {
+  0% {
+    background: conic-gradient(#ccc 0% 0%, #ffffff 0% 100%)
+  }
+
+  50% {
+    background: conic-gradient(#ccc 0% 50%, #ffffff 50% 100%)
+  }
+
+  100% {
+    background: conic-gradient(#ccc 0% 80%, #ffffff 80% 100%)
+  }
+}
