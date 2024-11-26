@@ -84,36 +84,71 @@ body {
     border-radius: 10px;
     background-color: #e6f7ff;
     position: relative;
-    z-index: 1;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
-    opacity: 0.8;
-    transform: translateY(0);
     transition: all 0.3s ease-in-out;
+    animation: fadeIn 1s ease-in-out;
 }
 
-/* 위/아래 학교 순위 효과 */
-.ranking-item.previous {
-    z-index: 0;
-    transform: translateY(-15px);
-    opacity: 0.5;
-}
-
+/* 광운대학교 위/아래 학교 스타일 */
+.ranking-item.previous,
 .ranking-item.next {
-    z-index: 0;
-    transform: translateY(15px);
-    opacity: 0.5;
+    font-size: 16px; /* 글자 크기 작게 */
+    padding: 8px; /* 패딩 작게 */
+    margin: -10px 0; /* 겹치도록 마진 설정 */
+    z-index: 0; /* 광운대학교 뒤로 이동 */
+    opacity: 0.7; /* 반투명 */
+    transform: scale(0.9); /* 크기 줄이기 */
+    animation: fadeInUp 1s ease-in-out; /* 위/아래 방향 애니메이션 */
 }
 
+/* 광운대학교 스타일 */
 .ranking-item.highlight {
-    font-size: 22px;
+    font-size: 22px; /* 더 큰 글씨 */
     font-weight: bold;
     color: #003366;
     background-color: #b3e5fc;
-    z-index: 2;
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 2; /* 가장 위로 */
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3); /* 그림자 추가 */
     transform: translateY(0);
     opacity: 1;
+    animation: bounce 1.5s infinite; /* 강조 애니메이션 */
 }
+
+/* 애니메이션 정의 */
+
+/* 서서히 나타나는 효과 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 위에서 서서히 내려오는 효과 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 0.7;
+        transform: translateY(-10px) scale(0.9);
+    }
+}
+
+/* 광운대학교 강조 애니메이션 */
+@keyframes bounce {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
 
 /* 결투 게임 스타일 */
 .duel-container {
