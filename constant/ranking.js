@@ -1,79 +1,99 @@
-// 데이터 클래스 정의
-class submitWithTime {
-    constructor(ID, problem, time) {
-        this._ID = ID; // 제출자의 ID
-        this._problem = problem; // 문제 ID 또는 이름
-        this._time = time; // 제출 시간
+/**
+ * 데이터를 가져오는 함수
+ * @description 서버로부터 학생 정보를 가져오는 비동기 함수. 데이터가 없거나 에러가 발생하면 빈 배열을 반환.
+ * @returns {Promise<Array>} 학생 정보 배열
+ */
+const fetchStudentInfo = async () => {
+    try {
+        const response = await fetch('/getkwStudentInfo'); // 서버에서 데이터 요청
+        const data = await response.json(); // JSON 형식으로 응답 파싱
+        return data; // 데이터 반환
+    } catch (error) {
+        console.error('데이터 가져오기 실패:', error); // 에러 로그 출력
+        return []; // 에러 발생 시 빈 배열 반환
     }
-}
+};
 
-class kwStudentInfo {
-    constructor(ID, tier, tierIcon, ranking, solvedCnt, rating, todaySolved, totalProblems) {
-        this._ID = ID; // 학생의 ID
-        this._tier = tier; // 학생의 티어 (예: Gold, Silver, Bronze)
-        this._tierIcon = tierIcon; // 티어 아이콘 이미지 경로
-        this._ranking = ranking; // 학생의 랭킹
-        this._solvedCnt = solvedCnt; // 해결한 문제 수
-        this._rating = rating; // 학생의 평점
-        this._todaySolved = todaySolved; // 오늘 해결한 문제 수
-        this._totalProblems = totalProblems; // 총 문제 수
-    }
-}
+/**
+ * 데이터를 렌더링하는 함수
+ * @description 사용자 데이터를 렌더링하는 함수. 랭킹별 ID에 따라 정렬 및 필터링 방식이 다름.
+ * @param {string} sectionId - DOM 요소 ID (렌더링할 ID)
+ * @param {Array} users - 사용자 데이터 배열
+ */
+const renderSection = (sectionId, users) => {
+    const podium = document.getElementById(sectionId); // 요소 가져오기
+    podium.innerHTML = ''; // 기존 내용 초기화
 
-// 더미 데이터 생성
-const recentSubmissions = [
-    new submitWithTime('kwuser1', 'problem1', new Date()),
-    new submitWithTime('kwuser2', 'problem2', new Date(Date.now() - 1000 * 60 * 5)),
-    new submitWithTime('kwuser3', 'problem3', new Date(Date.now() - 1000 * 60 * 10)),
-];
-
-const dormantUsers = [
-    new submitWithTime('kwuser4', 'problem4', new Date(Date.now() - 1000 * 60 * 60 * 24 * 30)),
-    new submitWithTime('kwuser5', 'problem5', new Date(Date.now() - 1000 * 60 * 60 * 24 * 20)),
-    new submitWithTime('kwuser6', 'problem6', new Date(Date.now() - 1000 * 60 * 60 * 24 * 10)),
-];
-
-const todayTopSolvers = [
-    new kwStudentInfo('kwuser7', 'Gold', 'gold.png', 1, 2000, 2500, 5, 10),
-    new kwStudentInfo('kwuser8', 'Silver', 'silver.png', 2, 1800, 2400, 4, 8),
-    new kwStudentInfo('kwuser9', 'Bronze', 'bronze.png', 3, 1600, 2300, 3, 6),
-];
-
-// podium 섹션 업데이트 함수
-function updatePodium(podiumElement, data, sortKey, getUserName) {
-    data
-        .sort((a, b) => b[sortKey] - a[sortKey]) // 정렬 기준으로 내림차순 정렬
-        .forEach((item, index) => {
-            const stageElement = podiumElement.children[index];
-            if (stageElement) {
-                const userElement = stageElement.querySelector('.user');
-                if (userElement) userElement.textContent = getUserName(item); // 사용자 이름 업데이트
-
-                const medalElement = stageElement.querySelector('.medal');
-                if (medalElement) {
-                    medalElement.textContent = index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉'; // 메달 설정
-                }
-            }
-        });
-}
-
-// DOM 로드 완료 후 실행
-document.addEventListener('DOMContentLoaded', () => {
-    const podiums = document.querySelectorAll('.podium');
-
-    // 최근 제출 섹션 업데이트
-    if (podiums[0]) {
-        updatePodium(podiums[0], recentSubmissions, '_time', item => item._ID);
+    // 데이터 정렬/필터링 로직
+    if (sectionId === 'recent-podium') {
+        // 최근 제출 시간을 기준으로 내림차순 정렬 (최신 순)
+        users.sort((a, b) => new Date(b.submissionTime) - new Date(a.submissionTime));
+    } else if (sectionId === 'ghost-podium') {
+        // 마지막 활동 시간을 기준으로 오름차순 정렬 (오래된 순)
+        users.sort((a, b) => new Date(a.lastActivityDate) - new Date(b.lastActivityDate));
+    } else if (sectionId === 'solver-podium') {
+        // 오늘 날짜의 데이터만 필터링 후 해결한 문제 수 기준으로 내림차순 정렬
+        const today = new Date().toDateString(); // 오늘 날짜
+        users = users.filter(user => new Date(user.solveDate).toDateString() === today); // 오늘 날짜와 일치하는 데이터 필터링
+        users.sort((a, b) => b.solvedProblems - a.solvedProblems); // 해결한 문제 수 기준 정렬
     }
 
-    // 잠수 순위 섹션 업데이트
-    if (podiums[1]) {
-        updatePodium(podiums[1], dormantUsers, '_time', item => item._ID);
-    }
+    const topUsers = users.slice(0, 3); // 상위 3명 데이터 추출
+    const stages = ['stage-1', 'stage-2', 'stage-3']; // 스테이지 클래스 배열
 
-    // 오늘의 탑 솔버 섹션 업데이트
-    if (podiums[2]) {
-        updatePodium(podiums[2], todayTopSolvers, '_todaySolved', item => item._ID);
-    }
+    // 각 사용자 데이터를 섹션에 추가
+    topUsers.forEach((user, index) => {
+        const stage = document.createElement('div');
+        stage.classList.add('stage', stages[index]); // 사용자 순위별 스테이지 스타일 적용
+
+        const userName = document.createElement('div');
+        userName.classList.add('user'); // 사용자 이름 스타일 적용
+        userName.textContent = user.name; // 사용자 이름 삽입
+
+        const additionalInfo = document.createElement('div');
+        additionalInfo.classList.add('additional-info'); // 추가 정보 스타일 적용
+
+        // 추가 정보 설정
+        if (sectionId === 'recent-podium') {
+            const submissionTime = new Date(user.submissionTime);
+            additionalInfo.textContent = `${submissionTime.toLocaleTimeString()}`; // 제출 시간 표시
+        } else if (sectionId === 'ghost-podium') {
+            const daysSinceLastActivity = Math.floor((new Date() - new Date(user.lastActivityDate)) / (1000 * 60 * 60 * 24));
+            additionalInfo.textContent = `${daysSinceLastActivity}일`; // 마지막 활동 이후 경과일 표시
+        } else if (sectionId === 'solver-podium') {
+            additionalInfo.textContent = `${user.solvedProblems}문제`; // 해결한 문제 수 표시
+        }
+
+        userName.appendChild(additionalInfo); // 추가 정보를 사용자 이름에 포함
+
+        const woodBase = document.createElement('div');
+        woodBase.classList.add('wood-base'); // 목재 기반 스타일 적용
+
+        const medal = document.createElement('div');
+        medal.classList.add('medal'); // 메달 스타일 적용
+        medal.textContent = index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉'; // 순위별 메달 설정
+
+        // 각 구성 요소를 스테이지에 추가
+        stage.appendChild(userName);
+        stage.appendChild(woodBase);
+        stage.appendChild(medal);
+
+        podium.appendChild(stage); // 스테이지 추가
+    });
+};
+
+/**
+ * 페이지가 로드될 때 데이터를 가져와서 업데이트하는 이벤트 리스너
+ * @description 페이지가 로드되면 fetchStudentInfo 함수를 호출하여 데이터를 가져온 후 데이터를 렌더링.
+ */
+window.addEventListener('DOMContentLoaded', async () => {
+    const data = await fetchStudentInfo(); // 서버에서 데이터 가져오기
+
+    // 섹션별 데이터 렌더링
+    renderSection('recent-podium', data.recentSubmitters); // 최근 제출자
+    renderSection('ghost-podium', data.ghostUsers); // 고스트 사용자
+    renderSection('solver-podium', data.topSolvers); // 오늘의 해결자 
 });
+
+
 
