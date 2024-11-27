@@ -1,6 +1,7 @@
 # Prograss Report for Team #6
 ## Progress Summary
-임시 데이터로 잔디밭 그래프 구현 성공, 크롤링 데이터로 잔디밭 그래프 구성 진행중
+- 백준에 있는 광운대학교 학생들의 정보, 광운대학교 순위, 광운대 학생들의 백준 제출 내역 크롤링 완료
+- 임시 데이터로 잔디밭 그래프 구현 성공, 크롤링 데이터로 잔디밭 그래프 구성 진행중
 
 ## Project Schedule
 <!-- 여기다가  빨간줄 그은 이미지 넣으면 됨-->
@@ -13,6 +14,9 @@
 ![강하늘](./mdImage/강하늘1차.png)  
 ### 이제희
 ![이제희](./mdImage/이제희_progrssmd1차.png)   
+### 김준상
+![김준상](./mdImage/김준상_progress.png)
+---
 # Individual Progress Status
 ## 박준혁
 임시 데이터로 잔디밭 그래프 생성 [(해당 커밋 보기)](https://github.com/sjml2002/oss_kwboj_6/commit/f88153c64e21ec6e016be71fc40844e30d571348)<br/>
@@ -29,6 +33,14 @@
 ## 이호정
 
 ## 김준상
+- 광운대학교 학생들의 정보를 크롤링 완료
+[(해당 커밋 보기)](https://github.com/sjml2002/oss_kwboj_6/commit/9d1cf1e2503abe0a8d05e40ed1bb5a4f9973bf5e)
+- 광운대학교 학생들의 백준 제출 내역에 대한 크롤링 작업 완료
+[(해당 커밋 보기)](https://github.com/sjml2002/oss_kwboj_6/commit/093a1395ba73279da2a5e09b0271c2345a69950b)
+- 백준 대학교 순위에 대한 크롤링 작업 완료
+[(해당 커밋 보기)](https://github.com/sjml2002/oss_kwboj_6/commit/04d7a89139aded61bab9a7b40255a6b5aa700808)
+
+
 
 
 
