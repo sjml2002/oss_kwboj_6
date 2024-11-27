@@ -30,9 +30,9 @@ app.use(express.static(path.join(__dirname, "mdImage"))); //view/STYLE 안의 �
 
 
 ///////////////////////  Routing  /////////////////////////////////////////
-app.get('/piechart', (req, res) => {
+app.get('/main_page', (req, res) => {
   //__dirname: 현재 폴더의 위치 (전역변수)
-  res.sendFile(path.join(__dirname, "view", "piechart.html"))
+  res.sendFile(path.join(__dirname, "view", "main_page.html"))
 })
 
 app.get("/studentInfo", (req, res) => {

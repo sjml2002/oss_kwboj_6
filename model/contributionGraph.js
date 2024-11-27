@@ -122,6 +122,9 @@ $(window).ready(async function () {
 
     function addValue(sector) {
 
+        // 로딩 메시지 변경!
+        $("#center-label").text("click it!");
+
         $(".chart-value ul").append(`
             <li class="${sector.label}" style="
                 display: flex;
@@ -172,7 +175,7 @@ $(window).ready(async function () {
         } else {
             $("#center-label").text("No Sector Clicked");
         }
-    
+
     });
 
     $(".pie-chart").on("mousemove", function (e) {

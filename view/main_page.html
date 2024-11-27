@@ -23,8 +23,8 @@
 
     <!-- 외부 CSS 파일 로드 -->
     <!-- <link rel="stylesheet" href="styles.css"> -->
-    <link rel="stylesheet" type="text/css" href="/view/STYLE/pie_chart.css">
-    <link rel="stylesheet" type="text/css" href="/view/STYLE/header.css">
+    <link rel="stylesheet" type="text/css" href="/view/STYLE/main_element.css">
+    <link rel="stylesheet" type="text/css" href="/view/STYLE/main_header.css">
 
     <!-- 외부 JavaScript 파일 로드 (필요 시) -->
     <!-- <script src="script.js" defer></script> -->
@@ -40,14 +40,20 @@
     <!-- 상단 배너 -->
     <header class="header-banner">
         <div class="logo-container">
-            <img src="/mdImage/mascot_.png" alt="Left Logo" class="logo-image">
+            <img src="/mdImage/mascot_.png" alt="Left Logo" class="logo-leftimage">
             <div class="logo-text">
                 광운대학교 백준 프로모션
             </div>
-            <img src="/mdImage/mascot2_.png" alt="Right Logo" class="logo-image">
+            <img src="/mdImage/mascot2_.png" alt="Right Logo" class="logo-rightimage" style="margin-right: 30px;">
             <div class="rank_link">
-                <a href="index.html" class="rank_link">
+                <a href="index.html" class="rank_link"> <!-- 올바른 링크 추가해야함 -->
                     야매랭킹
+                </a>
+            </div>
+            <div class="margin_1"></div>
+            <div class="problem_link">
+                <a href="*****.html" class="problem_link"> <!-- 올바른 링크 추가해야함 -->
+                    오늘의 문제
                 </a>
             </div>
         </div>
@@ -64,7 +70,7 @@
         <div class="data-container">
             <div class="pie-chart">
                 <span id="center-label" class="center">
-                    Click it!
+                    Loading...
                 </span>
             </div>
             <div class="tooltip"></div>
