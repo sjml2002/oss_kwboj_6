@@ -164,10 +164,7 @@ const fetchStudentInfo = async () => {
 const fetchUniversityRanking = async() => {
     try {
         const response = await fetch('/getUniversityRanking');
-        console.log(response); //debug
         const jsondata = await response.json();
-
-        console.log("jsondata: ", jsondata); //debug
 
         // 데이터를 HTML에 넣기 (example 코드는 studentInfo.html 참고)
         // TODO for 시각화 맴버들
@@ -177,6 +174,20 @@ const fetchUniversityRanking = async() => {
         console.error('Error fetching data:', error);
     }
 };
+
+ /// 오늘의 추천 문제 (6문제)
+ const fetchTodaysProblem = async() => {
+    try {
+        const response = await fetch('/getTodaysProblem');
+        const jsondata = await response.json();
+
+        // 데이터를 HTML에 넣기 (example 코드는 studentInfo.html 참고)
+        // TODO for 시각화 맴버들
+        return (jsondata);
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
 
 //////////////////////////////////// Fetching END ///////////////////////////////////
 
@@ -195,24 +206,15 @@ const loadKwuRanking = async () => {
             return;
         }
 
-        // const kwuIndex = [...rankingData]; //map to array
-        // console.log(kwuIndex); //debug
-        // if (kwuIndex === -1 || kwuIndex === "undefined") throw new Error("광운대학교 데이터 없음");
+        const kwuIndex = rankingData.findIndex(data => data._name === '광운대학교');
+        if (kwuIndex === -1 || kwuIndex === "undefined") throw new Error("광운대학교 데이터 없음");
 
         const displayData = [
-            "", //이전
-            "", //광운대
-            "", //다음
+            rankingData[kwuIndex - 1] || null, // 이전 학교
+            rankingData[kwuIndex],           // 광운대학교
+            rankingData[kwuIndex + 1] || null // 다음 학교
         ];
-        console.log(rankingData); //debug
-        rankingData.values((value) => {
-            displayData[0] = displayData[1];
-            displayData[1] = displayData[2];
-            displayData[2] = value;
-            if (displayData[1] === "광운대학교") {
-                return ; //break
-            }
-        })
+
 
         rankingContainer.innerHTML = displayData
             .map((data, idx) => {
@@ -235,21 +237,23 @@ const loadKwuRanking = async () => {
 // 추천 문제 로드
 async function loadRecommendedProblems() {
     try {
-        const problems = Array.from({ length: 1000 }, (_, i) => ({ id: i + 1 })); // Mocked problem data
-        const randomProblems = [];
-        while (randomProblems.length < 3) {
-            const randomIndex = Math.floor(Math.random() * problems.length);
-            const problem = problems[randomIndex];
-            if (!randomProblems.some(p => p.id === problem.id)) {
-                randomProblems.push(problem);
-            }
-        }
+        const resarray = await fetchTodaysProblem();
+        const randomProblems = resarray.slice(0, 3); //debug
+        // const problems = Array.from({ length: 1000 }, (_, i) => ({ id: i + 1 })); // Mocked problem data
+        // const randomProblems = [];
+        // while (randomProblems.length < 3) {
+        //     const randomIndex = Math.floor(Math.random() * problems.length);
+        //     const problem = problems[randomIndex];
+        //     if (!randomProblems.some(p => p.id === problem.id)) {
+        //         randomProblems.push(problem);
+        //     }
+        // }
 
         const problemList = document.getElementById('recommended-problems');
         problemList.innerHTML = randomProblems
-            .map(problem => `
-                <a href="https://www.acmicpc.net/problem/${problem.id}" target="_blank" class="problem">
-                    문제 ${problem.id}
+            .map(problemid => `
+                <a href="https://www.acmicpc.net/problem/${problemid}" target="_blank" class="problem">
+                    문제 ${problemid}
                 </a>
             `)
             .join('');
@@ -261,16 +265,18 @@ async function loadRecommendedProblems() {
 // 못 푼 문제 로드
 async function loadUnsolvedProblems() {
     try {
-        const unsolvedProblems = [
-            { id: 4004 },
-            { id: 5005 },
-            { id: 6006 }
-        ]; // Mocked unsolved problems
+        // const unsolvedProblems = [
+        //     { id: 4004 },
+        //     { id: 5005 },
+        //     { id: 6006 }
+        // ]; // Mocked unsolved problems
+        const resarray = await fetchTodaysProblem();
+        const unsolvedProblems = resarray.slice(3, 6); //debug
         const problemList = document.getElementById('unsolved-problems');
         problemList.innerHTML = unsolvedProblems
-            .map(problem => `
-                <a href="https://www.acmicpc.net/problem/${problem.id}" target="_blank" class="problem">
-                    문제 ${problem.id}
+            .map(problemid => `
+                <a href="https://www.acmicpc.net/problem/${problemid}" target="_blank" class="problem">
+                    문제 ${problemid}
                 </a>
             `)
             .join('');
@@ -280,7 +286,7 @@ async function loadUnsolvedProblems() {
 }
 
 // 결투 기능
-async function startDuel() {
+export async function startDuel() {
     const user1 = document.getElementById('user1').value.trim();
     const user2 = document.getElementById('user2').value.trim();
 
@@ -290,7 +296,7 @@ async function startDuel() {
     }
 
     try {
-        const studentData = await getkwStudentInfo();
+        const studentData = await fetchStudentInfo();
         if (!Array.isArray(studentData) || studentData.length === 0) {
             throw new Error('학생 데이터를 불러오지 못했습니다.');
         }
@@ -320,6 +326,10 @@ document.addEventListener('DOMContentLoaded', () => {
     loadKwuRanking();
     loadRecommendedProblems();
     loadUnsolvedProblems();
+
+    document.querySelector('.duel-button').addEventListener('click', async () => {
+        await startDuel();
+    });
 });
 
 

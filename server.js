@@ -58,11 +58,17 @@ app.get("/getkwStudentInfo", async (req, res) => {
 
 app.get("/getUniversityRanking", async (req, res) => {
   let unirank = await crawlingData.getUniversityRanking()
-  const jsondata = Object.fromEntries(unirank); //map to json
-  res.json(jsondata); //json 타입으로 데이터 전달
+  const arraydata = Array.from(unirank.values()); //map to array
+  arraydata.sort((a, b) => a._rank < b._rank); //랭킹 오름차순 정렬
+  res.json(arraydata); //json 타입으로 데이터 전달
 })
 
 app.get("/getSubmitInfo", async (req, res) => {
   let kwsubmit = await crawlingData.getSubmitOrderTime()
   res.json(kwsubmit); //json 타입으로 데이터 전달
+})
+
+app.get("/getTodaysProblem", async (req, res) => {
+  let problems = crawlingData.getTodaysProblem()
+  res.json(problems); //json 타입으로 데이터 전달
 })
