@@ -10,11 +10,11 @@ const app = express();
 const port = 3000;
 
 // Static 파일 서빙 설정
-app.use(express.static("./"));
-app.use(express.static(path.join(__dirname, "model")));
-app.use(express.static(path.join(__dirname, "view/STYLE")));
-app.use(express.static(path.join(__dirname, "mdImage")));
-app.use(express.static(path.join(__dirname, "rankingImage")));
+app.use(express.static(path.join(__dirname, "view/STYLE"))); // ranking.js 경로
+app.use(express.static(path.join(__dirname, "rankingImage"))); // 이미지 경로
+app.use(express.static(path.join(__dirname, "mdImage"))); // 다른 이미지 경로
+app.use(express.static(path.join(__dirname, "model"))); // 모델 경로
+app.use(express.static("./")); // 프로젝트 루트
 
 // 라우팅
 app.get('/piechart', (req, res) => {

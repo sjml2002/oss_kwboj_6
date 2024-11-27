@@ -10,6 +10,19 @@ const fetchStudentInfo = async () => {
     }
 };
 
+// 데이터 필터링 함수
+const filterRecentSubmitters = (data) => {
+    return [...data].sort((a, b) => b._solvedcnt - a._solvedcnt).slice(0, 3); // 예: 문제 수 기준 내림차순
+};
+
+const filterGhostUsers = (data) => {
+    return [...data].sort((a, b) => a._rankingInKWU - b._rankingInKWU).slice(0, 3); // 예: 랭킹 오름차순
+};
+
+const filterTopSolvers = (data) => {
+    return [...data].slice(0, 3); // 예: 상위 3명
+};
+
 // 섹션에 데이터를 렌더링하는 함수
 const renderSection = (sectionId, users) => {
     const podium = document.getElementById(sectionId); // 섹션 DOM 가져오기
@@ -60,8 +73,8 @@ const renderSection = (sectionId, users) => {
 window.addEventListener('DOMContentLoaded', async () => {
     const data = await fetchStudentInfo(); // 서버에서 데이터 가져오기
 
-    // 각 섹션에 데이터 렌더링
-    renderSection('recent-podium', data); // 최근 제출자 섹션
-    renderSection('ghost-podium', data); // 고스트 유저 섹션
-    renderSection('solver-podium', data); // 오늘의 문제 해결자 섹션
+    // 섹션별로 적합한 데이터 필터링 후 렌더링
+    renderSection('recent-podium', filterRecentSubmitters(data)); // 최근 제출자 섹션
+    renderSection('ghost-podium', filterGhostUsers(data)); // 고스트 유저 섹션
+    renderSection('solver-podium', filterTopSolvers(data)); // 오늘의 문제 해결자 섹션
 });
