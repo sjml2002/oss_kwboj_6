@@ -1,3 +1,5 @@
+
+/* 데이터 컨테이너 + 차트 설명 텍스트를 담는 컨테이너 */
 .chart-container {
   display: flex;
   flex-direction: column;
@@ -17,7 +19,7 @@
   /* 컨테이너를 화면 중앙에 정렬 */
 }
 
-/* 원형 그래프와 오른쪽 문제 value를 담는 컨테이너 */
+/* 원형 그래프와 티어별 인원수를 담는 컨테이너 */
 .data-container {
   display: flex;
   justify-content: center;
@@ -37,6 +39,7 @@
   /* 가운데 정렬 */
 }
 
+/* 파이차트 */
 .pie-chart {
   position: relative;
   /* 부모 요소의 위치를 기준으로 설정 */
@@ -52,6 +55,7 @@
   /* 변화 시 부드러운 전환 효과 */
 }
 
+/*  */
 .tooltip {
   position: absolute;
   padding: 8px;
@@ -64,6 +68,7 @@
   z-index: 1000;
 }
 
+/* 로딩, 비율 표시 span */
 span.center {
   background: #fff;
   display: flex; /* Flexbox 활성화 */
@@ -83,19 +88,7 @@ span.center {
   text-align: center;
 }
 
-.chart-description {
-  text-align: center;
-  /* 가운데 정렬 */
-  font-size: 25px;
-  /* 텍스트 크기 */
-  font-weight: bold;
-  /* 설명 텍스트 볼드체 */
-  color: #333;
-  /* 텍스트 색상 */
-  line-height: 1.5;
-  /* 텍스트 줄 간격 */
-}
-
+/* 그래프 오른쪽 티어별 인원 수 */
 .chart-value {
   font-size: 14px;
 }
@@ -123,8 +116,23 @@ span.center {
   /* 색상 박스 둥글게 */
 }
 
-/* 이하 테스트용 코드 */
+/* 차트 설명 텍스트 */
+.chart-description {
+  text-align: center;
+  /* 가운데 정렬 */
+  font-size: 25px;
+  /* 텍스트 크기 */
+  font-weight: bold;
+  /* 설명 텍스트 볼드체 */
+  color: #333;
+  /* 텍스트 색상 */
+  line-height: 1.5;
+  /* 텍스트 줄 간격 */
+}
 
+
+/* 이하 테스트용 코드 (미사용)*/
+/* 
 .pie-chart1 {
   animation: pie1 0.5s forwards;
 }
@@ -225,3 +233,5 @@ span.center {
     background: conic-gradient(#ccc 0% 80%, #ffffff 80% 100%)
   }
 }
+
+*/
