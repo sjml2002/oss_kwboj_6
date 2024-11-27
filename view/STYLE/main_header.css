@@ -77,16 +77,17 @@ body {
     font-family: 'Arial', sans-serif;
 }
 
-/* 이미지 컨테이너 스타일 */
+
 .image-container {
-    margin-bottom: 20px; /* 배너와 이미지 사이 간격 */
     text-align: center; /* 이미지 중앙 정렬 */
+    height: 200px; /* 컨테이너 높이 고정 */
+    width: 100%; /* 컨테이너 너비 100% */
+    overflow: hidden; /* 컨테이너 넘치는 부분은 보이지 않게 처리 */
 }
 
-/* 이미지 스타일 */
 .banner-image {
-    max-width: 100%; /* 화면 크기에 맞게 조정 */
-    height: auto; /* 비율 유지 */
-    /* border-radius: 8px; 이미지 모서리를 둥글게 (선택 사항) */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    width: 100%; /* 너비를 100%로 설정 */
+    height: 100%; /* 컨테이너 높이에 맞게 맞춤 */
+    object-fit: cover; /* 이미지가 부모 컨테이너를 꽉 채우되 비율 유지 */
+    display: block; /* display 설정 */
 }

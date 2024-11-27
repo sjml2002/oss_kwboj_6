@@ -57,7 +57,6 @@
                 </a>
             </div>
         </div>
-
     </header>
 
     <!-- 이미지 섹션 -->
@@ -65,27 +64,40 @@
         <img src="/mdImage/imsibgi.png" alt="광운대학교 이미지" class="banner-image">
     </div>
 
-    <!-- 원형그래프 -->
-    <div class="chart-container">
-        <div class="data-container">
-            <div class="pie-chart">
-                <span id="center-label" class="center">
-                    Loading...
-                </span>
+    <!-- 구현한 건 모두 메인 컨테이너 안에 담고 조절하기 -->
+    <div class="main_container">
+        <!-- 원형그래프 -->
+        <div class="chart-container">
+            <div class="description">
+                <p>광운대학교 solved.ac 티어 분포도</p>
             </div>
-            <div class="tooltip"></div>
-            <div class="chart-value">
-                <ul></ul>
+            <div class="data-container">
+                <div class="pie-chart">
+                    <span id="center-label" class="center">
+                        Loading...
+                    </span>
+                </div>
+                <div class="tooltip"></div>
+                <div class="chart-value">
+                    <ul></ul>
+                </div>
             </div>
         </div>
 
-        <div class="chart-description">
-            <p>광운대학교 solved.ac 티어 분포도</p>
+        <!-- 사이 마진 -->
+        <div class="margin_2"></div>
+
+        <!-- 오늘의 문제(가제) -->
+        <div class="category">
+            <div class="category-header">오늘의 문제</div>
+            <div class="problem-list">
+                <div class="problem-header">카테고리: 데이터 구조</div>
+                <a href="https://www.acmicpc.net/problem/1010" class="problem" target="_blank">문제 1010</a>
+                <a href="https://www.acmicpc.net/problem/2021" class="problem" target="_blank">문제 2021</a>
+                <a href="https://www.acmicpc.net/problem/3033" class="problem" target="_blank">문제 3033</a>
+            </div>
         </div>
     </div>
-
-    <!-- 오늘의 문제(가제) -->
-    
 
 </body>
 
