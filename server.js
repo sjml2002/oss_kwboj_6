@@ -18,6 +18,8 @@ app.listen(port, () => {
 
 app.use(express.static(path.join(__dirname, "model"))); //model 안의 파일들 사용하기
 
+//view 폴더 서빙 파트 추가했는데 문제 있는지 없는지 체크
+app.use(express.static(path.join(__dirname, "view")));
 
 
 
@@ -35,6 +37,12 @@ app.get("/studentInfo", (req, res) => {
 // app.get("/HTML파일이름", (req, res) => {
 //   res.sendFile(path.join(__dirname, "view", "HTML파일이름.html"))
 // })
+
+
+app.get("/index.html",(req,res) => {
+  res.sendFile(path.join(__dirname, "view", "index.html"))
+})
+
 
 app.get('/model/crawling', (req, res) => {
   res.sendStatus(401)
