@@ -1,24 +1,31 @@
-/**
- * 데이터를 가져오는 함수
- * @description 서버로부터 학생 정보를 가져오는 비동기 함수. 데이터가 없거나 에러가 발생하면 빈 배열을 반환.
- * @returns {Promise<Array>} 학생 정보 배열
- */
+//import * as crawling from "./crawlingMain.js";
+//import axios from "axios";
+
+
 const fetchStudentInfo = async () => {
     try {
-        const response = await fetch('/getkwStudentInfo'); // 서버에서 데이터 요청
-        const data = await response.json(); // JSON 형식으로 응답 파싱
-        return data; // 데이터 반환
+        const response = await fetch('/getkwStudentInfo');
+        const data = await response.json();
+
+
+        return data; 
+
+
     } catch (error) {
-        console.error('데이터 가져오기 실패:', error); // 에러 로그 출력
-        return []; // 에러 발생 시 빈 배열 반환
+        console.error('Error fetching data:', error); 
+        return []; 
     }
 };
 
 /**
  * 데이터를 렌더링하는 함수
+ 
  * @description 사용자 데이터를 렌더링하는 함수. 랭킹별 ID에 따라 정렬 및 필터링 방식이 다름.
+
  * @param {string} sectionId - DOM 요소 ID (렌더링할 ID)
+
  * @param {Array} users - 사용자 데이터 배열
+
  */
 const renderSection = (sectionId, users) => {
     const podium = document.getElementById(sectionId); // 요소 가져오기
@@ -32,7 +39,7 @@ const renderSection = (sectionId, users) => {
         // 마지막 활동 시간을 기준으로 오름차순 정렬 (오래된 순)
         users.sort((a, b) => new Date(a.lastActivityDate) - new Date(b.lastActivityDate));
     } else if (sectionId === 'solver-podium') {
-        // 오늘 날짜의 데이터만 필터링 후 해결한 문제 수 기준으로 내림차순 정렬
+        // 오늘 날짜의 데이터만 필터링 후 해결한 문제 수 기준으로 내림차순 정렬 (많이 푼 순)
         const today = new Date().toDateString(); // 오늘 날짜
         users = users.filter(user => new Date(user.solveDate).toDateString() === today); // 오늘 날짜와 일치하는 데이터 필터링
         users.sort((a, b) => b.solvedProblems - a.solvedProblems); // 해결한 문제 수 기준 정렬
@@ -90,9 +97,9 @@ window.addEventListener('DOMContentLoaded', async () => {
     const data = await fetchStudentInfo(); // 서버에서 데이터 가져오기
 
     // 섹션별 데이터 렌더링
-    renderSection('recent-podium', data.recentSubmitters); // 최근 제출자
-    renderSection('ghost-podium', data.ghostUsers); // 고스트 사용자
-    renderSection('solver-podium', data.topSolvers); // 오늘의 해결자 
+    renderSection('recent-podium', data.recentSubmitters); // THE MOST RECENT SUBMITTER
+    renderSection('ghost-podium', data.ghostUsers); // GHOST USER RANKING
+    renderSection('solver-podium', data.topSolvers); // TODAY'S TOP SOLVER
 });
 
 
