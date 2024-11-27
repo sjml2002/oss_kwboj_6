@@ -34,11 +34,13 @@ function loadKwuRanking() {
         })
         .join('');
 }
-        */
+*/        
 
+/*
 ///////////////////크롤링 데이터를 가져오는 버전/////////////////////////
 import { getUniversityRanking } from './crawlingMain.js';
 
+//광운대 순위 표시
 async function loadKwuRanking() {
     try {
         const rankingData = await getUniversityRanking(); // 크롤링된 순위 데이터 가져오기
@@ -138,6 +140,192 @@ async function startDuel() {
 document.addEventListener("DOMContentLoaded", () => {
     loadKwuRanking();
 });
+*/
+
+///////////////////동적버전/////////////////////////
+
+//import { getUniversityRanking, getkwStudentInfo } from './crawlingMain.js';
+const fetchStudentInfo = async () => {
+    try {
+        const response = await fetch('/getkwStudentInfo');
+        const jsondata = await response.json();
+
+        // 데이터를 HTML에 넣기 (example 코드는 studentInfo.html 참고)
+        // TODO for 시각화 맴버들
+        return (jsondata);
+
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return ([]);
+    }
+};
+
+/// 대학교 순위 정보
+const fetchUniversityRanking = async() => {
+    try {
+        const response = await fetch('/getUniversityRanking');
+        console.log(response); //debug
+        const jsondata = await response.json();
+
+        console.log("jsondata: ", jsondata); //debug
+
+        // 데이터를 HTML에 넣기 (example 코드는 studentInfo.html 참고)
+        // TODO for 시각화 맴버들
+        return (jsondata);
+        
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+};
+
+//////////////////////////////////// Fetching END ///////////////////////////////////
+
+
+// 광운대학교 순위 표시
+const loadKwuRanking = async () => {
+    try {
+        const rankingData = await fetchUniversityRanking();
+        if (!rankingData || rankingData.length === 0) {
+            throw new Error('순위 데이터를 불러오지 못했습니다.');
+        }
+
+        const rankingContainer = document.querySelector('.ranking-container');
+        if (!rankingContainer) {
+            console.error("Ranking container not found in DOM.");
+            return;
+        }
+
+        // const kwuIndex = [...rankingData]; //map to array
+        // console.log(kwuIndex); //debug
+        // if (kwuIndex === -1 || kwuIndex === "undefined") throw new Error("광운대학교 데이터 없음");
+
+        const displayData = [
+            "", //이전
+            "", //광운대
+            "", //다음
+        ];
+        console.log(rankingData); //debug
+        rankingData.values((value) => {
+            displayData[0] = displayData[1];
+            displayData[1] = displayData[2];
+            displayData[2] = value;
+            if (displayData[1] === "광운대학교") {
+                return ; //break
+            }
+        })
+
+        rankingContainer.innerHTML = displayData
+            .map((data, idx) => {
+                if (!data) return '';
+                const isHighlight = data._name === "광운대학교";
+                const positionClass = idx === 0 ? 'previous' : idx === 2 ? 'next' : '';
+                return `
+                    <div class="ranking-item ${isHighlight ? 'highlight' : ''} ${positionClass}">
+                        <span class="rank">${data._rank}</span>
+                        <span class="university">${data._name}</span>
+                    </div>
+                `;
+            })
+            .join('');
+    } catch (error) {
+        console.error('Error loading KWU ranking:', error);
+    }
+}
+
+// 추천 문제 로드
+async function loadRecommendedProblems() {
+    try {
+        const problems = Array.from({ length: 1000 }, (_, i) => ({ id: i + 1 })); // Mocked problem data
+        const randomProblems = [];
+        while (randomProblems.length < 3) {
+            const randomIndex = Math.floor(Math.random() * problems.length);
+            const problem = problems[randomIndex];
+            if (!randomProblems.some(p => p.id === problem.id)) {
+                randomProblems.push(problem);
+            }
+        }
+
+        const problemList = document.getElementById('recommended-problems');
+        problemList.innerHTML = randomProblems
+            .map(problem => `
+                <a href="https://www.acmicpc.net/problem/${problem.id}" target="_blank" class="problem">
+                    문제 ${problem.id}
+                </a>
+            `)
+            .join('');
+    } catch (error) {
+        console.error('Error loading recommended problems:', error);
+    }
+}
+
+// 못 푼 문제 로드
+async function loadUnsolvedProblems() {
+    try {
+        const unsolvedProblems = [
+            { id: 4004 },
+            { id: 5005 },
+            { id: 6006 }
+        ]; // Mocked unsolved problems
+        const problemList = document.getElementById('unsolved-problems');
+        problemList.innerHTML = unsolvedProblems
+            .map(problem => `
+                <a href="https://www.acmicpc.net/problem/${problem.id}" target="_blank" class="problem">
+                    문제 ${problem.id}
+                </a>
+            `)
+            .join('');
+    } catch (error) {
+        console.error('Error loading unsolved problems:', error);
+    }
+}
+
+// 결투 기능
+async function startDuel() {
+    const user1 = document.getElementById('user1').value.trim();
+    const user2 = document.getElementById('user2').value.trim();
+
+    if (!user1 || !user2) {
+        alert('두 아이디를 모두 입력해주세요!');
+        return;
+    }
+
+    try {
+        const studentData = await getkwStudentInfo();
+        if (!Array.isArray(studentData) || studentData.length === 0) {
+            throw new Error('학생 데이터를 불러오지 못했습니다.');
+        }
+
+        const student1 = studentData.find(student => student._ID === user1);
+        const student2 = studentData.find(student => student._ID === user2);
+
+        if (!student1 || !student2) {
+            alert('입력된 ID에 해당하는 사용자가 없습니다.');
+            return;
+        }
+
+        const resultDiv = document.getElementById('result');
+        if (student1._ranking < student2._ranking) {
+            resultDiv.textContent = `${student1._ID} 승리! (등수: ${student1._ranking} vs ${student2._ranking})`;
+        } else if (student1._ranking > student2._ranking) {
+            resultDiv.textContent = `${student2._ID} 승리! (등수: ${student1._ranking} vs ${student2._ranking})`;
+        } else {
+            resultDiv.textContent = `무승부! (등수: ${student1._ranking} vs ${student2._ranking})`;
+        }
+    } catch (error) {
+        console.error('Error during duel:', error);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadKwuRanking();
+    loadRecommendedProblems();
+    loadUnsolvedProblems();
+});
+
+
+
+
+
 
 ////////////////로드된 데이터에서 사용자 정보를 검색해서 가져오는 방식//////////////////
 

@@ -32,10 +32,14 @@ app.get("/studentInfo", (req, res) => {
   res.sendFile(path.join(__dirname, "view", "studentInfo.html"))
 })
 
-// Example for 시각화 맴버들
-app.get("/contribution", (req, res) => {
-  res.sendFile(path.join(__dirname, "view", "contribution.html"))
+app.get("/todayranking", (req, res) => {
+  res.sendFile(path.join(__dirname, "view", "todayranking.html"))
 })
+
+//// Example for 시각화 맴버들
+// app.get("/HTML파일이름", (req, res) => {
+//   res.sendFile(path.join(__dirname, "view", "HTML파일이름.html"))
+// })
 
 app.get('/model/crawling', (req, res) => {
   res.sendStatus(401)
@@ -54,7 +58,8 @@ app.get("/getkwStudentInfo", async (req, res) => {
 
 app.get("/getUniversityRanking", async (req, res) => {
   let unirank = await crawlingData.getUniversityRanking()
-  res.json(unirank); //json 타입으로 데이터 전달
+  const jsondata = Object.fromEntries(unirank); //map to json
+  res.json(jsondata); //json 타입으로 데이터 전달
 })
 
 app.get("/getSubmitInfo", async (req, res) => {
