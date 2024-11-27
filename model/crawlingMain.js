@@ -83,7 +83,7 @@ export const getSubmitOrderTime = async() => {
         const yearago = new Date();
         yearago.setFullYear(yearago.getFullYear()-1);
         yearago.setHours(0, 0, 0, 0); //오늘 자정으로 설정
-        let data_kwsubmitlist = await crawlingSubmit.getRecent_to_targettime_submitlist(mainhtml, yearago);
+        data_kwsubmitlist = await crawlingSubmit.getRecent_to_targettime_submitlist(mainhtml, yearago);
         return (data_kwsubmitlist)
     }
     else { //그냥 이미 저장되어있던 데이터 list return
