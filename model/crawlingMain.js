@@ -1,6 +1,6 @@
 import axios from 'axios';
 import * as cheerio from "cheerio";
-//import * as fs from 'fs';
+import * as fs from 'fs';
 import * as crawlingStudent from "./crawlingStudent.js";
 import * as crawlingSubmit from "./crawlingSubmitTime.js";
 import * as crawlingUniRank from "./crawlingUniversityRanking.js";
@@ -134,7 +134,7 @@ export const getUniversityRanking = async() => {
 //     return (data_totalProblems);
 // }
 
-//오늘의 추천 문제 3문제
+//오늘의 추천 문제 6문제
 export const getTodaysProblem = () =>  {
     //오늘 이미 업데이트 되었다면 딱히 추천하지 않기
     const today = new Date();
@@ -151,7 +151,7 @@ export const getTodaysProblem = () =>  {
     const parsedata = JSON.parse(jsondata); //광운대학생이 푼 문제 array
 
     data_todaysProblem = []; //초기화
-    while (data_todaysProblem.length < 5) {
+    while (data_todaysProblem.length < 6) {
         const randomval = Math.floor(Math.random() * (bojmax - bojmin + 1)) + bojmin;
         if (parsedata.includes(randomval.toString()))
             continue;
