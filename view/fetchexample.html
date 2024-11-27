@@ -73,6 +73,20 @@
             }
         }
 
+        /// 오늘의 추천 문제 (6문제)
+        const fetchTodaysProblem = async() => {
+            try {
+                const response = await fetch('/getTodaysProblem');
+                const jsondata = await response.json();
+
+                // 데이터를 HTML에 넣기 (example 코드는 studentInfo.html 참고)
+                // TODO for 시각화 맴버들
+                
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
     </script>
 </head>
 <body>
