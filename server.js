@@ -1,69 +1,68 @@
 import express from "express";
 import path from "path";
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-import * as crawlingData from "./model/crawlingMain.js"
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+import * as crawlingData from "./model/crawlingMain.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+const app = express();
+const port = 3000;
 
-const app = express()
-
-//// Setting ////
-const port = 3000
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
-
+// Static 파일 서빙 설정
 app.use(express.static("./"));
-app.use(express.static(path.join(__dirname, "model"))); //model 안의 파일들 사용하기
-app.use(express.static(path.join(__dirname, "view/STYLE",))); //view/STYLE 안의 파일들 사용하기
-app.use(express.static(path.join(__dirname, "mdImage"))); //mdImage 안의 asset 이미지들 사용
-app.use(express.static(path.join(__dirname, "rankingImage"))); //view/STYLE 안의 파일들 사용하기
+app.use(express.static(path.join(__dirname, "model")));
+app.use(express.static(path.join(__dirname, "view/STYLE")));
+app.use(express.static(path.join(__dirname, "mdImage")));
+app.use(express.static(path.join(__dirname, "rankingImage")));
 
-
-///////////////////////  Routing  /////////////////////////////////////////
+// 라우팅
 app.get('/piechart', (req, res) => {
-  //__dirname: 현재 폴더의 위치 (전역변수)
-  res.sendFile(path.join(__dirname, "view", "piechart.html"))
-})
+    res.sendFile(path.join(__dirname, "view", "piechart.html"));
+});
+app.get('/studentInfo', (req, res) => {
+    res.sendFile(path.join(__dirname, "view", "studentInfo.html"));
+});
+app.get('/medalRanking', (req, res) => {
+    res.sendFile(path.join(__dirname, "view", "medalRanking.html"));
+});
+app.get('/contribution', (req, res) => {
+    res.sendFile(path.join(__dirname, "view", "contribution.html"));
+});
 
-app.get("/studentInfo", (req, res) => {
-  res.sendFile(path.join(__dirname, "view", "studentInfo.html"))
-})
-
-app.get("/medalRanking", (req, res) => {
-  res.sendFile(path.join(__dirname, "view", "medalRanking.html"))
-})
-
-
-// Example for 시각화 맴버들
-app.get("/contribution", (req, res) => {
-  res.sendFile(path.join(__dirname, "view", "contribution.html"))
-})
-
-app.get('/model/crawling', (req, res) => {
-  res.sendStatus(401)
-  res.send("접근 금지")
-})
-/////////////////////////////////////////////////////////////////////
-
-
-
-
-//// fetching ////
+// 데이터 Fetching
 app.get("/getkwStudentInfo", async (req, res) => {
-  let kwstudents = await crawlingData.getkwStudentInfo()
-  res.json(kwstudents); //json 타입으로 데이터 전달
-})
+    try {
+        const data = await crawlingData.getkwStudentInfo();
+        res.json(data);
+    } catch (error) {
+        console.error("Error fetching KW student info:", error);
+        res.status(500).json({ error: "Failed to fetch KW student info" });
+    }
+});
 
 app.get("/getUniversityRanking", async (req, res) => {
-  let unirank = await crawlingData.getUniversityRanking()
-  res.json(unirank); //json 타입으로 데이터 전달
-})
+    try {
+        const data = await crawlingData.getUniversityRanking();
+        res.json(data);
+    } catch (error) {
+        console.error("Error fetching university ranking:", error);
+        res.status(500).json({ error: "Failed to fetch university ranking" });
+    }
+});
 
 app.get("/getSubmitInfo", async (req, res) => {
-  let kwsubmit = await crawlingData.getSubmitOrderTime()
-  res.json(kwsubmit); //json 타입으로 데이터 전달
-})
+    try {
+        const data = await crawlingData.getSubmitOrderTime();
+        res.json(data);
+    } catch (error) {
+        console.error("Error fetching submit info:", error);
+        res.status(500).json({ error: "Failed to fetch submit info" });
+    }
+});
+
+// 서버 시작
+app.listen(port, () => {
+    console.log(`Server is running at http://localhost:${port}`);
+});
+
