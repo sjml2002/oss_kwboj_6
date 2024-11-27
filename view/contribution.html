@@ -169,35 +169,35 @@
                     },
                 });
 
+                const rect = document.querySelectorAll('[class^="github-contribution-graph-box"]');     // 잔디밭 그래프의 각 일자 모두 선택
+
+                // 그래프에 마우스를 올릴 시 그래프 아래쪽에 해당 일자에 문제를 푼 사람의 개수를 나타내도록 하는 div 선택(기본적으로 hidden, 즉 숨겨져 있음)
+                const tooltip = document.querySelector(".github-contribution-graph-tooltip");
+
+                // 모든 잔디밭 그래프의 일자에 대해 마우스 올릴 시 및 치울 시 이벤트 추가
+
+                // 마우스를 올릴 시, 해당 일자의 data-tooltip-text class(출력에 필요한 텍스트가 저장되어 있음)를 가져온 뒤 그래프 아래의 div에 출력하고
+                // div의 style을 visible로 바꾸어 텍스트가 나타나도록 함
+                for (let i = 0; i < rect.length; i++) {
+                    rect[i].addEventListener("mouseover", () => {
+                        let Tooltip = rect[i].getAttribute("data-tooltip-text");
+                        tooltip.textContent = Tooltip;
+                        tooltip.style.visibility = "visible";
+                    })
+                }
+
+                // 마우스를 치울 시, 다시 그래프 아래의 div를 hidden으로 바꾸어 텍스트가 보이지 않도록 함
+                for (let i = 0; i < rect.length; i++) {
+                    rect[i].addEventListener("mouseout", () => {
+                        tooltip.style.visibility = "hidden";
+                    })
+                }
+
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         }
         fetchSubmitTimeInfo();
-
-        const rect = document.querySelectorAll('[class^="github-contribution-graph-box"]');     // 잔디밭 그래프의 각 일자 모두 선택
-
-        // 그래프에 마우스를 올릴 시 그래프 아래쪽에 해당 일자에 문제를 푼 사람의 개수를 나타내도록 하는 div 선택(기본적으로 hidden, 즉 숨겨져 있음)
-        const tooltip = document.querySelector(".github-contribution-graph-tooltip");
-
-        // 모든 잔디밭 그래프의 일자에 대해 마우스 올릴 시 및 치울 시 이벤트 추가
-
-        // 마우스를 올릴 시, 해당 일자의 data-tooltip-text class(출력에 필요한 텍스트가 저장되어 있음)를 가져온 뒤 그래프 아래의 div에 출력하고
-        // div의 style을 visible로 바꾸어 텍스트가 나타나도록 함
-        for (let i = 0; i < rect.length; i++) {
-            rect[i].addEventListener("mouseover", () => {
-                let Tooltip = rect[i].getAttribute("data-tooltip-text");
-                tooltip.textContent = Tooltip;
-                tooltip.style.visibility = "visible";
-            })
-        }
-
-        // 마우스를 치울 시, 다시 그래프 아래의 div를 hidden으로 바꾸어 텍스트가 보이지 않도록 함
-        for (let i = 0; i < rect.length; i++) {
-            rect[i].addEventListener("mouseout", () => {
-                tooltip.style.visibility = "hidden";
-            })
-        }
 
         /////////////////////////////////////////////////////////////////////////////////////
     </script>
