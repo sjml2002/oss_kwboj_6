@@ -197,12 +197,11 @@ body {
 .image-container {
     text-align: center;
     /* 이미지 중앙 정렬 */
-    height: 200px;
-    /* 컨테이너 높이 고정 */
     width: 100%;
     /* 컨테이너 너비 100% */
     overflow: hidden;
     /* 컨테이너 넘치는 부분은 보이지 않게 처리 */
+    border-bottom: 1px solid #9aa4af;
 }
 
 .banner-image {
