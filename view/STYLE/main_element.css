@@ -1,13 +1,14 @@
 /* 메인 컨테이너 */
-.main_container {
+.chart_and_problem {
   background-color: #ebeef1;
   display: flex;
   /* Flexbox 사용 */
-  justify-content: center; /* 요소들을 왼쪽에 정렬 */
+  justify-content: center; 
   align-items: center; /* 상단 정렬 */
   margin: 0px auto; /* 화면 중앙에 정렬, 상하 여백 추가 */
   max-width: 900px; /* 전체 컨테이너 너비 제한 */
   padding: 20px; /* 상하좌우 패딩 추가 */
+  padding-bottom: 5px !important; /* 하단 패딩만 덮어쓰기 5px */
 }
 
 /* 데이터 컨테이너 + 차트 설명 텍스트를 담는 컨테이너 */
@@ -31,13 +32,13 @@
 }
 
 /* 차트 설명 텍스트 */
-.description {
+.chart_description {
   text-align: left; /* 왼쪽 정렬 */
   background-color: white;
   font-size: 15px; /* 글씨 크기 줄이기 */
   font-weight: bold; /* 설명 텍스트 볼드체 */
   color: #cccccc; /* 텍스트 색상 */
-  width: 500px;
+  width: 100%;
   height: 10%;
   padding-left: 20px; 
   border-bottom: 2px solid #097dc5;
@@ -153,8 +154,6 @@ span.center {
   border-radius: 4px;
 }
 
-
-
 .margin_2{
   width:10px;
 }
@@ -165,7 +164,6 @@ span.center {
   height: 370px;
   background-color: white;
   border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.3s ease;
 }
@@ -229,4 +227,77 @@ span.center {
 
 .problem:last-child {
   margin-bottom: 0;
+}
+
+/* 잔디밭 of 박준혁 ////////////////////////////////////////////////////////////////////*/
+
+/* 마우스 툴팁 css */
+.github-contribution-graph-tooltip { 
+  position: absolute; /* 위치를 절대 좌표로 설정 */
+    background-color: #333; /* 배경색 */
+    color: #fff; /* 텍스트 색상 */
+    padding: 5px 10px; /* 내부 여백 */
+    border-radius: 5px; /* 모서리 둥글게 */
+    font-size: 14px; /* 폰트 크기 */
+    pointer-events: none; /* 툴팁 위에서 클릭되지 않도록 설정 */
+    visibility: hidden; /* 기본적으로 숨김 */
+    z-index: 1000; /* 다른 요소 위에 표시 */
+}
+
+rect {
+  cursor: pointer;
+  position: absolute;
+}
+
+.contribution_grass {
+  background-color: #ebeef1;
+  display: flex;
+  /* Flexbox 사용 */
+  justify-content: center;
+  align-items: center;
+  /* 상단 정렬 */
+  margin: 0px auto;
+  /* 화면 중앙에 정렬, 상하 여백 추가 */
+  max-width: 900px;
+  /* 전체 컨테이너 너비 제한 */
+  padding: 20px;
+  /* 상하좌우 패딩 추가 */
+  padding-top: 5px;
+  /* 상단 패딩만 덮어쓰기 5px*/
+}
+
+.grass_container {
+  background-color: white;
+  width: 91.6%;
+  /* 하드코딩으로 맞춰벌임... */
+  display: flex;
+  flex-direction: column;
+  /* 주축을 세로 방향으로 설정 */
+  justify-content: center;
+  /* 세로 방향 정렬 */
+  align-items: center;
+  /* 가로 방향 중앙 정렬 */
+  border-radius: 5px;
+  overflow: hidden; /* 중요!! 내부 내용이 테두리를 벗어나지 않도록, 유용하게 쓸 것*/
+}
+
+.grass_description {
+  text-align: left;
+  background-color: white;
+  font-size: 15px;
+  font-weight: bold;
+  color: #cccccc;
+  width: 100%; 
+  box-sizing: border-box;
+  height: 40px;
+  padding-left: 20px;
+  border-bottom: 2px solid #097dc5;
+  display: flex; /* Flexbox 사용 */
+  align-items: center; /* 수직 중앙 정렬 */
+  justify-content: flex-start; /* 왼쪽 정렬 */
+}
+
+.grass_graph {
+  padding: 10px;
+  padding-top: 15px;
 }
