@@ -28,9 +28,9 @@
     <script type="module">
 
         /// 광운대 학생들의 백준 정보
-        const fetchStudentInfo = async() => {
+        const fetchSubmitTimeInfo = async() => {
             try {
-                const response = await fetch('/getkwStudentInfo');
+                const response = await fetch('/getSubmitInfo');
                 const jsondata = await response.json();
 
                 // 데이터를 HTML에 넣기
@@ -43,38 +43,38 @@
                     idCell.textContent = item._ID;
                     tr.appendChild(idCell);
 
-                    const rankingCell = document.createElement('td');
-                    rankingCell.textContent = item._ranking;
-                    tr.appendChild(rankingCell);
+                    // const rankingCell = document.createElement('td');
+                    // rankingCell.textContent = item._problemID;
+                    // tr.appendChild(rankingCell);
 
-                    const rankingInKWUCell = document.createElement('td');
-                    rankingInKWUCell.textContent = item._rankingInKWU;
-                    tr.appendChild(rankingInKWUCell);
+                    // const rankingInKWUCell = document.createElement('td');
+                    // rankingInKWUCell.textContent = item._time;
+                    // tr.appendChild(rankingInKWUCell);
 
-                    const acratingCell = document.createElement('td');
-                    acratingCell.textContent = item._ACrating;
-                    tr.appendChild(acratingCell);
+                    // const acratingCell = document.createElement('td');
+                    // acratingCell.textContent = item._ACrating;
+                    // tr.appendChild(acratingCell);
 
-                    const classLevelCell = document.createElement('td');
-                    classLevelCell.textContent = item._CLASSLEVEL;
-                    tr.appendChild(classLevelCell);
+                    // const classLevelCell = document.createElement('td');
+                    // classLevelCell.textContent = item._CLASSLEVEL;
+                    // tr.appendChild(classLevelCell);
 
-                    const solvedCountCell = document.createElement('td');
-                    solvedCountCell.textContent = item._solvedcnt;
-                    tr.appendChild(solvedCountCell);
+                    // const solvedCountCell = document.createElement('td');
+                    // solvedCountCell.textContent = item._solvedcnt;
+                    // tr.appendChild(solvedCountCell);
 
-                    const tierCell = document.createElement('td');
-                    tierCell.textContent = item._tier;
-                    tr.appendChild(tierCell);
+                    // const tierCell = document.createElement('td');
+                    // tierCell.textContent = item._tier;
+                    // tr.appendChild(tierCell);
 
-                    const tierImgCell = document.createElement('td');
-                    const img = document.createElement('img');
-                    img.src = item._tierImgUrl;
-                    img.alt = item._tier;
-                    img.width = 20; // 이미지 크기 조절
-                    img.height = 20;
-                    tierImgCell.appendChild(img);
-                    tr.appendChild(tierImgCell);
+                    // const tierImgCell = document.createElement('td');
+                    // const img = document.createElement('img');
+                    // img.src = item._tierImgUrl;
+                    // img.alt = item._tier;
+                    // img.width = 20; // 이미지 크기 조절
+                    // img.height = 20;
+                    // tierImgCell.appendChild(img);
+                    // tr.appendChild(tierImgCell);
 
                     table.appendChild(tr);
                 });
@@ -83,7 +83,7 @@
             }
         };
 
-        fetchStudentInfo();
+        fetchSubmitTimeInfo();
     </script>
 </head>
 <body>

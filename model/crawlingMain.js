@@ -84,11 +84,19 @@ export const getSubmitOrderTime = async(targetTime) => {
         return ("Error! html 데이터 추출 중 에러")
 
     let recentdatetime = await crawlingSubmit.getRecentTime(mainhtml)
-    
+
     if (cache_lastdatetime < recentdatetime) {
+        // 테스트할 때는 없던 부분인데, 혹시 몰라서 주석 처리 해놓음
+        /* 
         let newsubmitlist = await crawlingSubmit.getRecent_to_targettime_submitlist(mainhtml, cache_lastdatetime);
         data_kwsubmitlist.push(newsubmitlist);
+        */
         cache_lastdatetime = recentdatetime; //cache update
+        //새롭게 업데이트 진행
+        const yearago = new Date();
+        yearago.setFullYear(yearago.getFullYear()-1);
+        yearago.setHours(0, 0, 0, 0); //오늘 자정으로 설정
+        data_kwsubmitlist = await crawlingSubmit.getRecent_to_targettime_submitlist(mainhtml, yearago);
         return (data_kwsubmitlist)
     }
     else { //그냥 이미 저장되어있던 데이터 list return
