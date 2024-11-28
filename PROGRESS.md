@@ -30,6 +30,7 @@
 - 메인 페이지 디자인 (배너 등) & pie-chart에 데이터 삽입을 위한 js 함수 수정 및 기능 추가 [(해당 커밋 보기)](https://github.com/sjml2002/oss_kwboj_6/commit/362c205315553c4480432ac8ae78fc7fff4ee792)<br/>
   - pie-chart 에는 학생들의 티어 분포를 나타낸다
   - pie-chart 오른쪽에 각 티어 학생수 표시
+- 메인 페이지 디자인 방향성 결정 및 재구성, 잔디밭 그래프(박준혁) 메인 페이지 추가[(해당 커밋 보기)](https://github.com/sjml2002/oss_kwboj_6/commit/3b9a0183e39ab187ddf68b00231b6cdf2c513f6f)<br/>
 ## 이호정
 
 ## 김준상
