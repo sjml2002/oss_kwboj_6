@@ -31,6 +31,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script type="module" src="/model/piegraph.js"></script>
+    <script type="module" src="/model/searchrank.js"></script>
 
 </head>
 
@@ -54,11 +55,6 @@
                 <a href="*****.html" class="problem_link"> <!-- 올바른 링크 추가해야함 -->
                     오늘의 문제
                 </a>
-            </div>
-            <div class="kwXbj">
-                <a class="kwtext">광운대학교</a>
-                <a class="bjtext"></a>
-                <a class="Xtext">백준 Statistics</a>
             </div>
         </div>
     </header>
@@ -93,23 +89,89 @@
 
         <!-- 1위부터 10위 랭킹 -->
         <div class="ranking_container">
-            <div class="ranking_description">광운대학교 랭킹</div>
-            <div class="ranking_list">
-                <div class="ranking_header">
-                    <a>순위&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        티어&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;레이팅&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        푼&nbsp;문제</a>
+            <div class="top-container">
+                <div class="ranking_description">광운대학교 랭킹</div>
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="검색하세요...">
+                    <button class="search-button"><!-- SVG 검색 아이콘 -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-search" viewBox="0 0 16 16">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.398 1.398h-.001l3.443 3.443a1 1 0 1 0 1.415-1.414l-3.444-3.442zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                        </svg></button>
                 </div>
-                <a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">1</a>
-                <a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">2</a>
-                <a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">3</a>
-                <a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">4</a>
-                <a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">5</a>
-                <a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">6</a>
-                <a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">7</a>
-                <a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">8</a>
+            </div>
+            <div class="ranking_list">
+                <table id="rankingTable">
+                    <thead>
+                        <tr>
+                            <th style="width: 20px;">순위</th>
+                            <th style="width: 90px;"></th>
+                            <th style="width: 20px;">티어</th>
+                            <th style="width: 30px;">레이팅</th>
+                            <th style="width: 50px;">푼 문제</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">1</a></td>
+                            <td style="width: 90px;"></td>
+                            <td style="width: 20px;">P</td>
+                            <td style="width: 30px;">1500</td>
+                            <td style="width: 50px;">120</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">2</a></td>
+                            <td style="width: 90px;"></td>
+                            <td style="width: 20px;">P</td>
+                            <td style="width: 30px;">1500</td>
+                            <td style="width: 50px;">120</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">3</a></td>
+                            <td style="width: 90px;"></td>
+                            <td style="width: 20px;">P</td>
+                            <td style="width: 30px;">1500</td>
+                            <td style="width: 50px;">120</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">4</a></td>
+                            <td style="width: 90px;"></td>
+                            <td style="width: 20px;">P</td>
+                            <td style="width: 30px;">1500</td>
+                            <td style="width: 50px;">120</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">5</a></td>
+                            <td style="width: 90px;"></td>
+                            <td style="width: 20px;">P</td>
+                            <td style="width: 30px;">1500</td>
+                            <td style="width: 50px;">120</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">6</a></td>
+                            <td style="width: 90px;"></td>
+                            <td style="width: 20px;">P</td>
+                            <td style="width: 30px;">1500</td>
+                            <td style="width: 50px;">120</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">7</a></td>
+                            <td style="width: 90px;"></td>
+                            <td style="width: 20px;">P</td>
+                            <td style="width: 30px;">1500</td>
+                            <td style="width: 50px;">120</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">8</a></td>
+                            <td style="width: 90px;"></td>
+                            <td style="width: 20px;">P</td>
+                            <td style="width: 30px;">1500</td>
+                            <td style="width: 50px;">120</td>
+                        </tr>
+                    </tbody>
+                </table>
+
             </div>
         </div>
     </div>
