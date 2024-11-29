@@ -13,7 +13,10 @@
 ### 강하늘 
 ![강하늘](./mdImage/강하늘1차.png)  
 ### 이제희
-![이제희](./mdImage/이제희_progrssmd1차.png)   
+- 1차 작업
+![이제희](./mdImage/이제희_progressmd1차.png)   
+- 2차 작업
+![이제희](./mdImage/이제희_progressmd2차.png)   
 ### 김준상
 ![김준상](./mdImage/김준상_progress.png)
 ### [이호정]
@@ -35,7 +38,9 @@
 - 메인 페이지 디자인 (배너 등) & pie-chart에 데이터 삽입을 위한 js 함수 수정 및 기능 추가 [(해당 커밋 보기)](https://github.com/sjml2002/oss_kwboj_6/commit/362c205315553c4480432ac8ae78fc7fff4ee792)<br/>
   - pie-chart 에는 학생들의 티어 분포를 나타낸다
   - pie-chart 오른쪽에 각 티어 학생수 표시
-- 메인 페이지 디자인 방향성 결정 및 재구성, 잔디밭 그래프(박준혁) 메인 페이지 추가[(해당 커밋 보기)](https://github.com/sjml2002/oss_kwboj_6/commit/3b9a0183e39ab187ddf68b00231b6cdf2c513f6f)<br/>
+- 메인 페이지 디자인 방향성 결정 및 재구성, 잔디밭 그래프(박준혁) 메인 페이지 추가[(해당 커밋 보기)](https://github.com/sjml2002/oss_kwboj_6/commit/3b9a0183e39ab187ddf68b00231b6cdf2c513f6f)
+- pie-chart 오른쪽에 광운대학교 학생들의 티어 순위표 추가[(해당 커밋 보기)](https://github.com/sjml2002/oss_kwboj_6/commit/61d3b52f1367b4fd060cd061b6165129aa90fee4)
+<br/>
 ## 이호정
 - Today's problem & duel game:
 오늘의 추천문제와 광운대학교 학생들이 풀지 못한 문제 추천하는 ui 추가,(문제 클릭시 해당 링크로 이동)
