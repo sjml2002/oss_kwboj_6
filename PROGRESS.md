@@ -16,6 +16,9 @@
 ![이제희](./mdImage/이제희_progrssmd1차.png)   
 ### 김준상
 ![김준상](./mdImage/김준상_progress.png)
+### [이호정]
+![이호정](./mdImage/이호정_progress1_1.png)
+![이호정](./mdImage/이호정_progress_1_2.png)
 ---
 # Individual Progress Status
 ## 박준혁
@@ -34,7 +37,12 @@
   - pie-chart 오른쪽에 각 티어 학생수 표시
 - 메인 페이지 디자인 방향성 결정 및 재구성, 잔디밭 그래프(박준혁) 메인 페이지 추가[(해당 커밋 보기)](https://github.com/sjml2002/oss_kwboj_6/commit/3b9a0183e39ab187ddf68b00231b6cdf2c513f6f)<br/>
 ## 이호정
-
+- Today's problem & duel game:
+오늘의 추천문제와 광운대학교 학생들이 풀지 못한 문제 추천하는 ui 추가,(문제 클릭시 해당 링크로 이동)
+유저 레이팅 데이터로 실행되는 결투 게임 ui 추가
+[(해당 커밋 보기)](https://github.com/sjml2002/oss_kwboj_6/commit/189ab84ac28bd4a13b0e0ab9e59afd151af0033a)
+- 우리학교의 백준 ranking 을 띄우는 ui 추가, + 결투 게임에서 육각형 데이터 출력 삭제, 유저의 레이팅이 아닌 등수로 변경
+[(해당 커밋 보기)](https://github.com/sjml2002/oss_kwboj_6/commit/bef94314187ec8562f316fc3b7b477fb2807a331)
 ## 김준상
 - 광운대학교 학생들의 정보를 크롤링 완료
 [(해당 커밋 보기)](https://github.com/sjml2002/oss_kwboj_6/commit/9d1cf1e2503abe0a8d05e40ed1bb5a4f9973bf5e)
