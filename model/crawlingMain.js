@@ -6,15 +6,20 @@ import * as crawlingSubmit from "./crawlingSubmitTime.js";
 import * as crawlingUniRank from "./crawlingUniversityRanking.js";
 
 let cache_numofpeople = 0;
-let cache_lastdatetime = 0;
-let cache_lastupdate = new Date("2000-01-01 00:00:00"); //마지막으로 업데이트 한 시간
+let cache_lastsubmittime = new Date(
+    new Date().getFullYear()-1,
+    new Date().getMonth(),
+    new Date().getDate(),
+    0, 0, 0, 0
+); //오늘 날짜로 부터 작년으로 설정
+let cache_lastunirankupdatetime = new Date("2000-01-01 00:00:00"); //마지막으로 업데이트 한 시간
 let cache_lasttodayproblem = new Date("2000-01-01 00:00:00"); //today problem 마지막 업데이트
 
 //view에 쓸 데이터
 let data_kwstudents = [];
 let data_kwsubmitlist = [];
 let data_unirank = new Map();
-let data_totalProblems = new Set();
+//let data_totalProblems = new Set();
 let data_todaysProblem = [];
 
 const getHtml = async(customheader, url) => {
@@ -85,18 +90,17 @@ export const getSubmitOrderTime = async(targetTime) => {
 
     let recentdatetime = await crawlingSubmit.getRecentTime(mainhtml)
 
-    if (cache_lastdatetime < recentdatetime) {
+    if (cache_lastsubmittime < recentdatetime) {
+        console.log("캐시: ", cache_lastsubmittime); //debug
         // 테스트할 때는 없던 부분인데, 혹시 몰라서 주석 처리 해놓음
         /* 
         let newsubmitlist = await crawlingSubmit.getRecent_to_targettime_submitlist(mainhtml, cache_lastdatetime);
         data_kwsubmitlist.push(newsubmitlist);
         */
-        cache_lastdatetime = recentdatetime; //cache update
         //새롭게 업데이트 진행
-        const yearago = new Date();
-        yearago.setFullYear(yearago.getFullYear()-1);
-        yearago.setHours(0, 0, 0, 0); //오늘 자정으로 설정
-        data_kwsubmitlist = await crawlingSubmit.getRecent_to_targettime_submitlist(mainhtml, yearago);
+        const newsubmit = await crawlingSubmit.getRecent_to_targettime_submitlist(mainhtml, cache_lastsubmittime);
+        data_kwsubmitlist = data_kwsubmitlist.concat(newsubmit); //data_kwsubmitlist + newsubmit
+        cache_lastsubmittime = recentdatetime; //cache update
         return (data_kwsubmitlist)
     }
     else { //그냥 이미 저장되어있던 데이터 list return
@@ -108,12 +112,12 @@ export const getSubmitOrderTime = async(targetTime) => {
 export const getUniversityRanking = async() => {
     //하루에 한번씩만 업데이트 하도록 설정
     const today = new Date();
-    let diffDate = today.getTime() - cache_lastupdate.getTime();
+    let diffDate = today.getTime() - cache_lastunirankupdatetime.getTime();
     diffDate = Math.abs(diffDate / (1000*60*60*24)); //밀리세컨*초*분*시 = 일
     if (diffDate < 1 && data_unirank.size != 0)
         return (data_unirank);
     //업데이트 어차피 할거니까 cache를 오늘 자정으로 설정
-    cache_lastupdate = today;
+    cache_lastunirankupdatetime = today;
 
     const url = "https://www.acmicpc.net/ranklist/university/1";
     const header = {
