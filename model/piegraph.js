@@ -123,7 +123,7 @@ $(window).ready(async function () {
     function addValue(sector) {
 
         // 값이 그래프에 추가되는 동시에 로딩 메시지 변경
-        $("#center-label").text("click it!");
+        $("#center-label").text("Click It!");
 
         // 그래프 오른쪽에 티어 별 인원수 데이터 입력
         $(".chart-value ul").append(`

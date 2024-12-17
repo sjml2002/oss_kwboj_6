@@ -92,28 +92,29 @@
             <div class="top-container">
                 <div class="ranking_description">광운대학교 랭킹</div>
                 <div class="search-container">
-                    <input type="text" class="search-input" placeholder="검색하세요...">
-                    <button class="search-button"><!-- SVG 검색 아이콘 -->
+                    <input type="text" class="searchInput" placeholder="검색하세요...">
+                    <button class="search-button" onclick="searchAndDisplay()"><!-- SVG 검색 아이콘 -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-search" viewBox="0 0 16 16">
                             <path
                                 d="M11.742 10.344a6.5 6.5 0 1 0-1.398 1.398h-.001l3.443 3.443a1 1 0 1 0 1.415-1.414l-3.444-3.442zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                        </svg></button>
+                        </svg>
+                    </button>
                 </div>
             </div>
             <div class="ranking_list">
                 <table id="rankingTable">
                     <thead>
                         <tr>
-                            <th style="width: 20px;">순위</th>
+                            <th style="width: 30px;">순위</th>
                             <th style="width: 90px;"></th>
                             <th style="width: 20px;">티어</th>
                             <th style="width: 30px;">레이팅</th>
                             <th style="width: 50px;">푼 문제</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
+                    <tbody id="rankingTableBody">
+                        <!-- <tr>
                             <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">1</a></td>
                             <td style="width: 90px;"></td>
                             <td style="width: 20px;">P</td>
@@ -168,7 +169,7 @@
                             <td style="width: 20px;">P</td>
                             <td style="width: 30px;">1500</td>
                             <td style="width: 50px;">120</td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
 
