@@ -26,7 +26,7 @@ const getHtml = async(customheader, url) => {
  * 이때, 동순위가 있을 수도 있다.
  * @param {html}$ 처음 html 파일
  * @returns 광운대학교 sokved 인원 중 가장 꼴지의 순위
- */
+ */ 
 export const curPeopleCnt = async($) => {
     const page = $("div.css-18lc7iz")
     const lastpagenum = page.find('a').last().text();
@@ -69,7 +69,9 @@ export const updateKwStudentInfo = async($) => {
                 
                 const student = new kwStudentInfo(ID,tier,tierimg,ranking,rankingInKWU,acrating,classlevel,solvedcnt);
                 kwstudents.push(student)
-            })
+            });
+            console.log(`Page ${pi} processed`); // 현재 페이지 처리 완료 확인
+            console.log('Current kwstudents:', kwstudents); // 디버깅: 현재까지 누적된 학생 데이터
         }
         return (kwstudents)
     }

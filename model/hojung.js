@@ -297,6 +297,7 @@ export async function startDuel() {
 
     try {
         const studentData = await fetchStudentInfo();
+        console.log("학생 데이터:", studentData);
         if (!Array.isArray(studentData) || studentData.length === 0) {
             throw new Error('학생 데이터를 불러오지 못했습니다.');
         }
