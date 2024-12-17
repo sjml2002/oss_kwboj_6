@@ -112,7 +112,8 @@ export const getUniversityRanking = async() => {
     const today = new Date();
     let diffDate = today.getTime() - cache_lastunirankupdatetime.getTime();
     diffDate = Math.abs(diffDate / (1000*60*60*24)); //밀리세컨*초*분*시 = 일
-    if (diffDate < 1 && !data_unirank.empty())
+    console.log(typeof data_unirank); //debug
+    if (diffDate < 1)
         return (data_unirank);
     //업데이트 어차피 할거니까 cache를 오늘 자정으로 설정
     cache_lastunirankupdatetime = today;

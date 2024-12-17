@@ -123,6 +123,7 @@ body {
 }
 
 /* 새로운 박스 */
+/* 새로운 박스 스타일 */
 .new-box-container {
     display: flex;
     flex-direction: column;
@@ -150,6 +151,19 @@ body {
     transform: translateY(-3px); /* 호버 시 살짝 위로 이동 */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
+
+.new-box a {
+    color: #333333; /* 링크 색상 */
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.new-box a:hover {
+    color: #000000; /* 호버 시 텍스트 색상 */
+}
+
 
 
 /* 결투 게임 스타일 */

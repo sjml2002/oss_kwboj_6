@@ -53,11 +53,6 @@ const loadKwuRanking = async () => {
     }
 };
 
-// 새로운 박스 데이터 표시
-const loadNewBoxes = () => {
-    document.getElementById('new-box-1').textContent = "공지사항: 업데이트 준비 중!";
-    document.getElementById('new-box-2').textContent = "이벤트: 다음 주 공개 예정!";
-};
 
 // 추천 문제 로드
 const loadRecommendedProblems = async () => {
@@ -133,7 +128,6 @@ document.addEventListener('DOMContentLoaded', () => {
     loadKwuRanking();
     loadRecommendedProblems();
     loadUnsolvedProblems();
-    loadNewBoxes();
 
     document.querySelector('.duel-button').addEventListener('click', startDuel);
 });
