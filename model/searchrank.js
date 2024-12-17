@@ -7,13 +7,13 @@ const fetchStudentInfo = async () => {
 
         allStudentData = jsondata; // 데이터를 저장
         console.log('All Student Data:', allStudentData); // 데이터 확인
-        displayTable(jsondata.slice(0, 10));
+        displayTable(jsondata.slice(0, 10), -1);
     } catch (error) {
         console.error('Error fetching data:', error);
     }
 };
 
-const displayTable = (data) => {
+const displayTable = (data, boldnum) => {
     const tableBody = document.getElementById('rankingTableBody');
     tableBody.innerHTML = ''; // 기존 데이터 초기화
 
@@ -44,6 +44,10 @@ const displayTable = (data) => {
         solvedCountCell.textContent = item._solvedcnt;
         tr.appendChild(solvedCountCell);
 
+        if (index === boldnum) {
+            tr.style.backgroundColor = '#f0f8ff'; // 하이라이트 색상
+        }
+
         tableBody.appendChild(tr);
     });
 };
@@ -56,7 +60,8 @@ window.searchAndDisplay = () => {
 
     // 만약 검색한 ID가 1위부터 5위에 속하면 초기 화면(1~10위) 리턴
     if (top5IDs.includes(searchInput)) {
-        displayTable(allStudentData.slice(0, 10), searchInput); // 초기 화면 출력
+        const targetIndex = allStudentData.findIndex(item => item._ID?.toLowerCase() === searchInput);
+        displayTable(allStudentData.slice(0, 10), targetIndex); // 초기 화면 출력
         return;
     }
 
