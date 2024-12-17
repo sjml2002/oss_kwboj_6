@@ -9,8 +9,13 @@
   "dependencies": {
     "axios": "^1.7.7",
     "cheerio": "^1.0.0",
+<<<<<<< HEAD
     "express": "^4.21.2",
     "github-contribution-graph": "^2.0.2",
     "github-contribution-graph-fix": "^2.0.6"
+=======
+    "express": "^4.21.1",
+    "github-contribution-graph": "^2.0.2"
+>>>>>>> 039a46b377d9f3d38a42cc0668efc221b6a1ac62
   }
 }
