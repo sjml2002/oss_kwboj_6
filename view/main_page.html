@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <!-- 문서의 문자 인코딩 설정 (UTF-8이 가장 일반적임) -->
+    <meta charset="UTF-8">
+
+    <!-- 반응형 웹을 위한 viewport 설정 (모바일 친화적) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- 문서 제목 (탭이나 검색 결과에 표시됨) -->
+    <title> oss_kwboj (가제) </title>
+
+    <!-- 설명과 키워드 (SEO 최적화를 위해 사용) -->
+    <meta name="description" content="광운대학교 백준 통계 사이트">
+    <meta name="keywords" content="kwboj, boj, kw, 광운대, 광운대백준, 광운대학교">
+
+    <!-- 작성자 정보 -->
+    <meta name="author" content="junsangkim">
+
+    <!-- 파비콘 (탭이나 북마크에 표시됨) -->
+    <!-- <link rel="icon" href="favicon.ico" type="image/x-icon"> -->
+
+    <!-- 외부 CSS 파일 로드 -->
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <link rel="stylesheet" type="text/css" href="/view/STYLE/main_element.css">
+    <link rel="stylesheet" type="text/css" href="/view/STYLE/main_header.css">
+
+    <!-- 외부 JavaScript 파일 로드 (필요 시) -->
+    <!-- <script src="script.js" defer></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="module" src="/model/piegraph.js"></script>
+    <script type="module" src="/model/searchrank.js"></script>
+
+</head>
+
+<body>
+
+    <!-- 상단 배너 -->
+    <header class="header-banner">
+        <div class="logo-container">
+            <img src="/mdImage/mascot_.png" alt="Left Logo" class="logo-leftimage">
+            <div class="logo-text">
+                K B S
+            </div>
+            <img src="/mdImage/mascot2_.png" alt="Right Logo" class="logo-rightimage" style="margin-right: 30px;">
+            <div class="rank_link">
+                <a href="index.html" class="rank_link"> <!-- 올바른 링크 추가해야함 -->
+                    랭킹
+                </a>
+            </div>
+            <div class="margin_1"></div>
+            <div class="problem_link">
+                <a href="*****.html" class="problem_link"> <!-- 올바른 링크 추가해야함 -->
+                    오늘의 문제
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 이미지 섹션 -->
+    <div class="image-container">
+        <img src="/mdImage/bannerver1.png" alt="광운대학교 이미지" class="banner-image">
+    </div>
+
+    <!-- 구현한 건 모두 메인 컨테이너 안에 담고 조절하기 -->
+    <div class="chart_and_problem">
+        <!-- 원형그래프 -->
+        <div class="chart-container">
+            <div class="chart_description">
+                <p>광운대학교 solved.ac 티어 분포도</p>
+            </div>
+            <div class="data-container">
+                <div class="pie-chart">
+                    <span id="center-label" class="center">
+                        Loading...
+                    </span>
+                </div>
+                <div class="tooltip"></div>
+                <div class="chart-value">
+                    <ul></ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 그래프와 랭킹 사이 마진 -->
+        <div class="margin_2"></div>
+
+        <!-- 1위부터 10위 랭킹 -->
+        <div class="ranking_container">
+            <div class="top-container">
+                <div class="ranking_description">광운대학교 랭킹</div>
+                <div class="search-container">
+                    <input type="text" class="searchInput" placeholder="검색하세요...">
+                    <button class="search-button" onclick="searchAndDisplay()"><!-- SVG 검색 아이콘 -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-search" viewBox="0 0 16 16">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.398 1.398h-.001l3.443 3.443a1 1 0 1 0 1.415-1.414l-3.444-3.442zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="ranking_list">
+                <table id="rankingTable">
+                    <thead>
+                        <tr>
+                            <th style="width: 30px;">순위</th>
+                            <th style="width: 90px;"></th>
+                            <th style="width: 20px;">티어</th>
+                            <th style="width: 30px;">레이팅</th>
+                            <th style="width: 50px;">푼 문제</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rankingTableBody">
+                        <!-- <tr>
+                            <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">1</a></td>
+                            <td style="width: 90px;"></td>
+                            <td style="width: 20px;">P</td>
+                            <td style="width: 30px;">1500</td>
+                            <td style="width: 50px;">120</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">2</a></td>
+                            <td style="width: 90px;"></td>
+                            <td style="width: 20px;">P</td>
+                            <td style="width: 30px;">1500</td>
+                            <td style="width: 50px;">120</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">3</a></td>
+                            <td style="width: 90px;"></td>
+                            <td style="width: 20px;">P</td>
+                            <td style="width: 30px;">1500</td>
+                            <td style="width: 50px;">120</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">4</a></td>
+                            <td style="width: 90px;"></td>
+                            <td style="width: 20px;">P</td>
+                            <td style="width: 30px;">1500</td>
+                            <td style="width: 50px;">120</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">5</a></td>
+                            <td style="width: 90px;"></td>
+                            <td style="width: 20px;">P</td>
+                            <td style="width: 30px;">1500</td>
+                            <td style="width: 50px;">120</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">6</a></td>
+                            <td style="width: 90px;"></td>
+                            <td style="width: 20px;">P</td>
+                            <td style="width: 30px;">1500</td>
+                            <td style="width: 50px;">120</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">7</a></td>
+                            <td style="width: 90px;"></td>
+                            <td style="width: 20px;">P</td>
+                            <td style="width: 30px;">1500</td>
+                            <td style="width: 50px;">120</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">8</a></td>
+                            <td style="width: 90px;"></td>
+                            <td style="width: 20px;">P</td>
+                            <td style="width: 30px;">1500</td>
+                            <td style="width: 50px;">120</td>
+                        </tr> -->
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- 잔디밭 html -->
+    <div class="contribution_grass">
+        <div class="grass_container">
+            <div class="grass_description">
+                <p>Loading... (It takes time!)</p>
+            </div>
+            <div class="grass_graph" id="app"></div>
+        </div>
+    </div>
+    <!-- 잔디밭 html -->
+
+    <!-- 잔디밭 JS -->
+    <script type="module">
+        import drawContributionGraph from "https://cdn.jsdelivr.net/npm/github-contribution-graph-fix/dist/github-contribution-graph.es.js"
+
+        //////////////////////////////////////// 임시 데이터 ///////////////////////////////////////////
+
+        // const data = {
+        //     2023: [
+        //         {
+        //             done: 50,
+        //             not_done: 10, // it's fine if you keep not_done as 0
+        //             date: "2023-06-07",
+        //         },
+        //         {
+        //             done: 22,
+        //             not_done: 6,
+        //             date: "2023-02-25",
+        //         },
+        //     ],
+        //     2022: [
+        //         {
+        //             done: 7,
+        //             not_done: 3,
+        //             date: "2022-08-01",
+        //         },
+        //     ],
+        // };
+
+        // drawContributionGraph({
+        //         data,
+        //         ssr: false,
+        //         config: {
+        //             graphMountElement: "#app",
+        //         },
+        // });
+
+        // const rect = document.querySelectorAll('[class^="github-contribution-graph-box"]');
+        // const tooltip = document.querySelector(".github-contribution-graph-tooltip");
+
+        // for (let i = 0;i < rect.length;i++) {
+        //     rect[i].addEventListener("mouseover", () => {
+        //         let Tooltip = rect[i].getAttribute("data-tooltip-text");
+        //         tooltip.textContent = Tooltip;
+        //         tooltip.style.visibility = "visible";
+        //     })
+        // }
+
+        // for (let i = 0;i < rect.length;i++) {
+        //     rect[i].addEventListener("mouseout", () => {
+        //         tooltip.style.visibility = "hidden";
+        //     })
+        // }
+
+        ///////////////////////////////////////////////////////////////////////////////
+
+        ////////////////////////// 크롤링 데이터 사용 //////////////////////////////////
+
+        let year = 2024;        // 현재 연도
+        let currentmonth;       // 현재 월
+        let currentday;         // 현재 일
+
+        const fetchSubmitTimeInfo = async () => {
+            try {
+                const response = await fetch('/getSubmitInfo');
+                const jsondata = await response.json();
+
+                // 데이터를 HTML에 넣기 (example 코드는 studentInfo.html 참고)
+                // TODO for 시각화 맴버들
+                const generateData = {                                 // drawContributionGraph 함수에 사용할 data 생성
+                    generator() {
+                        const data = {};
+
+                        for (let month = 1; month <= 12; month++) {    // 1월부터 12월까지
+                            if (month <= 9) {                          // month string으로 변환
+                                currentmonth = "0" + month;            // 1월부터 9월까지는 앞에 '0' 붙여서 01, 02... 와 같은 형태로 만듦
+                                //console.log(currentmonth);
+                            }
+                            else {                                     // 10월부터 12월까지는 toString으로 string 형태로 변환시켜 그대로 사용
+                                currentmonth = month.toString();
+                                //console.log(currentmonth);
+                            }
+
+                            for (let day = 1; day <= this.getDaysInMonth(month, year); day++) {         // 월과 같은 방식으로 일도 생성
+                                if (day <= 9) {
+                                    currentday = "0" + day;
+                                }
+                                else {
+                                    currentday = day.toString();
+                                }
+
+                                const date = `${year}-${this.padZero(month)}-${this.padZero(day)}`;     // data에 넣을 날짜
+                                let done = 0;                                                           // 해당 일자의 문제를 몇 명이 풀었는지
+
+                                jsondata.forEach((item, idx) => {                                       // 크롤링 데이터마다 반복
+                                    let curyear = item._time.substring(0, 4);                           // XXXX-XX-XX에서 연도 부분 추출
+                                    let curmonth = item._time.substring(5, 7);                          // 월 부분 추출
+                                    let curday = item._time.substring(8, 10);                           // 일 부분 추출
+
+                                    // 만약 크롤링 데이터의 문제 풀이 날짜가 현재 반복문 내의 날짜와 동일하다면, 해당 날짜의 문제 푼 수를 증가시킴
+                                    if (curyear === year.toString() && curmonth === currentmonth && curday === currentday) {
+                                        done++;
+                                    }
+                                });
+
+                                const not_done = 0;  // 안쓰는 데이터, 다만 drawContributionGraph 함수에 필요하기 때문에 임시로 0 넣어줌
+
+                                if (!data[year]) {   // 현재 연도의 데이터 배열이 없다면 새로 생성
+                                    data[year] = [];
+                                }
+                                data[year].push({ done, not_done, date });  // 데이터 배열에 앞서 생성한 데이터 저장
+                            }
+                        }
+
+
+                        return data;
+                    },
+                    getDaysInMonth(month, year) {                           // 월별 몇일이 있는지 확인하는 함수
+                        return new Date(year, month, 0).getDate();
+                    },
+                    padZero(number) {
+                        return number.toString().padStart(2, '0');
+                    }
+                }
+
+                const data = generateData.generator();                      // 위에서 만든 함수로 데이터 생성
+
+                drawContributionGraph({                                     // 생성한 데이터로 잔디밭 그래프 생성, id가 app인 div쪽에 생성됨
+                    data,
+                    ssr: false,
+                    config: {
+                        graphMountElement: "#app",
+                    },
+                });
+
+                const descriptionElement = document.querySelector('.grass_description p');
+                descriptionElement.textContent = '광운대학교 Baekjoon 기여 그래프 (2024)'; // 텍스트 변경
+
+                const rect = document.querySelectorAll('[class^="github-contribution-graph-box"]');     // 잔디밭 그래프의 각 일자 모두 선택
+
+                // 그래프에 마우스를 올릴 시 그래프 아래쪽에 해당 일자에 문제를 푼 사람의 개수를 나타내도록 하는 div 선택(기본적으로 hidden, 즉 숨겨져 있음)
+                const tooltip = document.querySelector(".github-contribution-graph-tooltip");
+
+                // 모든 잔디밭 그래프의 일자에 대해 마우스 올릴 시 및 치울 시 이벤트 추가
+
+                // 마우스를 올릴 시, 해당 일자의 data-tooltip-text class(출력에 필요한 텍스트가 저장되어 있음)를 가져온 뒤 그래프 아래의 div에 출력하고
+                // div의 style을 visible로 바꾸어 텍스트가 나타나도록 함
+                for (let i = 0; i < rect.length; i++) {
+                    rect[i].addEventListener("mouseover", () => {
+                        let Tooltip = rect[i].getAttribute("data-tooltip-text");
+                        tooltip.textContent = Tooltip;
+                        tooltip.style.visibility = "visible";
+
+                        // 툴팁 좌표 설정
+                        tooltip.style.top = `${event.pageY + 10}px`; // 마우스 Y 좌표 아래로 10px
+                        tooltip.style.left = `${event.pageX + 10}px`; // 마우스 X 좌표 오른쪽으로 10px
+                    })
+                }
+
+                // 마우스를 치울 시, 다시 그래프 아래의 div를 hidden으로 바꾸어 텍스트가 보이지 않도록 함
+                for (let i = 0; i < rect.length; i++) {
+                    rect[i].addEventListener("mouseout", () => {
+                        tooltip.style.visibility = "hidden";
+                    })
+                }
+
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+        fetchSubmitTimeInfo();
+
+        /////////////////////////////////////////////////////////////////////////////////////
+    </script>
+    <!-- 잔디밭 JS -->
+
+
+</body>
+
+</html>

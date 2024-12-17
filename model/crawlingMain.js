@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 import * as cheerio from "cheerio";
 import * as fs from 'fs';
 import * as crawlingStudent from "./crawlingStudent.js";
@@ -69,12 +69,8 @@ export const getkwStudentInfo = async() => {
     }
 }
 
-/**
- * targetTime ~ 호출한 시각까지 모두 구해옴
- * @param {Date} targetTime 
- * @returns {list} data_kwsubmitlist
- */
-export const getSubmitOrderTime = async(targetTime) => {
+//return: 시간 순으로 정렬된 submitWithTime
+export const getSubmitOrderTime = async() => {
     const result_id = 4; //-1: 전체, 4: 맞았습니다
     const school_id = 222; //222: 광운대학교
     const url = `https://www.acmicpc.net/status?&result_id=${result_id}&school_id=${school_id}`
@@ -114,7 +110,7 @@ export const getUniversityRanking = async() => {
     const today = new Date();
     let diffDate = today.getTime() - cache_lastunirankupdatetime.getTime();
     diffDate = Math.abs(diffDate / (1000*60*60*24)); //밀리세컨*초*분*시 = 일
-    if (diffDate < 1 && data_unirank.size != 0)
+    if (diffDate < 1 && !data_unirank.empty())
         return (data_unirank);
     //업데이트 어차피 할거니까 cache를 오늘 자정으로 설정
     cache_lastunirankupdatetime = today;
@@ -173,44 +169,45 @@ export const getTodaysProblem = () =>  {
     return (data_todaysProblem);
 }
 
-///////////////////////////////////////////////////////////
-//debug
-// const testmain = async() => {
-//     // const ksi = await getkwStudentInfo();
-//     // if (ksi.includes("Error!")) {
-//     //     console.log(ksi); //debug
-//     // }
-//     // else {
-//     //     data_kwstudents = ksi;
-//     //     console.log("테스트: ", data_kwstudents) //success debug
-//     // }
 
-//     // const sot = await getSubmitOrderTime();
-//     // if (sot.includes("Error!")) {
-//     //     console.log(sot)
-//     // }
-//     // else {
-//     //     data_kwsubmitlist = sot;
-//     //     console.log("테스트: ", data_kwsubmitlist)
-//     // }
+// ///////////////////////////////////////////////////////////
+// //debug
+// // const testmain = async() => {
+// //     // const ksi = await getkwStudentInfo();
+// //     // if (ksi.includes("Error!")) {
+// //     //     console.log(ksi); //debug
+// //     // }
+// //     // else {
+// //     //     data_kwstudents = ksi;
+// //     //     console.log("테스트: ", data_kwstudents) //success debug
+// //     // }
 
-//     // const unirank = await getUniversityRanking();
-//     // if (unirank.includes("Error!")) {
-//     //     console.log(unirank)
-//     // }
-//     // else {
-//     //     data_unirank = unirank;
-//     //     console.log("테스트: ", data_unirank)
-//     // }
+// //     // const sot = await getSubmitOrderTime();
+// //     // if (sot.includes("Error!")) {
+// //     //     console.log(sot)
+// //     // }
+// //     // else {
+// //     //     data_kwsubmitlist = sot;
+// //     //     console.log("테스트: ", data_kwsubmitlist)
+// //     // }
 
-//     // data_totalProblems = await getTotalProblem();
-//     // console.log("테스트: ", data_totalProblems); //deubg
-//     // data_totalProblems = await getTotalProblem();
-//     // console.log("캐시 테스트: ", data_totalProblems); //debug
+// //     // const unirank = await getUniversityRanking();
+// //     // if (unirank.includes("Error!")) {
+// //     //     console.log(unirank)
+// //     // }
+// //     // else {
+// //     //     data_unirank = unirank;
+// //     //     console.log("테스트: ", data_unirank)
+// //     // }
 
-//     // data_todaysProblem = getTodaysProblem();
-//     // console.log(data_todaysProblem);
-//     // data_todaysProblem = getTodaysProblem();
-//     // console.log(data_todaysProblem);
-// }
-// testmain();
+// //     // data_totalProblems = await getTotalProblem();
+// //     // console.log("테스트: ", data_totalProblems); //deubg
+// //     // data_totalProblems = await getTotalProblem();
+// //     // console.log("캐시 테스트: ", data_totalProblems); //debug
+
+// //     // data_todaysProblem = getTodaysProblem();
+// //     // console.log(data_todaysProblem);
+// //     // data_todaysProblem = getTodaysProblem();
+// //     // console.log(data_todaysProblem);
+// // }
+// // testmain();
