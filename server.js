@@ -45,6 +45,10 @@ app.get("/contribution", (req, res) => {
   res.sendFile(path.join(__dirname, "view", "contribution.html"))
 })
 
+app.get("/medalRanking", (req, res) => {
+  res.sendFile(path.join(__dirname, "view", "medalRanking.html"))
+})
+
 //// Example for 시각화 맴버들
 // app.get("/HTML파일이름", (req, res) => {
 //   res.sendFile(path.join(__dirname, "view", "HTML파일이름.html"))
