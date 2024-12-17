@@ -19,6 +19,8 @@ export default class kwStudentInfo {
         this._solvedcnt = sc;
     }
 
+
+
     // get ID() {
     //     return (this._ID);
     // }

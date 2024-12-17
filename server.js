@@ -1,5 +1,4 @@
 import express from "express";
-import cors from "cors";
 import path from "path";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -17,12 +16,6 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
 
-app.use(cors({
-  origin: "*", // 접근 권한을 부여하는 도메인
-  credentials: true, // 응답 헤더에 Access-Control-Allow-Credentials 추가
-  optionsSuccessStatus: 200, // 응답 상태 200으로 설정
-}));
-
 app.use(express.static("./"));
 app.use(express.static(path.join(__dirname, "model"))); //model 안의 파일들 사용하기
 app.use(express.static(path.join(__dirname, "view/STYLE",))); //view/STYLE 안의 파일들 사용하기
@@ -39,10 +32,18 @@ app.get("/studentInfo", (req, res) => {
   res.sendFile(path.join(__dirname, "view", "studentInfo.html"))
 })
 
-// Example for 시각화 맴버들
+app.get("/todayranking", (req, res) => {
+  res.sendFile(path.join(__dirname, "view", "todayranking.html"))
+})
+
 app.get("/contribution", (req, res) => {
   res.sendFile(path.join(__dirname, "view", "contribution.html"))
 })
+
+//// Example for 시각화 맴버들
+// app.get("/HTML파일이름", (req, res) => {
+//   res.sendFile(path.join(__dirname, "view", "HTML파일이름.html"))
+// })
 
 app.get('/model/crawling', (req, res) => {
   res.sendStatus(401)
@@ -61,10 +62,17 @@ app.get("/getkwStudentInfo", async (req, res) => {
 
 app.get("/getUniversityRanking", async (req, res) => {
   let unirank = await crawlingData.getUniversityRanking()
-  res.json(unirank); //json 타입으로 데이터 전달
+  const arraydata = Array.from(unirank.values()); //map to array
+  arraydata.sort((a, b) => a._rank < b._rank); //랭킹 오름차순 정렬
+  res.json(arraydata); //json 타입으로 데이터 전달
 })
 
 app.get("/getSubmitInfo", async (req, res) => {
   let kwsubmit = await crawlingData.getSubmitOrderTime()
   res.json(kwsubmit); //json 타입으로 데이터 전달
+})
+
+app.get("/getTodaysProblem", async (req, res) => {
+  let problems = crawlingData.getTodaysProblem()
+  res.json(problems); //json 타입으로 데이터 전달
 })

@@ -1,0 +1,214 @@
+/* 기본 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+}
+
+/* 문제 카테고리 스타일 */
+.categories {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 40px;
+}
+
+.category {
+    width: 300px;
+    background-color: #e6f7ff;
+    border-radius: 15px;
+    border: 2px solid #b3e5fc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.category:hover {
+    transform: translateY(-5px);
+}
+
+.category-header {
+    background-color: #b3e5fc;
+    color: #003366;
+    padding: 15px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.problem-list {
+    padding: 15px;
+}
+
+.problem {
+    background-color: #f0f8ff;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #003366;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s ease;
+}
+
+.problem:hover {
+    background-color: #d9f1ff;
+}
+
+.problem:last-child {
+    margin-bottom: 0;
+}
+
+/* 광운대 순위 스타일 */
+.ranking-container {
+    margin: 40px auto;
+    max-width: 300px;
+    background-color: #f9f9f9;
+    border: 2px solid #b3e5fc;
+    border-radius: 15px;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.ranking-item {
+    font-size: 18px;
+    color: #333;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #b3e5fc;
+    border-radius: 10px;
+    background-color: #e6f7ff;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* 광운대학교 위/아래 학교 스타일 */
+.ranking-item.previous,
+.ranking-item.next {
+    font-size: 16px; /* 글자 크기 작게 */
+    padding: 8px; /* 패딩 작게 */
+    margin: -10px 0; /* 겹치도록 마진 설정 */
+    z-index: 0; /* 광운대학교 뒤로 이동 */
+    opacity: 0.7; /* 반투명 */
+    transform: scale(0.9); /* 크기 줄이기 */
+    animation: fadeInUp 1s ease-in-out; /* 위/아래 방향 애니메이션 */
+}
+
+/* 광운대학교 스타일 */
+.ranking-item.highlight {
+    font-size: 22px; /* 더 큰 글씨 */
+    font-weight: bold;
+    color: #003366;
+    background-color: #b3e5fc;
+    z-index: 2; /* 가장 위로 */
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3); /* 그림자 추가 */
+    transform: translateY(0);
+    opacity: 1;
+    animation: bounce 1.5s infinite; /* 강조 애니메이션 */
+}
+
+/* 애니메이션 정의 */
+
+/* 서서히 나타나는 효과 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 위에서 서서히 내려오는 효과 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 0.7;
+        transform: translateY(-10px) scale(0.9);
+    }
+}
+
+/* 광운대학교 강조 애니메이션 */
+@keyframes bounce {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* 결투 게임 스타일 */
+.duel-container {
+    margin: 50px auto;
+    max-width: 600px;
+    background-color: #e6f7ff;
+    border: 2px solid #b3e5fc;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.duel-header {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #003366;
+}
+
+.input-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.input-group input {
+    width: 45%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #b3e5fc;
+    border-radius: 5px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.vs {
+    font-size: 20px;
+    font-weight: bold;
+    color: #003366;
+}
+
+.duel-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #007acc;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.duel-button:hover {
+    background-color: #005f99;
+}
+
+.result {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}

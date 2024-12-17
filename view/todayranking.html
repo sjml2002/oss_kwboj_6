@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문제 카테고리 & 결투 게임</title>
+    <link rel="stylesheet" href="../styles.css">
+    <script type="module" src="/model/hojung.js"></script>
+</head>
+<body>
+    <div class="categories">
+        <div class="category">
+            <div class="category-header">오늘의 문제</div>
+            <div class="problem-list" id="recommended-problems"></div>
+        </div>
+
+        <div class="category">
+            <div class="category-header">우리 학교 학생들이 못 푼 문제</div>
+            <div class="problem-list" id="unsolved-problems"></div>
+        </div>
+    </div>
+
+    <div class="ranking-container">
+        <div class="ranking-header">광운대 순위</div>
+        
+    </div>
+
+    <div class="duel-container">
+        <div class="duel-header">백준 레이팅 결투</div>
+        <div class="input-group">
+            <input type="text" id="user1" placeholder="첫 번째 아이디 입력">
+            <div class="vs">VS</div>
+            <input type="text" id="user2" placeholder="두 번째 아이디 입력">
+        </div>
+        <button class="duel-button" onclick="">결투 시작</button>
+        <div class="result" id="result"></div>
+    </div>
+</body>
+</html>
