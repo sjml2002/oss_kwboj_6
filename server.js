@@ -73,6 +73,6 @@ app.get("/getSubmitInfo", async (req, res) => {
 })
 
 app.get("/getTodaysProblem", async (req, res) => {
-  let problems = crawlingData.getTodaysProblem()
+  let problems = await crawlingData.getTodaysProblem()
   res.json(problems); //json 타입으로 데이터 전달
 })

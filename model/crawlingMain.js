@@ -4,6 +4,7 @@ import * as fs from 'fs';
 import * as crawlingStudent from "./crawlingStudent.js";
 import * as crawlingSubmit from "./crawlingSubmitTime.js";
 import * as crawlingUniRank from "./crawlingUniversityRanking.js";
+import * as crawlingTodayProblem from "./crawlingTodaysProblem.js";
 
 let cache_numofpeople = 0;
 let cache_lastsubmittime = new Date(
@@ -143,7 +144,7 @@ export const getUniversityRanking = async() => {
 // }
 
 //오늘의 추천 문제 6문제
-export const getTodaysProblem = () =>  {
+export const getTodaysProblem = async() => {
     //오늘 이미 업데이트 되었다면 딱히 추천하지 않기
     const today = new Date();
     let diffDate = today.getTime() - cache_lasttodayproblem.getTime();
@@ -153,19 +154,18 @@ export const getTodaysProblem = () =>  {
     cache_lasttodayproblem = today;
 
     console.log("오늘의 문제 새로 업데이트"); //debug
-    const bojmin = 1000; //제일 처음 문제번호
-    const bojmax = 32827; //제일 마지막 문제번호
     const jsondata = fs.readFileSync(`json/totalProblem.json`);
     const parsedata = JSON.parse(jsondata); //광운대학생이 푼 문제 array
 
-    data_todaysProblem = []; //초기화
-    while (data_todaysProblem.length < 6) {
-        const randomval = Math.floor(Math.random() * (bojmax - bojmin + 1)) + bojmin;
-        if (parsedata.includes(randomval.toString()))
-            continue;
-        else
-        data_todaysProblem.push(randomval);
+    const url = "https://www.acmicpc.net/problem/added/0"; //한국어로 된 새로 추가된 문제
+    const header = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3",
     }
+    const mainhtml = await getHtml(header, url);
+    if (mainhtml == -1)
+        return ("Error! html 데이터 추출 중 에러")
+
+    data_todaysProblem = await crawlingTodayProblem.todaysProblem(mainhtml, 6, parsedata); //초기화
     return (data_todaysProblem);
 }
 
