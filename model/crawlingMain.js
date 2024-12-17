@@ -7,12 +7,7 @@ import * as crawlingUniRank from "./crawlingUniversityRanking.js";
 import * as crawlingTodayProblem from "./crawlingTodaysProblem.js";
 
 let cache_numofpeople = 0;
-let cache_lastsubmittime = new Date(
-    new Date().getFullYear()-1,
-    new Date().getMonth(),
-    new Date().getDate(),
-    0, 0, 0, 0
-); //오늘 날짜로 부터 작년으로 설정
+let cache_lastsubmittime = 0;
 let cache_lastunirankupdatetime = new Date("2000-01-01 00:00:00"); //마지막으로 업데이트 한 시간
 let cache_lasttodayproblem = new Date("2000-01-01 00:00:00"); //today problem 마지막 업데이트
 
@@ -87,6 +82,12 @@ export const getSubmitOrderTime = async() => {
 
     let recentdatetime = await crawlingSubmit.getRecentTime(mainhtml)
 
+    if (cache_lastsubmittime == 0) {
+        const jsondata = fs.readFileSync(`json/kwsubmitData.json`);
+        data_kwsubmitlist = JSON.parse(jsondata); //231216 ~ 231217 제출기록
+        cache_lastsubmittime = new Date("2024-12-17 17:37:37");
+        console.log(cache_lastsubmittime); //debug
+    }
     if (cache_lastsubmittime < recentdatetime) {
         console.log("캐시: ", cache_lastsubmittime); //debug
         // 테스트할 때는 없던 부분인데, 혹시 몰라서 주석 처리 해놓음
