@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KWU student's BAEKJOON RANKING</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* 로딩 메시지 스타일 */
+        #loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #6B2230;
+            z-index: 1000;
+        }
+        body.loading {
+            overflow: hidden; /* 로딩 중일 때 스크롤 비활성화 */
+        }
+
+        .title-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        .title-image {
+            width: 50px;
+            margin: 0 10px;
+        }
+        h1 {
+            font-size: 24px;
+            color: white;
+            margin: 0;
+            background-color: #6B2230;
+            padding: 5px 15px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        .section {
+            margin-bottom: 70px;
+            padding: 10px 0px 60px 0px;
+            border: 4px solid #6B2230;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        .section-title {
+            margin-top: -10px;
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: white;
+            background-color: #6B2230;
+            text-align: center;
+            border: 2px solid #6B2230;
+            padding: 5px;
+            border-radius: 2px;
+        }
+        .podium {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 10px;
+        }
+        .stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            position: relative;
+            border-radius: 5px 5px 0 0;
+            color: white;
+            font-weight: bold;
+<<<<<<< HEAD
+            padding-top: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .stage-1 {
+            order: 2;
+            height: 150px;
+            width: 250px;
+            background-color: #FFD700;
+        }
+        .stage-2 {
+            order: 1;
+            height: 120px;
+            width: 250px;
+            background-color: #C0C0C0;
+        }
+        .stage-3 {
+            order: 3;
+            height: 100px;
+            width: 250px;
+=======
+            padding-top: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .stage-1 {
+            height: 25vh;
+            width: 20vw;
+            min-width: 120px;
+            background-color: #FFD700;
+        }
+        .stage-2 {
+            height: 20vh;
+            width: 20vw;
+            min-width: 120px;
+            background-color: #C0C0C0;
+        }
+        .stage-3 {
+            height: 15vh;
+            width: 20vw;
+            min-width: 120px;
+>>>>>>> 9b33e5ebe11736cd76bc6c5a47e88cca2e79e447
+            background-color: #CD7F32;
+        }
+        .wood-base {
+            background-color: #6B4230;
+<<<<<<< HEAD
+            width: 250px;
+=======
+            width: 100%;
+>>>>>>> 9b33e5ebe11736cd76bc6c5a47e88cca2e79e447
+            height: 20px;
+            border-radius: 0 0 5px 5px;
+            margin-top: 5px;
+        }
+        .medal {
+            position: absolute;
+            bottom: -40px;
+            font-size: 24px;
+        }
+
+        @keyframes growAndShrink {
+            0% {
+                transform: scale(1); /* 원래 크기 */
+            }
+            50% {
+                transform: scale(1.1); /* 커지는 크기 */
+            }
+            100% {
+                transform: scale(1); /* 다시 원래 크기로 돌아감 */
+            }
+        }
+
+        .user {
+            margin-top: auto;
+            padding: 10px 40px;
+            text-align: center;
+            color: white;
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+            font-size: 18px;
+            animation: growAndShrink 2s infinite; /* 2초 동안 반복 */
+            display: inline-block; /* scale이 적용되도록 설정 */
+        }
+<<<<<<< HEAD
+
+=======
+        /* Hover Effect */
+>>>>>>> 9b33e5ebe11736cd76bc6c5a47e88cca2e79e447
+        .stage:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="/view/STYLE/main_header.css">
+</head>
+<<<<<<< HEAD
+<body class="loading">
+    <div id="loading">로딩중...</div>
+=======
+<body>
+    <!-- 상단 배너 -->
+    <header class="header-banner">
+        <div class="logo-container">
+            <img src="/mdImage/mascot_.png" alt="Left Logo" class="logo-leftimage">
+            <div class="logo-text">
+                <a href="http://osskwboj.ap-northeast-2.elasticbeanstalk.com/">K B S</a>
+            </div>
+            <img src="/mdImage/mascot2_.png" alt="Right Logo" class="logo-rightimage" style="margin-right: 30px;">
+            <div class="rank_link">
+                <a href="medalranking" class="rank_link"> <!-- 올바른 링크 추가해야함 -->
+                    랭킹
+                </a>
+            </div>
+            <div class="margin_1"></div>
+            <div class="problem_link">
+                <a href="todayranking" class="problem_link"> <!-- 올바른 링크 추가해야함 -->
+                    오늘의 문제
+                </a>
+            </div>
+        </div>
+    </header>
+>>>>>>> 9b33e5ebe11736cd76bc6c5a47e88cca2e79e447
+
+    <div class="title-container">
+        <img src="/mdImage/mascot_.png" alt="Baekjoon Ranking Mascot" class="title-image">
+        <h1>KWU student's BAEKJOON RANKING</h1>
+        <img src="/mdImage/mascot2_.png" alt="Baekjoon Ranking Mascot 2" class="title-image">
+    </div>
+
+    <div class="section" id="recent-submitters">
+        <h2 class="section-title" aria-label="The Most Recent Submitter Ranking">THE MOST RECENT SUBMITTER</h2>
+        <div class="podium" id="recent-podium"></div>
+    </div>
+
+    <div class="section" id="top-solvers">
+        <h2 class="section-title" aria-label="Today's Top Solver Ranking">TODAY'S TOP SOLVER</h2>
+        <div class="podium" id="solver-podium"></div>
+    </div>
+
+    <script>
+        // 로딩 메시지 처리
+        window.addEventListener('DOMContentLoaded', () => {
+            const loadingElement = document.getElementById('loading'); // 로딩 메시지 요소
+            const bodyElement = document.body; // body 요소
+
+            // 로딩 메시지를 숨기는 함수
+            const removeLoading = () => {
+                loadingElement.style.display = 'none'; // 로딩 메시지 숨기기
+                bodyElement.classList.remove('loading'); // 스크롤 활성화
+            };
+
+            // 데이터를 비동기로 가져오고 로딩 메시지 제거
+            Promise.all([fetchStudentInfo(), fetchSubmitTimeInfo()])
+                .then(() => {
+                    removeLoading(); // 데이터 로드 완료 후 실행
+                })
+                .catch((error) => {
+                    console.error('Error during loading:', error);
+                    removeLoading(); // 에러 발생 시에도 로딩 메시지 제거
+                });
+        });
+    </script>
+    <script src="/model/ranking.js"></script>
+</body>
+</html>
+<<<<<<< HEAD
+
+=======
+>>>>>>> 9b33e5ebe11736cd76bc6c5a47e88cca2e79e447
