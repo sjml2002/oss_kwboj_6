@@ -3,8 +3,61 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #ffffff;
+    background-color: #ffffff; /* 배경을 하얗게 */
 }
+
+/* 상단바 스타일 */
+.header-banner {
+    background-color: #ffffff; /* 상단바 배경을 흰색으로 설정 */
+    color: #000000; /* 텍스트 색상을 검정으로 설정 */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-leftimage,
+.logo-rightimage {
+    height: 50px; /* 로고 이미지 크기 조정 */
+    width: auto;
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #8a1601; /* 텍스트 색상을 원하는 색상으로 설정 */
+}
+
+/* 링크 스타일 */
+.rank_link a,
+.problem_link a {
+    text-decoration: none; /* 밑줄 제거 */
+    color: #8a1601; /* 링크 색상을 기본 색상으로 설정 */
+    font-weight: bold;
+    padding: 8px 15px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.rank_link a:hover,
+.problem_link a:hover {
+    background-color: #fbe8e5; /* 호버 시 배경색 */
+    color: #701201; /* 호버 시 텍스트 색상 */
+}
+
+.margin_1 {
+    flex-grow: 1; /* 남은 공간을 채워줌 */
+}
+
+
+
 
 /* 문제 카테고리 스타일 */
 .categories {
@@ -22,6 +75,12 @@ body {
     border: 2px solid #8a1601;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category:hover {
+    transform: translateY(-10px); /* 박스 위로 살짝 이동 */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .category-header {
@@ -58,206 +117,231 @@ body {
 }
 
 
-/* 상단 레이아웃 전체 */
-.top-container {
-    display: flex;
-    justify-content: center; /* 가로 중앙 정렬 */
-    align-items: flex-start; /* 세로 기준 위쪽 정렬 */
-    margin: 20px 0 40px; /* 상단과 하단 여백 조정 */
-    gap: 20px; /* 요소 간 여백 */
-}
 
-/* 광운대 순위 스타일 */
+
+
+
+/* 순위 박스 스타일 */
 .ranking-container {
-    position: relative; /* 상대적 위치 */
-    width: 320px; /* 박스 너비 설정 */
-    background-color: #fbe8e5;
-    border: 2px solid #8a1601;
-    border-radius: 15px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    text-align: center;
-    animation: fadeIn 1s ease-in-out;
-    margin: 0 auto; /* 가로 중앙 정렬 */
-    margin-left: 440px; /* 오른쪽으로 이동 */
+    width: 300px; /* 고정된 너비 */
+    margin: 0 auto; /* 중앙 정렬 */
+    padding: 15px; /* 내부 여백 */
+    background-color: #fbe8e5; /* 배경색 */
+    border: 2px solid #8a1601; /* 테두리 */
+    border-radius: 15px; /* 모서리 둥글게 */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* 그림자 */
+    text-align: center; /* 텍스트 가운데 정렬 */
 }
 
-.ranking-header {
-    font-size: 24px;
+.ranking-header, .duel-title {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 텍스트 중앙 정렬 */
+    position: relative; /* 아이콘 위치 설정을 위한 상대 위치 */
+    font-size: 20px;
     font-weight: bold;
     color: #8a1601;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .ranking-item {
-    font-size: 20px;
-    color: #8a1601;
-    margin: 10px 0;
-    background-color: #f2d6ce;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 1s ease-in-out;
+    font-size: 18px; /* 글자 크기 */
+    color: #8a1601; /* 글씨 색상 */
+    margin: 5px 0; /* 상하 여백 */
+    background-color: #f2d6ce; /* 배경색 */
+    padding: 10px; /* 내부 여백 */
+    border-radius: 10px; /* 모서리 둥글게 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* 애니메이션 */
 }
 
-.ranking-item.previous,
-.ranking-item.next {
-    font-size: 16px;
-    padding: 8px;
-    margin: -8px 0;
-    opacity: 0.7;
-    transform: scale(0.9);
-    background-color: #fbe8e5;
-    animation: fadeInUp 1s ease-in-out;
+.ranking-item:hover {
+    transform: translateY(-5px); /* 살짝 위로 올라감 */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
 }
 
 .ranking-item.highlight {
-    font-size: 22px;
-    font-weight: bold;
-    color: #ffffff;
-    background-color: #8a1601;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    animation: bounce 1.5s infinite;
-    transform: translateY(0);
-    opacity: 1;
+    font-size: 20px; /* 하이라이트 항목 크기 */
+    font-weight: bold; /* 굵은 글씨 */
+    color: #ffffff; /* 텍스트 흰색 */
+    background-color: #8a1601; /* 배경색 진하게 */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* 그림자 진하게 */
+    animation: bounce 1.5s infinite; /* 점프 애니메이션 */
 }
 
-/* 새로운 박스 */
-/* 새로운 박스 스타일 */
-.new-box-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px; 
-    width: 250px; 
+/* 애니메이션 */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0); /* 초기 위치 */
+    }
+    50% {
+        transform: translateY(-10px); /* 위로 이동 */
+    }
 }
-
-.new-box {
-    background-color: #cccccc; /* 회색 배경 */
-    color: #333333; /* 글자색 */
-    padding: 15px;
-    border: 2px solid #999999; /* 테두리 색상 */
-    border-radius: 0; /* 각진 모양 */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 그림자 */
-    font-size: 16px;
-    text-align: center;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none; /* 링크 밑줄 제거 */
-}
-
-.new-box:hover {
-    background-color: #bfbfbf; /* 호버 시 더 어두운 회색 */
-    transform: translateY(-3px); /* 호버 시 살짝 위로 이동 */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-}
-
-.new-box a {
-    color: #333333; /* 링크 색상 */
-    text-decoration: none;
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
-.new-box a:hover {
-    color: #000000; /* 호버 시 텍스트 색상 */
-}
-
-
 
 /* 결투 게임 스타일 */
 .duel-container {
     margin: 50px auto;
     max-width: 600px;
-    background-color: #f2d6ce;
-    border: 2px solid #8a1601;
-    border-radius: 15px;
-    padding: 20px;
+    background: linear-gradient(135deg, #fbe8e5, #ffffff); /* 상자 배경 그라디언트 */
+    border: 3px solid #8a1601;
+    border-radius: 20px;
+    padding: 30px;
     text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 1s ease-in-out;
+    position: relative; /* 툴팁 및 아이콘 위치를 설정하기 위한 상대 위치 */
 }
 
-
-
-.duel-header {
+/* 타이틀 및 아이콘 */
+.duel-title {
+    text-align: center;
     font-size: 24px;
     font-weight: bold;
+    color: #8a1601; /* 원하는 색상 지정 */
     margin-bottom: 20px;
+    position: relative; /* 아이콘 및 툴팁 위치 설정 */
+}
+/* 정보 아이콘 */
+.info-icon {
+    font-size: 18px;
+    cursor: pointer;
     color: #8a1601;
-    animation: fadeIn 1s ease-in-out;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
+/* 툴팁 */
+.info-icon:hover + .tooltip {
+    display: block;
+}
+
+.tooltip {
+    display: none;
+    position: absolute;
+    top: 30px; /* 아이콘 아래에 위치 */
+    right: 0; /* 아이콘 정렬에 맞춰 표시 */
+    background-color: rgba(255, 200, 200, 0.9); /* 연한 빨간색 배경 */
+    color: #8a1601; /* 텍스트 색상 */
+    padding: 8px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+    z-index: 1000; /* 팝업이 위에 뜨도록 */
+}
+
+/* 입력 그룹 스타일 */
 .input-group {
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 30px;
-    margin-bottom: 20px;
-}
-
-.input-group .input-container {
-    display: flex;
-    flex-direction: column;
     align-items: center;
+    justify-content: space-around; /* 양쪽으로 정렬 */
+    margin: 20px 0;
 }
 
-.input-group input {
-    width: 180px;
-    padding: 10px;
-    font-size: 16px;
-    border: 2px solid #8a1601;
-    border-radius: 5px;
-    background-color: #fbe8e5;
-    color: #8a1601;
+/* 입력 컨테이너 */
+.input-container {
     text-align: center;
 }
 
+/* VS 텍스트 */
 .vs {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: bold;
     color: #8a1601;
-    animation: bounce 1.5s infinite;
 }
 
-.character-image {
-    margin-top: 10px;
+/* 로딩 이미지 스타일 */
+.loading img {
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
 }
 
+
+
+.loading {
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+
+/* 로딩 애니메이션 */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* 승자/패자 캐릭터 이미지 스타일 */
 .character-image img {
-    max-width: 80px;
-    height: auto;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
     border-radius: 50%;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border: 3px solid #8a1601;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.duel-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #ffffff;
-    background-color: #8a1601;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.character-image img:hover {
+    transform: scale(1.15);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
 }
 
-.duel-button:hover {
-    background-color: #701201;
-    transform: translateY(-3px);
+/* 팡파레 효과 */
+.confetti {
+    position: fixed; /* 화면 전체를 기준으로 위치 */
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    animation: burst 0.8s ease-out, sway 2s ease-in-out infinite, fadeOut 2s ease-out forwards;
+    pointer-events: none;
+    z-index: 9999; /* 최상위 레이어로 설정 */
+    opacity: 0; /* 초기 상태 */
 }
 
-.result {
-    margin-top: 20px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #8a1601;
-    animation: fadeIn 1s ease-in-out;
+/* 팡파레 터지는 효과 */
+@keyframes burst {
+    0% {
+        transform: translate(0, 0) scale(1); /* 중심에서 시작 */
+        opacity: 1;
+    }
+    50% {
+        transform: translate(calc(-50vw + 100px), calc(-50vh + 100px)) scale(1.2); /* 무작위 방향으로 팡! */
+    }
+    100% {
+        transform: translate(calc(50vw - 100px), calc(50vh - 100px)) scale(1); /* 무작위 방향에서 멀리 이동 */
+    }
 }
 
-/* 애니메이션 정의 */
+/* 좌우로 흩날리는 효과 */
+@keyframes sway {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(15px); /* 좌우로 흔들리는 모양 */
+    }
+}
+
+/* 투명하게 사라지는 효과 */
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+
+
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -269,22 +353,52 @@ body {
     }
 }
 
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
+@media (max-width: 768px) {
+    .ranking-container {
+        width: 90%; /* 화면 너비의 90% */
+        margin: 0 auto; /* 가운데 정렬 */
     }
-    to {
-        opacity: 0.7;
-        transform: translateY(-10px) scale(0.9);
+
+    .top-container {
+        flex-direction: column; /* 세로 배치 */
+        align-items: center; /* 요소 중앙 정렬 */
     }
 }
 
+/* 백준 등수 대결 타이틀 스타일 */
+.duel-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #8a1601; /* 원하는 색상 지정 */
+    margin-bottom: 20px;
+    animation: fadeIn 1s ease-in-out; /* 등장 애니메이션 */
+}
+
+/* 애니메이션 */
 @keyframes bounce {
     0%, 100% {
-        transform: scale(1);
+        transform: translateY(0); /* 초기 위치 */
     }
     50% {
-        transform: scale(1.05);
+        transform: translateY(-10px); /* 위로 이동 */
     }
+}
+
+/* 결과 텍스트 스타일 */
+.result {
+    font-size: 20px;
+    font-weight: bold; /* 글씨를 더 두껍게 */
+    color: #8a1601; /* 강조된 색상 */
+    margin-top: 20px; /* 상단 여백 */
+    text-align: center; /* 가운데 정렬 */
+}
+
+/* 등수 정보 스타일 */
+.ranking-info {
+    font-size: 16px;
+    font-weight: bold; /* 글씨를 더 두껍게 */
+    color: #8a1601; /* 텍스트 색상 */
+    margin-top: 10px; /* 캐릭터 이미지와 간격 */
+    text-align: center;
 }
