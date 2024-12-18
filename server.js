@@ -25,7 +25,8 @@ app.listen(port, () => {
 app.use(express.static("./"));
 app.use(express.static(path.join(__dirname, "model"))); //model 안의 파일들 사용하기
 app.use(express.static(path.join(__dirname, "view/STYLE",))); //view/STYLE 안의 파일들 사용하기
-app.use(express.static(path.join(__dirname, "mdImage"))); //view/STYLE 안의 파일들 사용하기
+app.use(express.static(path.join(__dirname, "mdImage"))); //mdImage 사용하기
+app.use(express.static(path.join(__dirname, "mdImage/ad_banner"))); //adbanner 사용하기
 
 
 ///////////////////////  Routing  /////////////////////////////////////////
