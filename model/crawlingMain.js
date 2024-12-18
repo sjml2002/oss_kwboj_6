@@ -15,7 +15,6 @@ let cache_lasttodayproblem = new Date("2000-01-01 00:00:00"); //today problem �
 let data_kwstudents = [];
 let data_kwsubmitlist = [];
 let data_unirank = new Map();
-//let data_totalProblems = new Set();
 let data_todaysProblem = [];
 
 const getHtml = async(customheader, url) => {
@@ -62,8 +61,12 @@ export const getkwStudentInfo = async() => {
     }
 }
 
-//return: 시간 순으로 정렬된 submitWithTime
-export const getSubmitOrderTime = async() => {
+/**
+ * targetTime ~ 호출한 시각까지 모두 구해옴
+ * @param {Date} targetTime 
+ * @returns {list} data_kwsubmitlist
+ */
+export const getSubmitOrderTime = async(targetTime) => {
     const result_id = 4; //-1: 전체, 4: 맞았습니다
     const school_id = 222; //222: 광운대학교
     const url = `https://www.acmicpc.net/status?&result_id=${result_id}&school_id=${school_id}`
@@ -137,7 +140,6 @@ export const getUniversityRanking = async() => {
 
 //     console.log("여기는? ", data_totalProblems); //debug
 //     return (data_totalProblems);
-// }
 
 //오늘의 추천 문제 6문제
 export const getTodaysProblem = async() => {
