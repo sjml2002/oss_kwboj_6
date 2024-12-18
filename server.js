@@ -91,4 +91,8 @@ app.get("/getSubmitInfo", async (req, res) => {
 app.get("/getTodaysProblem", async (req, res) => {
   let problems = await crawlingData.getTodaysProblem()
   res.json(problems); //json 타입으로 데이터 전달
+<<<<<<< HEAD
 })
+=======
+})
+>>>>>>> 9b33e5ebe11736cd76bc6c5a47e88cca2e79e447

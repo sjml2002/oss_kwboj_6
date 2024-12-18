@@ -456,7 +456,7 @@ rect {
 }
 
 .bottom_credit {
-  background-color: #d3d3d3;
+  background-color: #ebeef1;
   display: flex;
   /* Flexbox 사용 */
   justify-content: flex-start;
@@ -524,7 +524,7 @@ rect {
   padding-left: -30px;
   padding-right: 77px;
   border-radius: 10px;
-  background-color: #FFFAFA;
+  background-color: white;
 }
 
 .kwangwoon_address_container {
