@@ -44,11 +44,9 @@ export const getkwStudentInfo = async() => {
         return ("Error! html 데이터 추출 중 에러")
 
     const numofpeople = await crawlingStudent.curPeopleCnt(mainhtml);
-    console.log(numofpeople, cache_numofpeople); //debug
 
     if (numofpeople > cache_numofpeople) { //kwStudentInfo 배열 업데이트
         cache_numofpeople = numofpeople; //cache update
-        console.log("kwStudentInfo 업데이트 해야됨") //debug
         const ksiarray = await crawlingStudent.updateKwStudentInfo(mainhtml);
 
         //이거 그냥 return (ksiarray) 한 다음에 view(front-end) 단에서 처리해도 될듯
@@ -60,7 +58,6 @@ export const getkwStudentInfo = async() => {
         }
     }
     else { //그냥 이미 저장된 데이터 list return
-        console.log("kwstudents는 cache에 저장된거 return 했쪄") //debug
         return (data_kwstudents)
     }
 }
@@ -73,23 +70,20 @@ export const getSubmitOrderTime = async() => {
     const header = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3",
     }
-
-    console.log(url) //debug
-
     const mainhtml = await getHtml(header, url)
     if (mainhtml == -1)
         return ("Error! html 데이터 추출 중 에러")
 
     let recentdatetime = await crawlingSubmit.getRecentTime(mainhtml)
+    console.log("recentdatatime: ", recentdatetime); //debug
 
     if (cache_lastsubmittime == 0) {
         const jsondata = fs.readFileSync(`json/kwsubmitData.json`);
         data_kwsubmitlist = JSON.parse(jsondata); //231216 ~ 231217 제출기록
         cache_lastsubmittime = new Date("2024-12-17 17:37:37");
-        console.log(cache_lastsubmittime); //debug
+        console.log("json후 캐시:", cache_lastsubmittime); //debug
     }
     if (cache_lastsubmittime < recentdatetime) {
-        console.log("캐시: ", cache_lastsubmittime); //debug
         // 테스트할 때는 없던 부분인데, 혹시 몰라서 주석 처리 해놓음
         /* 
         let newsubmitlist = await crawlingSubmit.getRecent_to_targettime_submitlist(mainhtml, cache_lastdatetime);
@@ -97,12 +91,12 @@ export const getSubmitOrderTime = async() => {
         */
         //새롭게 업데이트 진행
         const newsubmit = await crawlingSubmit.getRecent_to_targettime_submitlist(mainhtml, cache_lastsubmittime);
-        data_kwsubmitlist = data_kwsubmitlist.concat(newsubmit); //data_kwsubmitlist + newsubmit
+        console.log(Array.isArray(newsubmit)); //debug
+        data_kwsubmitlist = newsubmit.concat(data_kwsubmitlist); //data_kwsubmitlist + newsubmit
         cache_lastsubmittime = recentdatetime; //cache update
         return (data_kwsubmitlist)
     }
     else { //그냥 이미 저장되어있던 데이터 list return
-        console.log("kwsublist는 cache에 저장된거 return 했쪄") //debug
         return (data_kwsubmitlist)
     }
 }
@@ -155,7 +149,6 @@ export const getTodaysProblem = async() => {
         return (data_todaysProblem);
     cache_lasttodayproblem = today;
 
-    console.log("오늘의 문제 새로 업데이트"); //debug
     const jsondata = fs.readFileSync(`json/totalProblem.json`);
     const parsedata = JSON.parse(jsondata); //광운대학생이 푼 문제 array
 
