@@ -33,12 +33,13 @@ body {
     
 }
 
-.logo-text {
+.logo-text a{
     font-size: 2em;
     font-weight: bold;
     color: #8a1601;
     font-family: 'Baloo', sans-serif; /* Baloo 글꼴 적용 */
     cursor: default; /* 클릭할 수 없는 텍스트 */
+    text-decoration: none;
 }
 
 
