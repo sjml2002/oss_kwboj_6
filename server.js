@@ -1,13 +1,19 @@
 import express from "express";
 import path from "path";
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-import * as crawlingData from "./model/crawlingMain.js"
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+import * as crawlingData from "./model/crawlingMain.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+const app = express();
 
-const app = express()
+// Static 파일 서빙 설정
+app.use(express.static(path.join(__dirname, "view/STYLE"))); // ranking.js 경로
+app.use(express.static(path.join(__dirname, "rankingImage"))); // 이미지 경로
+app.use(express.static(path.join(__dirname, "mdImage"))); // 다른 이미지 경로
+app.use(express.static(path.join(__dirname, "model"))); // 모델 경로
+app.use(express.static("./")); // 프로젝트 루트
 
 //// Setting ////
 const port = process.env.PORT || 3000
@@ -25,11 +31,6 @@ app.use(express.static(path.join(__dirname, "mdImage"))); //view/STYLE 안의 �
 ///////////////////////  Routing  /////////////////////////////////////////
 app.get('/', (req, res) => {
   //__dirname: 현재 폴더의 위치 (전역변수)
-  res.send("Hello, Elastic Beanstalk!");
-})
-
-app.get('/main_page', (req, res) => {
-  //__dirname: 현재 폴더의 위치 (전역변수)
   res.sendFile(path.join(__dirname, "view", "main_page.html"))
 })
 
@@ -43,6 +44,10 @@ app.get("/todayranking", (req, res) => {
 
 app.get("/contribution", (req, res) => {
   res.sendFile(path.join(__dirname, "view", "contribution.html"))
+})
+
+app.get("/medalRanking", (req, res) => {
+  res.sendFile(path.join(__dirname, "view", "medalRanking.html"))
 })
 
 //// Example for 시각화 맴버들
@@ -61,9 +66,14 @@ app.get('/model/crawling', (req, res) => {
 
 //// fetching ////
 app.get("/getkwStudentInfo", async (req, res) => {
-  let kwstudents = await crawlingData.getkwStudentInfo()
-  res.json(kwstudents); //json 타입으로 데이터 전달
-})
+    try {
+        const data = await crawlingData.getkwStudentInfo();
+        res.json(data);
+    } catch (error) {
+        console.error("Error fetching KW student info:", error);
+        res.status(500).json({ error: "Failed to fetch KW student info" });
+    }
+});
 
 app.get("/getUniversityRanking", async (req, res) => {
   let unirank = await crawlingData.getUniversityRanking()

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KWU student's BAEKJOON RANKING</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            padding: 20px;
+            text-align: center;
+        }
+        .title-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        .title-image {
+            width: 50px;
+            margin: 0 10px;
+        }
+        h1 {
+            font-size: 24px;
+            color: white;
+            margin: 0;
+            background-color: #6B2230;
+            padding: 5px 15px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        .section {
+            margin-bottom: 70px;
+            padding: 10px 0px 60px 0px;
+            border: 4px solid #6B2230;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        .section-title {
+            margin-top: -10px;
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: white;
+            background-color: #6B2230;
+            text-align: center;
+            border: 2px solid #6B2230;
+            padding: 5px;
+            border-radius: 2px;
+        }
+        .podium {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            position: relative;
+            border-radius: 5px 5px 0 0;
+            color: white;
+            font-weight: bold;
+            padding-top: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .stage-1 {
+            height: 25vh;
+            width: 20vw;
+            min-width: 120px;
+            background-color: #FFD700;
+        }
+        .stage-2 {
+            height: 20vh;
+            width: 20vw;
+            min-width: 120px;
+            background-color: #C0C0C0;
+        }
+        .stage-3 {
+            height: 15vh;
+            width: 20vw;
+            min-width: 120px;
+            background-color: #CD7F32;
+        }
+        .wood-base {
+            background-color: #6B4230;
+            width: 100%;
+            height: 20px;
+            border-radius: 0 0 5px 5px;
+            margin-top: 5px;
+        }
+        .medal {
+            position: absolute;
+            bottom: -40px;
+            font-size: 24px;
+        }
+        .user {
+            margin-top: auto;
+            padding: 10px 5px;
+            text-align: center;
+            color: #6B2230;
+            text-shadow: -1px -1px 0 #FFFFFF, 1px -1px 0 #FFFFFF, -1px 1px 0 #FFFFFF, 1px 1px 0 #FFFFFF;
+        }
+        /* Hover Effect */
+        .stage:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="/view/STYLE/main_header.css">
+</head>
+<body>
+    <!-- 상단 배너 -->
+    <header class="header-banner">
+        <div class="logo-container">
+            <img src="/mdImage/mascot_.png" alt="Left Logo" class="logo-leftimage">
+            <div class="logo-text">
+                K B S
+            </div>
+            <img src="/mdImage/mascot2_.png" alt="Right Logo" class="logo-rightimage" style="margin-right: 30px;">
+            <div class="rank_link">
+                <a href="medalranking" class="rank_link"> <!-- 올바른 링크 추가해야함 -->
+                    랭킹
+                </a>
+            </div>
+            <div class="margin_1"></div>
+            <div class="problem_link">
+                <a href="todayranking" class="problem_link"> <!-- 올바른 링크 추가해야함 -->
+                    오늘의 문제
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="title-container">
+        <img src="/mdImage/mascot_.png" alt="Baekjoon Ranking Mascot" class="title-image">
+        <h1>KWU student's BAEKJOON RANKING</h1>
+        <img src="/mdImage/mascot2_.png" alt="Baekjoon Ranking Mascot 2" class="title-image">
+    </div>
+
+    <!-- 최근 제출자 섹션 -->
+    <div class="section" id="recent-submitters">
+        <h2 class="section-title" aria-label="The Most Recent Submitter Ranking">THE MOST RECENT SUBMITTER</h2>
+        <div class="podium" id="recent-podium"></div>
+    </div>
+
+    <!-- 고스트 유저 섹션
+    <div class="section" id="ghost-users">
+        <h2 class="section-title" aria-label="Ghost User Ranking">GHOST USER RANKING</h2>
+        <div class="podium" id="ghost-podium"></div>
+    </div> -->
+
+    <!-- 상위 솔버 섹션 -->
+    <div class="section" id="top-solvers">
+        <h2 class="section-title" aria-label="Today's Top Solver Ranking">TODAY'S TOP SOLVER</h2>
+        <div class="podium" id="solver-podium"></div>
+    </div>
+
+    <script src="/model/ranking.js"></script>
+</body>
+</html>

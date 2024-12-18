@@ -5,34 +5,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>문제 카테고리 & 결투 게임</title>
     <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" type="text/css" href="/view/STYLE/main_header.css">
     <script type="module" src="/model/hojung.js"></script>
 </head>
 <body>
+    <!-- 상단 배너 -->
+    <header class="header-banner">
+        <div class="logo-container">
+            <img src="/mdImage/mascot_.png" alt="Left Logo" class="logo-leftimage">
+            <div class="logo-text">
+                K B S
+            </div>
+            <img src="/mdImage/mascot2_.png" alt="Right Logo" class="logo-rightimage" style="margin-right: 30px;">
+            <div class="rank_link">
+                <a href="medalranking" class="rank_link"> <!-- 올바른 링크 추가해야함 -->
+                    랭킹
+                </a>
+            </div>
+            <div class="margin_1"></div>
+            <div class="problem_link">
+                <a href="todayranking" class="problem_link"> <!-- 올바른 링크 추가해야함 -->
+                    오늘의 문제
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 상단 레이아웃 -->
+    <div class="top-container">
+        <!-- 광운대 순위 정보 -->
+        <div class="ranking-container">
+            <div class="ranking-header">광운대 순위</div>
+            <div id="ranking-content"></div>
+        </div>
+
+        <!-- 새로운 박스 -->
+        <div class="new-box-wrapper">
+            <div class="new-box-container">
+                <a href="page1.html" class="new-box" target="_blank">공지사항</a>
+                <a href="page2.html" class="new-box" target="_blank">새로운이벤트</a>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- 중간 레이아웃 -->
     <div class="categories">
         <div class="category">
             <div class="category-header">오늘의 문제</div>
             <div class="problem-list" id="recommended-problems"></div>
         </div>
-
         <div class="category">
             <div class="category-header">우리 학교 학생들이 못 푼 문제</div>
             <div class="problem-list" id="unsolved-problems"></div>
         </div>
     </div>
 
-    <div class="ranking-container">
-        <div class="ranking-header">광운대 순위</div>
-        
-    </div>
-
+    <!-- 결투 기능 -->
     <div class="duel-container">
         <div class="duel-header">백준 레이팅 결투</div>
         <div class="input-group">
-            <input type="text" id="user1" placeholder="첫 번째 아이디 입력">
+            <div class="input-container">
+                <input type="text" id="user1" placeholder="첫 번째 아이디 입력">
+                <div class="character-image">
+                    <img src="uoni.png" alt="첫 번째 캐릭터">
+                </div>
+            </div>
             <div class="vs">VS</div>
-            <input type="text" id="user2" placeholder="두 번째 아이디 입력">
+            <div class="input-container">
+                <input type="text" id="user2" placeholder="두 번째 아이디 입력">
+                <div class="character-image">
+                    <img src="uoni.png" alt="두 번째 캐릭터">
+                </div>
+            </div>
         </div>
-        <button class="duel-button" onclick="">결투 시작</button>
+        <button class="duel-button">결투 시작</button>
         <div class="result" id="result"></div>
     </div>
 </body>

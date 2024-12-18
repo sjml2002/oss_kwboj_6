@@ -17,21 +17,16 @@ body {
 
 .category {
     width: 300px;
-    background-color: #e6f7ff;
+    background-color: #f2d6ce;
     border-radius: 15px;
-    border: 2px solid #b3e5fc;
+    border: 2px solid #8a1601;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    transition: transform 0.3s ease;
-}
-
-.category:hover {
-    transform: translateY(-5px);
 }
 
 .category-header {
-    background-color: #b3e5fc;
-    color: #003366;
+    background-color: #8a1601;
+    color: #ffffff;
     padding: 15px;
     text-align: center;
     font-size: 20px;
@@ -43,79 +38,226 @@ body {
 }
 
 .problem {
-    background-color: #f0f8ff;
+    background-color: #fbe8e5;
     padding: 10px 15px;
     margin-bottom: 10px;
     border-radius: 10px;
     font-size: 14px;
-    color: #003366;
+    color: #8a1601;
     text-decoration: none;
     display: block;
     transition: background-color 0.3s ease;
 }
 
 .problem:hover {
-    background-color: #d9f1ff;
+    background-color: #f4c8c1;
 }
 
 .problem:last-child {
     margin-bottom: 0;
 }
 
+
+/* 상단 레이아웃 전체 */
+.top-container {
+    display: flex;
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: flex-start; /* 세로 기준 위쪽 정렬 */
+    margin: 20px 0 40px; /* 상단과 하단 여백 조정 */
+    gap: 20px; /* 요소 간 여백 */
+}
+
 /* 광운대 순위 스타일 */
 .ranking-container {
-    margin: 40px auto;
-    max-width: 300px;
-    background-color: #f9f9f9;
-    border: 2px solid #b3e5fc;
+    position: relative; /* 상대적 위치 */
+    width: 320px; /* 박스 너비 설정 */
+    background-color: #fbe8e5;
+    border: 2px solid #8a1601;
     border-radius: 15px;
-    text-align: center;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: relative;
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+    margin: 0 auto; /* 가로 중앙 정렬 */
+    margin-left: 440px; /* 오른쪽으로 이동 */
+}
+
+.ranking-header {
+    font-size: 24px;
+    font-weight: bold;
+    color: #8a1601;
+    margin-bottom: 10px;
 }
 
 .ranking-item {
-    font-size: 18px;
-    color: #333;
+    font-size: 20px;
+    color: #8a1601;
+    margin: 10px 0;
+    background-color: #f2d6ce;
     padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #b3e5fc;
     border-radius: 10px;
-    background-color: #e6f7ff;
-    position: relative;
-    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     animation: fadeIn 1s ease-in-out;
 }
 
-/* 광운대학교 위/아래 학교 스타일 */
 .ranking-item.previous,
 .ranking-item.next {
-    font-size: 16px; /* 글자 크기 작게 */
-    padding: 8px; /* 패딩 작게 */
-    margin: -10px 0; /* 겹치도록 마진 설정 */
-    z-index: 0; /* 광운대학교 뒤로 이동 */
-    opacity: 0.7; /* 반투명 */
-    transform: scale(0.9); /* 크기 줄이기 */
-    animation: fadeInUp 1s ease-in-out; /* 위/아래 방향 애니메이션 */
+    font-size: 16px;
+    padding: 8px;
+    margin: -8px 0;
+    opacity: 0.7;
+    transform: scale(0.9);
+    background-color: #fbe8e5;
+    animation: fadeInUp 1s ease-in-out;
 }
 
-/* 광운대학교 스타일 */
 .ranking-item.highlight {
-    font-size: 22px; /* 더 큰 글씨 */
+    font-size: 22px;
     font-weight: bold;
-    color: #003366;
-    background-color: #b3e5fc;
-    z-index: 2; /* 가장 위로 */
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3); /* 그림자 추가 */
+    color: #ffffff;
+    background-color: #8a1601;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    animation: bounce 1.5s infinite;
     transform: translateY(0);
     opacity: 1;
-    animation: bounce 1.5s infinite; /* 강조 애니메이션 */
+}
+
+/* 새로운 박스 */
+/* 새로운 박스 스타일 */
+.new-box-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+    width: 250px; 
+}
+
+.new-box {
+    background-color: #cccccc; /* 회색 배경 */
+    color: #333333; /* 글자색 */
+    padding: 15px;
+    border: 2px solid #999999; /* 테두리 색상 */
+    border-radius: 0; /* 각진 모양 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 그림자 */
+    font-size: 16px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none; /* 링크 밑줄 제거 */
+}
+
+.new-box:hover {
+    background-color: #bfbfbf; /* 호버 시 더 어두운 회색 */
+    transform: translateY(-3px); /* 호버 시 살짝 위로 이동 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.new-box a {
+    color: #333333; /* 링크 색상 */
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.new-box a:hover {
+    color: #000000; /* 호버 시 텍스트 색상 */
+}
+
+
+
+/* 결투 게임 스타일 */
+.duel-container {
+    margin: 50px auto;
+    max-width: 600px;
+    background-color: #f2d6ce;
+    border: 2px solid #8a1601;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.duel-header {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #8a1601;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.input-group {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.input-group .input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-group input {
+    width: 180px;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #8a1601;
+    border-radius: 5px;
+    background-color: #fbe8e5;
+    color: #8a1601;
+    text-align: center;
+}
+
+.vs {
+    font-size: 20px;
+    font-weight: bold;
+    color: #8a1601;
+    animation: bounce 1.5s infinite;
+}
+
+.character-image {
+    margin-top: 10px;
+}
+
+.character-image img {
+    max-width: 80px;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.duel-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #8a1601;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.duel-button:hover {
+    background-color: #701201;
+    transform: translateY(-3px);
+}
+
+.result {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #8a1601;
+    animation: fadeIn 1s ease-in-out;
 }
 
 /* 애니메이션 정의 */
-
-/* 서서히 나타나는 효과 */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -127,7 +269,6 @@ body {
     }
 }
 
-/* 위에서 서서히 내려오는 효과 */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -139,7 +280,6 @@ body {
     }
 }
 
-/* 광운대학교 강조 애니메이션 */
 @keyframes bounce {
     0%, 100% {
         transform: scale(1);
@@ -147,68 +287,4 @@ body {
     50% {
         transform: scale(1.05);
     }
-}
-
-/* 결투 게임 스타일 */
-.duel-container {
-    margin: 50px auto;
-    max-width: 600px;
-    background-color: #e6f7ff;
-    border: 2px solid #b3e5fc;
-    border-radius: 15px;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.duel-header {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #003366;
-}
-
-.input-group {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.input-group input {
-    width: 45%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #b3e5fc;
-    border-radius: 5px;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.vs {
-    font-size: 20px;
-    font-weight: bold;
-    color: #003366;
-}
-
-.duel-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    color: white;
-    background-color: #007acc;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.duel-button:hover {
-    background-color: #005f99;
-}
-
-.result {
-    margin-top: 20px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
 }
