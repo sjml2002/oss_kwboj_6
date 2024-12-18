@@ -183,6 +183,13 @@ const startDuel = async () => {
     }
 };
 
+// 테스트 버튼 클릭 이벤트
+const fillTestData = () => {
+    document.getElementById('user1').value = 'js2002'; // 첫 번째 아이디 자동 입력
+    document.getElementById('user2').value = 'omsluck'; // 두 번째 아이디 자동 입력
+};
+
+
 // 초기화
 document.addEventListener('DOMContentLoaded', () => {
     loadKwuRanking();
@@ -190,4 +197,5 @@ document.addEventListener('DOMContentLoaded', () => {
     loadUnsolvedProblems();
 
     document.querySelector('.duel-button').addEventListener('click', startDuel);
+    document.querySelector('#testData').addEventListener('click', fillTestData); 
 });

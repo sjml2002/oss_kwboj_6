@@ -402,3 +402,17 @@ body {
     margin-top: 10px; /* 캐릭터 이미지와 간격 */
     text-align: center;
 }
+
+.test-button {
+    background-color: #f2d6ce; /* 배경색 */
+    border: 1px solid #8a1601; /* 테두리 */
+    border-radius: 5px;
+    color: #8a1601; /* 텍스트 색상 */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.test-button:hover {
+    background-color: #f4c8c1; /* 호버 시 색상 */
+}
+
