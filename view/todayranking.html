@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="/view/STYLE/main_header.css">
     <link rel="stylesheet" href="/sidebar_layout.css">
+    <link rel="stylesheet" type="text/css" href="/view/STYLE/bannerballoon.css">
     <script type="module" src="/model/hojung.js"></script>
 </head>
 <body>
@@ -34,8 +35,10 @@
     <div class="container">
         <!-- 왼쪽 여백 -->
         <aside class="sidebar left-sidebar">
-            <div class="ad-box">광고 또는 배너 1</div>
-            <div class="ad-box">광고 또는 배너 2</div>
+            <!-- 광고 배너 -->
+            <div class="ad-box">
+                    <img class="bannerimg" src="/mdImage/ad_banner/banner1.png" />
+            </div>
         </aside>
 
         <!-- 메인 콘텐츠 -->
@@ -141,9 +144,12 @@
 
         <!-- 오른쪽 여백 -->
         <aside class="sidebar right-sidebar">
-            <div class="ad-box">광고 또는 배너 3</div>
-            <div class="ad-box">광고 또는 배너 4</div>
+            <!-- 광고 배너 -->
+            <div class="ad-box">
+                <img class="bannerimg" src="/mdImage/ad_banner/banner2.png" />
+            </div>
         </aside>
+        <script src="/model/balloon.js"></script>
     </div>
 </body>
 </html>
