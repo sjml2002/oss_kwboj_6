@@ -13,10 +13,6 @@ const getHtml = async(customheader, url) => {
         const html  = await axios.get(url, {
             headers: customheader,
         });
-        if (html.status !== 200) {
-            console.log("회원탈퇴!!", html.status); //debug
-            throw ("회원탈퇴", html.status);
-        }
         const htmldata = cheerio.load(html.data)
         return (htmldata);
     } catch (error) {

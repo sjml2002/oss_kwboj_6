@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문제 카테고리 & 결투 게임</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="/view/STYLE/main_header.css">
+    <link rel="stylesheet" href="/sidebar_layout.css">
+    <link rel="stylesheet" type="text/css" href="/view/STYLE/bannerballoon.css">
+    <script type="module" src="/model/hojung.js"></script>
+</head>
+<body>
+    <!-- 상단 배너 -->
+    <header class="header-banner">
+        <div class="logo-container">
+            <img src="/mdImage/mascot_.png" alt="Left Logo" class="logo-leftimage">
+            <div class="logo-text">
+                <a href="http://osskwboj.ap-northeast-2.elasticbeanstalk.com/" >K B S</a>
+            </div>
+            <img src="/mdImage/mascot2_.png" alt="Right Logo" class="logo-rightimage" style="margin-right: 30px;">
+            <div class="rank_link">
+                <a href="medalranking" class="rank_link"> <!-- 올바른 링크 추가해야함 -->
+                    랭킹
+                </a>
+            </div>
+            <div class="margin_1"></div>
+            <div class="problem_link">
+                <a href="todayranking" class="problem_link">오늘의 문제</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 전체 레이아웃 -->
+    <div class="container">
+        <!-- 왼쪽 여백 -->
+        <aside class="sidebar left-sidebar">
+            <!-- 광고 배너 -->
+            <div class="ad-box">
+                    <img class="bannerimg" src="/mdImage/ad_banner/banner1.png" />
+            </div>
+            <div class="ad-box">
+                <img class="bannerimg" src="/mdImage/ad_banner/banner3.png" />
+        </div>
+        </aside>
+
+        <!-- 메인 콘텐츠 -->
+        <main class="main-content">
+            <!-- 상단 레이아웃 -->
+            <div class="top-container">
+                <!-- 광운대 순위 정보 -->
+                <div class="ranking-container">
+                    <div class="ranking-header">
+                        광운대 순위
+                        <span class="info-icon" title="광운대 순위는 학교 순위를 보여줍니다.">🔍</span>
+                        <div class="tooltip">백준 내의 대학교 들 중 광운대의 순위를 보여줍니다. </div>
+                    </div>
+                    <div id="ranking-content"></div>
+                </div>
+            </div>
+
+            <!-- 중간 레이아웃 -->
+            <div class="categories">
+                <div class="category">
+                    <div class="category-header">오늘의 문제</div>
+                    <div class="problem-list" id="recommended-problems"></div>
+                </div>
+                <div class="category">
+                    <div class="category-header">광운대생들이 못 푼 문제</div>
+                    <div class="problem-list" id="unsolved-problems"></div>
+                </div>
+            </div>
+
+            <!-- 결투 기능 -->
+            <div class="duel-container">
+                <div class="duel-title">
+                    백준 등수 대결
+                    <span class="info-icon">🔍</span>
+                    <div class="tooltip">두 사람의 백준 내 solved.ac 등수를 비교합니다. <br>
+                        학교등록을 한 사용자들만 가능합니다.<br>
+                        학교등록을 하지 않은 분들은 아래 제공 아이디로 실행해 보세요~<br>
+                        제공 아이디 : js2002 , omsluck
+                        
+
+
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="input-container">
+                        <input type="text" id="user1" placeholder="첫 번째 아이디 입력">
+                        <div class="character-image" id="user1-img">
+                            <img src="uoni.png" alt="첫 번째 캐릭터" class="character-img">
+                            <div class="ranking-info" id="user1-ranking"></div> <!-- 승자/패자의 등수 정보 -->
+                        </div>
+                    </div>
+                    <div class="vs">VS</div>
+                    <div class="input-container">
+                        <input type="text" id="user2" placeholder="두 번째 아이디 입력">
+                        <div class="character-image" id="user2-img">
+                            <img src="uoni.png" alt="두 번째 캐릭터" class="character-img">
+                            <div class="ranking-info" id="user2-ranking"></div>
+                        </div>
+                    </div>
+                </div>
+                <button class="duel-button" id="startDuel">결투 시작</button>
+                <button class="test-button" id="testData" style="font-size: 12px; padding: 5px 10px; margin-top: 10px;">임의 데이터 테스트</button>
+                <div id="result" class="result">결과가 여기에 표시됩니다.</div> 
+                <div id="loading" class="loading" style="display: none;">
+                    <img src="load1.png" alt="로딩 중" class="loading-image">
+                </div>
+            </div>
+           
+
+            <!-- <div class="duel-container">
+                <div class="duel-header">
+                <h2 class="duel-title">백준 등수 대결
+                </h2>
+                <div class="info-icon">
+                    <img src="info-icon.png" alt="정보" class="info-icon-img">
+                    <div class="tooltip">
+                        두 사용자 ID를 입력하여 백준 등수를 비교합니다. 등수가 낮은 사용자가 승리합니다!
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="input-container">
+                        <input type="text" id="user1" placeholder="첫 번째 아이디 입력">
+                        <div class="character-image" id="user1-img">
+                            <img src="uoni.png" alt="첫 번째 캐릭터" class="character-img">
+                        </div>
+                    </div>
+                    <div class="vs">VS</div>
+                    <div class="input-container">
+                        <input type="text" id="user2" placeholder="두 번째 아이디 입력">
+                        <div class="character-image" id="user2-img">
+                            <img src="uoni.png" alt="두 번째 캐릭터" class="character-img">
+                        </div>
+                    </div>
+                </div>
+                <button class="duel-button" id="startDuel">결투 시작</button>
+                <div id="loading" class="loading" style="display: none;">
+                    <img src="load1.png" alt="로딩 중" class="loading-image">
+                </div>
+                <div class="result" id="result">결과가 여기에 표시됩니다.</div>
+            </div> -->
+
+        </main>
+
+        <!-- 오른쪽 여백 -->
+        <aside class="sidebar right-sidebar">
+            <!-- 광고 배너 -->
+            <div class="ad-box">
+                <img class="bannerimg" src="/mdImage/ad_banner/banner2.png" />
+            </div>
+        </aside>
+        <script src="/model/balloon.js"></script>
+    </div>
+</body>
+</html>
