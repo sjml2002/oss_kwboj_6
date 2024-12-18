@@ -25,6 +25,7 @@
     <!-- <link rel="stylesheet" href="styles.css"> -->
     <link rel="stylesheet" type="text/css" href="/view/STYLE/main_element.css">
     <link rel="stylesheet" type="text/css" href="/view/STYLE/main_header.css">
+    <link rel="stylesheet" type="text/css" href="/view/STYLE/bannerballoon.css">
 
     <!-- 외부 JavaScript 파일 로드 (필요 시) -->
     <!-- <script src="script.js" defer></script> -->
@@ -42,11 +43,11 @@
         <div class="logo-container">
             <img src="/mdImage/mascot_.png" alt="Left Logo" class="logo-leftimage">
             <div class="logo-text">
-                K B S
+                <a href="http://osskwboj.ap-northeast-2.elasticbeanstalk.com/">K B S</a>
             </div>
             <img src="/mdImage/mascot2_.png" alt="Right Logo" class="logo-rightimage" style="margin-right: 30px;">
             <div class="rank_link">
-                <a href="index.html" class="rank_link"> <!-- 올바른 링크 추가해야함 -->
+                <a href="medalranking" class="rank_link"> <!-- 올바른 링크 추가해야함 -->
                     랭킹
                 </a>
             </div>
@@ -64,129 +65,199 @@
         <img src="/mdImage/bannerver1.png" alt="광운대학교 이미지" class="banner-image">
     </div>
 
-    <!-- 구현한 건 모두 메인 컨테이너 안에 담고 조절하기 -->
-    <div class="chart_and_problem">
-        <!-- 원형그래프 -->
-        <div class="chart-container">
-            <div class="chart_description">
-                <p>광운대학교 solved.ac 티어 분포도</p>
-            </div>
-            <div class="data-container">
-                <div class="pie-chart">
-                    <span id="center-label" class="center">
-                        Loading...
-                    </span>
-                </div>
-                <div class="tooltip"></div>
-                <div class="chart-value">
-                    <ul></ul>
-                </div>
-            </div>
-        </div>
 
-        <!-- 그래프와 랭킹 사이 마진 -->
-        <div class="margin_2"></div>
-
-        <!-- 1위부터 10위 랭킹 -->
-        <div class="ranking_container">
-            <div class="top-container">
-                <div class="ranking_description">광운대학교 랭킹</div>
-                <div class="search-container">
-                    <input type="text" class="searchInput" placeholder="검색하세요...">
-                    <button class="search-button" onclick="searchAndDisplay()"><!-- SVG 검색 아이콘 -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-search" viewBox="0 0 16 16">
-                            <path
-                                d="M11.742 10.344a6.5 6.5 0 1 0-1.398 1.398h-.001l3.443 3.443a1 1 0 1 0 1.415-1.414l-3.444-3.442zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            <div class="ranking_list">
-                <table id="rankingTable">
-                    <thead>
-                        <tr>
-                            <th style="width: 30px;">순위</th>
-                            <th style="width: 90px;"></th>
-                            <th style="width: 20px;">티어</th>
-                            <th style="width: 30px;">레이팅</th>
-                            <th style="width: 50px;">푼 문제</th>
-                        </tr>
-                    </thead>
-                    <tbody id="rankingTableBody">
-                        <!-- <tr>
-                            <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">1</a></td>
-                            <td style="width: 90px;"></td>
-                            <td style="width: 20px;">P</td>
-                            <td style="width: 30px;">1500</td>
-                            <td style="width: 50px;">120</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">2</a></td>
-                            <td style="width: 90px;"></td>
-                            <td style="width: 20px;">P</td>
-                            <td style="width: 30px;">1500</td>
-                            <td style="width: 50px;">120</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">3</a></td>
-                            <td style="width: 90px;"></td>
-                            <td style="width: 20px;">P</td>
-                            <td style="width: 30px;">1500</td>
-                            <td style="width: 50px;">120</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">4</a></td>
-                            <td style="width: 90px;"></td>
-                            <td style="width: 20px;">P</td>
-                            <td style="width: 30px;">1500</td>
-                            <td style="width: 50px;">120</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">5</a></td>
-                            <td style="width: 90px;"></td>
-                            <td style="width: 20px;">P</td>
-                            <td style="width: 30px;">1500</td>
-                            <td style="width: 50px;">120</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">6</a></td>
-                            <td style="width: 90px;"></td>
-                            <td style="width: 20px;">P</td>
-                            <td style="width: 30px;">1500</td>
-                            <td style="width: 50px;">120</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">7</a></td>
-                            <td style="width: 90px;"></td>
-                            <td style="width: 20px;">P</td>
-                            <td style="width: 30px;">1500</td>
-                            <td style="width: 50px;">120</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">8</a></td>
-                            <td style="width: 90px;"></td>
-                            <td style="width: 20px;">P</td>
-                            <td style="width: 30px;">1500</td>
-                            <td style="width: 50px;">120</td>
-                        </tr> -->
-                    </tbody>
-                </table>
-
+    <div id="content-body" style="display:flex;">
+    <!-- 왼쪽 광고 -->
+    <div style="flex: 1">
+        <!-- 광고 배너 -->
+        <div class="banner-container_left">
+            <div class="balloon" id="balloon1"></div>
+            <div class="wire" id="wire1"></div> <!-- 풍선과 배너 사이의 와이어 -->
+            <div class="ad-banner" id="ad-banner1">
+                <img class="bannerimg" src="/mdImage/ad_banner/banner1.png" />
             </div>
         </div>
     </div>
 
-    <!-- 잔디밭 html -->
-    <div class="contribution_grass">
-        <div class="grass_container">
-            <div class="grass_description">
-                <p>Loading... (It takes time!)</p>
+    <!-- 내용 -->
+    <div style="flex: 5">
+        <!-- 구현한 건 모두 메인 컨테이너 안에 담고 조절하기 -->
+        <div class="chart_and_problem">
+            <!-- 원형그래프 -->
+            <div class="chart-container">
+                <div class="chart_description">
+                    <p>광운대학교 solved.ac 티어 분포도</p>
+                </div>
+                <div class="data-container">
+                    <div class="pie-chart">
+                        <span id="center-label" class="center">
+                            Loading...
+                        </span>
+                    </div>
+                    <div class="tooltip"></div>
+                    <div class="chart-value">
+                        <ul></ul>
+                    </div>
+                </div>
             </div>
-            <div class="grass_graph" id="app"></div>
+
+            <!-- 그래프와 랭킹 사이 마진 -->
+            <div class="margin_2"></div>
+
+            <!-- 1위부터 10위 랭킹 -->
+            <div class="ranking_container">
+                <div class="top-container">
+                    <div class="ranking_description">광운대학교 랭킹</div>
+                    <div class="search-container">
+                        <input type="text" class="searchInput" placeholder="검색하세요...">
+                        <button class="search-button" onclick="searchAndDisplay()"><!-- SVG 검색 아이콘 -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-search" viewBox="0 0 16 16">
+                                <path
+                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.398 1.398h-.001l3.443 3.443a1 1 0 1 0 1.415-1.414l-3.444-3.442zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="ranking_list">
+                    <table id="rankingTable">
+                        <thead>
+                            <tr>
+                                <th style="width: 30px;">순위</th>
+                                <th style="width: 90px;"></th>
+                                <th style="width: 20px;">티어</th>
+                                <th style="width: 30px;">레이팅</th>
+                                <th style="width: 50px;">푼 문제</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rankingTableBody">
+                            <!-- <tr>
+                                <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">1</a></td>
+                                <td style="width: 90px;"></td>
+                                <td style="width: 20px;">P</td>
+                                <td style="width: 30px;">1500</td>
+                                <td style="width: 50px;">120</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">2</a></td>
+                                <td style="width: 90px;"></td>
+                                <td style="width: 20px;">P</td>
+                                <td style="width: 30px;">1500</td>
+                                <td style="width: 50px;">120</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">3</a></td>
+                                <td style="width: 90px;"></td>
+                                <td style="width: 20px;">P</td>
+                                <td style="width: 30px;">1500</td>
+                                <td style="width: 50px;">120</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">4</a></td>
+                                <td style="width: 90px;"></td>
+                                <td style="width: 20px;">P</td>
+                                <td style="width: 30px;">1500</td>
+                                <td style="width: 50px;">120</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">5</a></td>
+                                <td style="width: 90px;"></td>
+                                <td style="width: 20px;">P</td>
+                                <td style="width: 30px;">1500</td>
+                                <td style="width: 50px;">120</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">6</a></td>
+                                <td style="width: 90px;"></td>
+                                <td style="width: 20px;">P</td>
+                                <td style="width: 30px;">1500</td>
+                                <td style="width: 50px;">120</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">7</a></td>
+                                <td style="width: 90px;"></td>
+                                <td style="width: 20px;">P</td>
+                                <td style="width: 30px;">1500</td>
+                                <td style="width: 50px;">120</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20px;"><a href="https://solved.ac/ranking/o/222" class="ranking" target="_blank">8</a></td>
+                                <td style="width: 90px;"></td>
+                                <td style="width: 20px;">P</td>
+                                <td style="width: 30px;">1500</td>
+                                <td style="width: 50px;">120</td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
         </div>
+
+        <!-- 잔디밭 html -->
+        <div class="contribution_grass">
+            <div class="grass_container">
+                <div class="grass_description">
+                    <p>Loading... (It takes time!)</p>
+                </div>
+                <div class="grass_graph" id="app"></div>
+            </div>
+        </div>
+        <!-- 잔디밭 html -->
+
+        <div class="bottom_credit">
+            <div class="credit_members">
+                <span>이호정</span>
+                <span>이제희</span>
+                <span>강하늘</span>
+                <span>김준상</span>
+                <span>박준혁</span>
+            </div>
+
+            <div class="credit_github_url">
+                <a href="https://github.com/hj-ta" target="_blank">
+                    <img width="100px" height="28px" src="../mdImage/githubicon-이호정.png"/>
+                </a>
+                <a href="https://github.com/jhlee001010" target="_blank">
+                    <img width="100px" height="28px" src="../mdImage/githubicon-이제희.png"/>
+                </a>
+                <a href="https://github.com/sky-kang" target="_blank">
+                    <img width="100px" height="28px" src="../mdImage/githubicon-강하늘.png"/></a>
+                <a href="https://github.com/sjml2002" target="_blank">
+                    <img width="100px" height="28px" src="../mdImage/githubicon-김준상.png"/>
+                </a>
+                <a href="https://github.com/rain0118" target="_blank">
+                    <img width="100px" height="28px" src="../mdImage/githubicon-박준혁.png"/>
+                </a>
+            </div>
+        
+            <div class="credit_address_container">
+                <div class="kwangwoon_address_container">
+                    <div class="credit_kbs">
+                        <a href="https://www.kw.ac.kr/ko/" target="_blank">
+                            <img width="175px" height="80px" src="../mdImage/kwangwoonlogo.svg"/>
+                        </a>
+                    </div>
+                    <div class="credit_address">
+                        서울시 노원구 광운로 20 (월계동 477-1) 광운대학교(01897)<br>
+                    KWANGWOON UNIVERSITY OSS TEAM 6
+                    </div>
+                </div>
+                <div class="baekjoon_credit">
+                    <div class="baekjoon_link">
+                        <a href="https://www.acmicpc.net/" target="_blank">
+                            <img width="300px" height="70px" src="../mdImage/baekjoonlogo.png"/>
+                        </a>
+        
+                    </div>
+                    <div class="baekjoon_address">
+                        서울시 서초구 서토대로74길 29
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-    <!-- 잔디밭 html -->
 
     <!-- 잔디밭 JS -->
     <script type="module">
@@ -364,6 +435,19 @@
     <!-- 잔디밭 JS -->
 
 
+    <!-- 오른쪽 광고 -->
+    <div style="flex: 1">
+        <!-- 광고 배너 -->
+        <div class="banner-container_right">
+            <div class="balloon" id="balloon2"></div>
+            <div class="wire" id="wire2"></div> <!-- 풍선과 배너 사이의 와이어 -->
+            <div class="ad-banner" id="ad-banner2">
+                <img class="bannerimg" src="/mdImage/ad_banner/banner1.png" />
+            </div>
+        </div>
+    </div>
+    </div> <!-- content-body 종료 -->
+    <script src="/model/balloon.js"></script>
 </body>
 
 </html>

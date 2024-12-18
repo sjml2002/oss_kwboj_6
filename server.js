@@ -25,7 +25,8 @@ app.listen(port, () => {
 app.use(express.static("./"));
 app.use(express.static(path.join(__dirname, "model"))); //model 안의 파일들 사용하기
 app.use(express.static(path.join(__dirname, "view/STYLE",))); //view/STYLE 안의 파일들 사용하기
-app.use(express.static(path.join(__dirname, "mdImage"))); //view/STYLE 안의 파일들 사용하기
+app.use(express.static(path.join(__dirname, "mdImage"))); //mdImage 사용하기
+app.use(express.static(path.join(__dirname, "mdImage/ad_banner"))); //adbanner 사용하기
 
 
 ///////////////////////  Routing  /////////////////////////////////////////
@@ -90,4 +91,8 @@ app.get("/getSubmitInfo", async (req, res) => {
 app.get("/getTodaysProblem", async (req, res) => {
   let problems = await crawlingData.getTodaysProblem()
   res.json(problems); //json 타입으로 데이터 전달
+<<<<<<< HEAD
 })
+=======
+})
+>>>>>>> 9b33e5ebe11736cd76bc6c5a47e88cca2e79e447
