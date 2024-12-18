@@ -1,6 +1,6 @@
 {
   "name": "oss_kwboj_6",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "type": "module",
   "main": "server.js",
   "scripts": {
